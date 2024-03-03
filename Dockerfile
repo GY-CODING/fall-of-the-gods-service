@@ -1,5 +1,5 @@
 # Use a base image with Java and Maven installed
-FROM maven:3.8.4-openjdk-11-slim AS build
+FROM maven:3.8.4-openjdk-21-slim AS build
 
 # Set the working directory
 WORKDIR /app
@@ -17,7 +17,7 @@ COPY src ./src
 RUN mvn package -DskipTests
 
 # Use a lightweight base image with Java installed
-FROM openjdk:11-jre-slim
+FROM openjdk:21-jre-slim
 
 # Set the working directory
 WORKDIR /app

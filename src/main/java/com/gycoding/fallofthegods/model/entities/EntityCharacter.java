@@ -13,10 +13,10 @@ public class EntityCharacter {
     private EntityWorld world;
     
     public EntityCharacter(String mongoId, String name, String description, EntityWorld world) {
-        this.mongoId = mongoId;
-        this.name = name;
-        this.description = description;
-        this.world = world;
+        this.mongoId        = mongoId;
+        this.name           = name;
+        this.description    = description;
+        this.world          = world;
     }
 
     public String getMongoId() {

@@ -12,9 +12,9 @@ public class EntityPlace {
     private String description;
     
     public EntityPlace(String mongoId, String name, String description) {
-        this.mongoId = mongoId;
-        this.name = name;
-        this.description = description;
+        this.mongoId        = mongoId;
+        this.name           = name;
+        this.description    = description;
     }
 
     public String getMongoId() {

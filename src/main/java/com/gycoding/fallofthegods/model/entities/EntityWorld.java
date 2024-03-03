@@ -16,10 +16,10 @@ public class EntityWorld {
     private List<EntityPlace> places;
     
     public EntityWorld(String mongoId, String name, String description, List<EntityPlace> places) {
-        this.mongoId = mongoId;
-        this.name = name;
-        this.description = description;
-        this.places = places != null ? places : new ArrayList<EntityPlace>();
+        this.mongoId        = mongoId;
+        this.name           = name;
+        this.description    = description;
+        this.places         = places != null ? places : new ArrayList<EntityPlace>();
     }
 
     public String getMongoId() {
