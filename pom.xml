@@ -45,6 +45,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>FallOfTheGods-Data</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
