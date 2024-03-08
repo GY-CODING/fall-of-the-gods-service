@@ -1,32 +1,14 @@
-# Use a base image with Java and Maven installed
-FROM maven:3.8.4-openjdk-17-slim AS build
+# Use an official OpenJDK runtime as a parent image
+FROM openjdk:17-jre-slim
 
-# Set the working directory
-WORKDIR /app
+# Set the working directory in the container
+WORKDIR /usr/src/app
 
-# Copy the pom.xml file to the working directory
-COPY pom.xml .
+# Copy the application JAR file into the container at /usr/src/app
+COPY target/FallOfTheGods-Data.jar .
 
-# Download the project dependencies
-RUN mvn dependency:go-offline -B
-
-# Copy the source code to the working directory
-COPY src ./src
-
-# Build the application
-RUN mvn package -DskipTests
-
-# Use a lightweight base image with Java installed
-FROM openjdk:17-jdk-slim
-
-# Set the working directory
-WORKDIR /app
-
-# Copy the JAR file from the build stage to the current directory
-COPY --from=build /app/target/*.jar ./FallOfTheGods-Data.jar
-
-# Expose the port on which the application will run
+# Expose the port the application runs on
 EXPOSE 8080
 
-# Set the command to run the application
+# Run the JAR file when the container launches
 CMD ["java", "-jar", "FallOfTheGods-Data.jar"]

@@ -11,12 +11,14 @@ public class EntityPlace {
     private String name;
     private String description;
     private String image;
+    private Boolean inGame;
     
-    public EntityPlace(String mongoId, String name, String description, String image) {
+    public EntityPlace(String mongoId, String name, String description, String image, Boolean inGame) {
         this.mongoId        = mongoId;
         this.name           = name;
         this.description    = description;
         this.image          = image;
+        this.inGame         = inGame;
     }
 
     public String getMongoId() {
@@ -54,10 +56,17 @@ public class EntityPlace {
         this.image = image;
     }
 
+    public Boolean getInGame() {
+        return inGame;
+    }
+    public void setInGame(Boolean inGame) {
+        this.inGame = inGame;
+    }
+
     @Override
     public String toString() {
         return "{" +
-                "\"id\": \"" + identifier + "\"," +
+                "\"identifier\": \"" + identifier + "\"," +
                 "\"name\": \"" + name + "\"," +
                 "\"description\": \"" + description + "\"," +
                 "\"image\": \"" + image + "\"" +
