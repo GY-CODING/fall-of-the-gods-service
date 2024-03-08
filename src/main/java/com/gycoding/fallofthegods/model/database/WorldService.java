@@ -20,16 +20,12 @@ public class WorldService {
         worldRepository.save(character);
     }
 
-    public EntityWorld getWorld(int id) {
-        EntityWorld world = worldRepository.findAll().get(id);
-        world.setID(id);
-        return world;
+    public EntityWorld getWorld(String id) {
+        return worldRepository.findByIdentifier(id).orElse(null);
     }
 
     public EntityPlace getWorldPlace(int idWorld, int idPlace) {
-        EntityPlace place = worldRepository.findAll().get(idWorld).getPlace(idPlace);
-        place.setID(idPlace);
-        return place;
+        return worldRepository.findAll().get(idWorld).getPlace(idPlace);
     }
 
     public List<EntityWorld> listWorlds() {

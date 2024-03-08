@@ -3,6 +3,7 @@ package com.gycoding.fallofthegods.controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gycoding.fallofthegods.model.database.CharacterService;
+import com.gycoding.fallofthegods.model.entities.ServerStatus;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,13 +18,39 @@ public class CharacterRouting {
         this.characterService = characterService;
     }
 
-    @GetMapping("/get")
-    public String getCharacter(@RequestParam int id) {
-        return characterService.getCharacter(id).toString();
+    @GetMapping("/story/get")
+    public String getStoryCharacter(@RequestParam String id) {
+        try {
+            return characterService.getStoryCharacter(id).toString();
+        } catch (Exception e) {
+            return ServerStatus.NOT_FOUND.toString();
+        }
     }
 
-    @GetMapping("/list")
-    public String listCharacters() {
-        return characterService.listCharacters().toString();
+    @GetMapping("/story/list")
+    public String listStoryCharacters() {
+        try {
+            return characterService.listStoryCharacters().toString();
+        } catch (Exception e) {
+            return ServerStatus.NOT_FOUND.toString();
+        }
+    }
+
+    @GetMapping("/game/get")
+    public String getGameCharacter(@RequestParam String id) {
+        try {
+            return characterService.getGameCharacter(id).toString();
+        } catch (Exception e) {
+            return ServerStatus.NOT_FOUND.toString();
+        }
+    }
+
+    @GetMapping("/game/list")
+    public String listGameCharacters() {
+        try {
+            return characterService.listGameCharacters().toString();
+        } catch (Exception e) {
+            return ServerStatus.NOT_FOUND.toString();
+        }
     }
 }

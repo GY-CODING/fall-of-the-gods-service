@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeRouting {
     @GetMapping("/")
     public String home() {
-        return "Developed by GY Coding.";
+        return "<h1 style=\"color: purple\">Developed by GY Coding.</h1>";
     }
 }

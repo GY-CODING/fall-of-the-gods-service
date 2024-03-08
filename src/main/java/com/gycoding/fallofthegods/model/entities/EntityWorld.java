@@ -10,15 +10,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class EntityWorld {
     @Id
     private String mongoId;
-    private int id;
+    private String identifier;
     private String name;
     private String description;
+    private String image;
     private List<EntityPlace> places;
     
-    public EntityWorld(String mongoId, String name, String description, List<EntityPlace> places) {
+    public EntityWorld(String mongoId, String identifier, String name, String description, String image, List<EntityPlace> places) {
         this.mongoId        = mongoId;
+        this.identifier     = identifier;
         this.name           = name;
         this.description    = description;
+        this.image          = image;
         this.places         = places != null ? places : new ArrayList<EntityPlace>();
     }
 
@@ -28,12 +31,12 @@ public class EntityWorld {
     public void setMongoId(String mongoId) {
         this.mongoId = mongoId;
     }
-
-    public int getID() {
-        return id;
+    
+    public String getIdentifier() {
+        return identifier;
     }
-    public void setID(int id) {
-        this.id = id;
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 
     public String getName() {
@@ -48,6 +51,13 @@ public class EntityWorld {
     }
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public List<EntityPlace> listPlaces() {
@@ -66,9 +76,10 @@ public class EntityWorld {
     @Override
     public String toString() {
         return "{" +
-                "\"id\": \"" + id + "\"," +
+                "\"identifier\": \"" + identifier + "\"," +
                 "\"name\": \"" + name + "\"," +
                 "\"description\": \"" + description + "\"," +
+                "\"image\": \"" + image + "\"," +
                 "\"places\": " + places.toString() +
                 "}";
     }

@@ -19,13 +19,19 @@ public class CharacterService {
         characterRepository.save(character);
     }
 
-    public EntityCharacter getCharacter(int id) {
-        EntityCharacter character = characterRepository.findAll().get(id);
-        character.setID(id);
-        return character;
+    public EntityCharacter getStoryCharacter(String id) {
+        return characterRepository.findByIdentifier(id).orElse(null);
     }
 
-    public List<EntityCharacter> listCharacters() {
+    public List<EntityCharacter> listStoryCharacters() {
         return characterRepository.findAll();
+    }
+
+    public EntityCharacter getGameCharacter(String id) {
+        return characterRepository.findByIdentifierAndInGame(id, true).orElse(null);
+    }
+
+    public List<EntityCharacter> listGameCharacters() {
+        return characterRepository.findByInGame(true).orElse(null);
     }
 }
