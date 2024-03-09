@@ -23,10 +23,10 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the JAR file from the build stage to the current directory
-COPY --from=build /app/target/*.jar ./FallOfTheGods-Data.jar
+COPY --from=build /app/target/*.jar ./fallofthegods-data.jar
 
 # Expose the port on which the application will run
 EXPOSE 8080
 
 # Set the command to run the application
-CMD ["java", "-jar", "FallOfTheGods-Data.jar"]
+CMD ["java", "-jar", "fallofthegods-data.jar"]
