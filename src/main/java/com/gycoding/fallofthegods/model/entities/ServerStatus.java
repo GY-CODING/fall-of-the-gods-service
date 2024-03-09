@@ -12,4 +12,9 @@ public enum ServerStatus {
     public int getStatus() {
         return status;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(status);
+    }
 }
