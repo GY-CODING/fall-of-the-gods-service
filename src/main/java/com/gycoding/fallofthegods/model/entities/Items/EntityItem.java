@@ -1,28 +1,24 @@
-package com.gycoding.fallofthegods.model.entities;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.gycoding.fallofthegods.model.entities.Items;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "World")
-public class EntityWorld {
+@Document(collection = "Item")
+public class EntityItem {
     @Id
     private String mongoId;
     private String identifier;
     private String name;
     private String description;
     private String image;
-    private List<EntityPlace> places;
+    private Boolean inGame;
     
-    public EntityWorld(String mongoId, String identifier, String name, String description, String image, List<EntityPlace> places) {
+    public EntityItem(String mongoId, String name, String description, String image, Boolean inGame) {
         this.mongoId        = mongoId;
-        this.identifier     = identifier;
         this.name           = name;
         this.description    = description;
         this.image          = image;
-        this.places         = places != null ? places : new ArrayList<EntityPlace>();
+        this.inGame         = inGame;
     }
 
     public String getMongoId() {
@@ -31,7 +27,7 @@ public class EntityWorld {
     public void setMongoId(String mongoId) {
         this.mongoId = mongoId;
     }
-    
+
     public String getIdentifier() {
         return identifier;
     }
@@ -60,17 +56,11 @@ public class EntityWorld {
         this.image = image;
     }
 
-    public List<EntityPlace> listPlaces() {
-        return places;
+    public Boolean getInGame() {
+        return inGame;
     }
-    public EntityPlace getPlace(int id) {
-        return places.get(id);
-    }
-    public void addPlace(EntityPlace place) {
-        this.places.add(place);
-    }
-    public void removePlace(int id) {
-        this.places.remove(id);
+    public void setInGame(Boolean inGame) {
+        this.inGame = inGame;
     }
 
     @Override
@@ -79,8 +69,7 @@ public class EntityWorld {
                 "\"identifier\": \"" + identifier + "\"," +
                 "\"name\": \"" + name + "\"," +
                 "\"description\": \"" + description + "\"," +
-                "\"image\": \"" + image + "\"," +
-                "\"places\": " + places.toString() +
+                "\"image\": \"" + image + "\"" +
                 "}";
     }
 }

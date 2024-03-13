@@ -1,10 +1,10 @@
 package com.gycoding.fallofthegods.model.database;
 
-import com.gycoding.fallofthegods.model.entities.EntityItem;
-
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+
+import com.gycoding.fallofthegods.model.entities.Items.EntityItem;
 
 @Service
 public class ItemService {

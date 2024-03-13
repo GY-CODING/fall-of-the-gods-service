@@ -23,6 +23,7 @@ public class CharacterRouting {
         try {
             return characterService.getStoryCharacter(id).toString();
         } catch (Exception e) {
+            e.printStackTrace();
             return ServerStatus.NOT_FOUND.toString();
         }
     }
@@ -32,6 +33,7 @@ public class CharacterRouting {
         try {
             return characterService.listStoryCharacters().toString();
         } catch (Exception e) {
+            e.printStackTrace();
             return ServerStatus.NOT_FOUND.toString();
         }
     }
@@ -41,6 +43,7 @@ public class CharacterRouting {
         try {
             return characterService.getGameCharacter(id).toString();
         } catch (Exception e) {
+            e.printStackTrace();
             return ServerStatus.NOT_FOUND.toString();
         }
     }
@@ -50,6 +53,7 @@ public class CharacterRouting {
         try {
             return characterService.listGameCharacters().toString();
         } catch (Exception e) {
+            e.printStackTrace();
             return ServerStatus.NOT_FOUND.toString();
         }
     }

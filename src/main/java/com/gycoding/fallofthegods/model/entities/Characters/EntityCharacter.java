@@ -1,7 +1,9 @@
-package com.gycoding.fallofthegods.model.entities;
+package com.gycoding.fallofthegods.model.entities.Characters;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.gycoding.fallofthegods.model.entities.Worlds.EntityWorld;
 
 @Document(collection = "Character")
 public class EntityCharacter {
@@ -9,19 +11,25 @@ public class EntityCharacter {
     private String mongoId;
     private String identifier;
     private String name;
+    private String title;
     private String description;
     private EntityWorld world;
     private Boolean inGame;
     private String image;
+    private EntityStat stats;
+    private EntityAbility ability;
 
-    public EntityCharacter(String mongoId, String identifier, String name, String description, EntityWorld world, Boolean inGame, String image) {
+    public EntityCharacter(String mongoId, String identifier, String name, String title, String description, EntityWorld world, Boolean inGame, String image, EntityStat stats, EntityAbility ability) {
         this.mongoId        = mongoId;
         this.identifier     = identifier;
         this.name           = name;
+        this.title          = title;
         this.description    = description;
         this.world          = world;
         this.inGame         = inGame;
         this.image          = image;
+        this.stats          = stats;
+        this.ability        = ability;
     }
 
     public String getMongoId() {
@@ -43,6 +51,13 @@ public class EntityCharacter {
     }
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -72,15 +87,32 @@ public class EntityCharacter {
     public void setImage(String image) {
         this.image = image;
     }
+    
+    public EntityStat getStats() {
+        return stats;
+    }
+    public void setStats(EntityStat stats) {
+        this.stats = stats;
+    }
+    
+    public EntityAbility getAbility() {
+        return ability;
+    }
+    public void setAbility(EntityAbility ability) {
+        this.ability = ability;
+    }
 
     @Override
     public String toString() {
         return "{" +
                 "\"identifier\": \"" + identifier + "\"," +
                 "\"name\": \"" + name + "\"," +
+                "\"title\": \"" + title + "\"," +
                 "\"description\": \"" + description + "\"," +
                 "\"world\": " + "\"" + world.getIdentifier() + "\"," +
-                "\"image\": \"" + image + "\"" +
+                "\"image\": \"" + image + "\"," +
+                "\"stats\": " + stats + "," +
+                "\"ability\": " + ability +
                 "}";
     }
 }

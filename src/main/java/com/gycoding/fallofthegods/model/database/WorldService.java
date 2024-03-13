@@ -1,11 +1,11 @@
 package com.gycoding.fallofthegods.model.database;
 
-import com.gycoding.fallofthegods.model.entities.EntityPlace;
-import com.gycoding.fallofthegods.model.entities.EntityWorld;
-
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+
+import com.gycoding.fallofthegods.model.entities.Worlds.EntityPlace;
+import com.gycoding.fallofthegods.model.entities.Worlds.EntityWorld;
 
 @Service
 public class WorldService {

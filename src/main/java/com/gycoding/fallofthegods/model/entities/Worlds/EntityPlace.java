@@ -1,10 +1,10 @@
-package com.gycoding.fallofthegods.model.entities;
+package com.gycoding.fallofthegods.model.entities.Worlds;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "Item")
-public class EntityItem {
+@Document(collection = "Place")
+public class EntityPlace {
     @Id
     private String mongoId;
     private String identifier;
@@ -13,7 +13,7 @@ public class EntityItem {
     private String image;
     private Boolean inGame;
     
-    public EntityItem(String mongoId, String name, String description, String image, Boolean inGame) {
+    public EntityPlace(String mongoId, String name, String description, String image, Boolean inGame) {
         this.mongoId        = mongoId;
         this.name           = name;
         this.description    = description;
