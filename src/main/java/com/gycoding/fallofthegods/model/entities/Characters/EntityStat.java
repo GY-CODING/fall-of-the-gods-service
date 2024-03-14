@@ -67,7 +67,7 @@ public class EntityStat {
                 "\"accuracy\": " + accuracy + "," +
                 "\"life\": " + life + "," +
                 "\"ether\": " + ether + "," +
-                "\"movement\": " + movement + "," +
+                "\"movement\": " + movement +
                 "}";
     }
 }
