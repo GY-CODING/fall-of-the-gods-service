@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fall of the Gods API</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left">
+            <img src="./img/FOTG_logo.png" class="nav-logo"/>
+            <h1 class="nav-title">Fall of the Gods API</h1>
+        </div>
+        <ul class="nav-right">
+            <li class="nav-element">
+                <h4 class="nav-link nav-link-endpoints">Endpoints</h4>
+            </li>
+            <li class="nav-element">
+                <h4 class="nav-link nav-link-about">About</h4>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="endpoints-page">
+        <div class="api-characters api">
+            <h2 class="api-title">Characters</h2>
+            <hr>
+            <ul class="api-endpoints">
+                <li class="api-endpoint">
+                    <h3 class="api-type" type="GET">GET</h3>
+                    <a href="/characters/story/get?id=odin"><code class="api-endpoint-code">/characters/story/get</code></a>
+                    <p class="api-desc">Devuelve un personaje concreto de la historia de Fall of the Gods.</p>
+                    <ul class="api-params">
+                        <li class="api-param">
+                            <code class="api-param-name">id</code>
+                            <p class="api-param-desc"> — Identificador de tipo cadena de texto del personaje de la historia.</p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="api-endpoint">
+                    <h3 class="api-type" type="GET">GET</h3>
+                    <a href="/characters/story/list"><code class="api-endpoint-code">/characters/story/list</code></a>
+                    <p class="api-desc">Devuelve todos los personajes de la historia de Fall of the Gods.</p>
+                </li>
+                <li class="api-endpoint">
+                    <h3 class="api-type" type="GET">GET</h3>
+                    <a href="/characters/game/get?id=odin"><code class="api-endpoint-code">/characters/game/get</code></a>
+                    <p class="api-desc">Devuelve un personaje concreto del videojuego de Fall of the Gods.</p>
+                    <ul class="api-params">
+                        <li class="api-param">
+                            <code class="api-param-name">id</code>
+                            <p class="api-param-desc"> — Identificador de tipo cadena de texto del personaje del videojuego.</p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="api-endpoint">
+                    <h3 class="api-type" type="GET">GET</h3>
+                    <a href="/characters/game/list"><code class="api-endpoint-code">/characters/game/list</code></a>
+                    <p class="api-desc">Devuelve todos los personajes del videojuego de Fall of the Gods.</p>
+                </li>
+            </ul>
+        </div>
+    
+        <div class="api-worlds api">
+            <h2 class="api-title">Worlds</h2>
+            <hr>
+            <ul class="api-endpoints">
+                <li class="api-endpoint">
+                    <h3 class="api-type" type="GET">GET</h3>
+                    <a href="/worlds/story/get?id=asgard"><code class="api-endpoint-code">/worlds/story/get</code></a>
+                    <p class="api-desc">Devuelve un mundo concreto de la historia de Fall of the Gods.</p>
+                    <ul class="api-params">
+                        <li class="api-param">
+                            <code class="api-param-name">id</code>
+                            <p class="api-param-desc"> — Identificador de tipo cadena de texto del mundo de la historia.</p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="api-endpoint">
+                    <h3 class="api-type" type="GET">GET</h3>
+                    <a href="/worlds/story/list"><code class="api-endpoint-code">/worlds/story/list</code></a>
+                    <p class="api-desc">Devuelve todos los mundos de la historia de Fall of the Gods.</p>
+                </li>
+                <li class="api-endpoint">
+                    <h3 class="api-type" type="GET">GET</h3>
+                    <a href="/worlds/game/get?id=asgard"><code class="api-endpoint-code">/worlds/game/get</code></a>
+                    <p class="api-desc">Devuelve un mundo concreto del videojuego de Fall of the Gods.</p>
+                    <ul class="api-params">
+                        <li class="api-param">
+                            <code class="api-param-name">id</code>
+                            <p class="api-param-desc"> — Identificador de tipo cadena de texto del mundo del videojuego.</p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="api-endpoint">
+                    <h3 class="api-type" type="GET">GET</h3>
+                    <a href="/worlds/game/list"><code class="api-endpoint-code">/worlds/game/list</code></a>
+                    <p class="api-desc">Devuelve todos los mundos del videojuego de Fall of the Gods.</p>
+                </li>
+            </ul>
+        </div>
+    
+        <div class="api-items api">
+            <h2 class="api-title">Items</h2>
+            <hr>
+            <ul class="api-endpoints">
+                <li class="api-endpoint">
+                    <h3 class="api-type" type="GET">GET</h3>
+                    <a href="/items/story/get?id=mjolnir"><code class="api-endpoint-code">/items/story/get</code></a>
+                    <p class="api-desc">Devuelve un objeto concreto de la historia de Fall of the Gods.</p>
+                    <ul class="api-params">
+                        <li class="api-param">
+                            <code class="api-param-name">id</code>
+                            <p class="api-param-desc"> — Identificador de tipo cadena de texto del objeto de la historia.</p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="api-endpoint">
+                    <h3 class="api-type" type="GET">GET</h3>
+                    <a href="/items/story/list"><code class="api-endpoint-code">/items/story/list</code></a>
+                    <p class="api-desc">Devuelve todos los objetos de la historia de Fall of the Gods.</p>
+                </li>
+                <li class="api-endpoint">
+                    <h3 class="api-type" type="GET">GET</h3>
+                    <a href="/items/game/get?id=mjolnir"><code class="api-endpoint-code">/items/game/get</code></a>
+                    <p class="api-desc">Devuelve un objeto concreto del videojuego de Fall of the Gods.</p>
+                    <ul class="api-params">
+                        <li class="api-param">
+                            <code class="api-param-name">id</code>
+                            <p class="api-param-desc"> — Identificador de tipo cadena de texto del objeto del videojuego.</p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="api-endpoint">
+                    <h3 class="api-type" type="GET">GET</h3>
+                    <a href="/items/game/list"><code class="api-endpoint-code">/items/game/list</code></a>
+                    <p class="api-desc">Devuelve todos los objetos del videojuego de Fall of the Gods.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="about-page">
+        <div class="about-content">
+            <h2 class="about-title">About</h2>
+            <hr>
+            <p class="about-text">Esta es la API de referencia de toda la historia de Fall of the Gods, sirve actualmente tanto como consulta de personajes, relatos, objetos, mundos y lugares de la historia, como del videojuego oficial.</p>
+        </div>
+    </div>
+
+    <script>
+        const navLinkEndpoints  = document.querySelector('.nav-link-endpoints');
+        const navLinkAbout      = document.querySelector('.nav-link-about');
+        const endpointsPage     = document.querySelector('.endpoints-page');
+        const aboutPage         = document.querySelector('.about-page');
+    
+        navLinkEndpoints.addEventListener('click', () => {
+            endpointsPage.style.display     = 'flex';
+            aboutPage.style.display         = 'none';
+        });
+
+        navLinkAbout.addEventListener('click', () => {
+            endpointsPage.style.display     = 'none';
+            aboutPage.style.display         = 'flex';
+        });
+    </script>
+</body>
+</html>
