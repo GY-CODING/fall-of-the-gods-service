@@ -14,11 +14,6 @@ public class ItemService {
         this.itemRepository = worldRepository;
     }
 
-    @SuppressWarnings("null")
-    public void insertCharacter(EntityItem character) {
-        itemRepository.save(character);
-    }
-
     public EntityItem getStoryItem(String id) {
         return itemRepository.findByIdentifier(id).orElse(null);
     }

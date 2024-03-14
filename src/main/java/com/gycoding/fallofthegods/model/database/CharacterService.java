@@ -14,11 +14,6 @@ public class CharacterService {
         this.characterRepository = characterRepository;
     }
 
-    @SuppressWarnings("null")
-    public void insertCharacter(EntityCharacter character) {
-        characterRepository.save(character);
-    }
-
     public EntityCharacter getStoryCharacter(String id) {
         return characterRepository.findByIdentifier(id).orElse(null);
     }

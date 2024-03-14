@@ -15,20 +15,19 @@ public class WorldService {
         this.worldRepository = worldRepository;
     }
 
-    @SuppressWarnings("null")
-    public void insertCharacter(EntityWorld character) {
-        worldRepository.save(character);
-    }
-
     public EntityWorld getWorld(String id) {
         return worldRepository.findByIdentifier(id).orElse(null);
     }
 
-    public EntityPlace getWorldPlace(int idWorld, int idPlace) {
-        return worldRepository.findAll().get(idWorld).getPlace(idPlace);
-    }
-
     public List<EntityWorld> listWorlds() {
         return worldRepository.findAll();
+    }
+
+    public EntityPlace getWorldPlace(String idWorld, String idPlace) {
+        return worldRepository.findByIdentifier(idWorld).orElse(null).getPlace(idPlace);
+    }
+
+    public List<EntityPlace> listWorldPlaces(String id) {
+        return worldRepository.findByIdentifier(id).orElse(null).listPlaces();
     }
 }

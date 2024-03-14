@@ -63,14 +63,34 @@ public class EntityWorld {
     public List<EntityPlace> listPlaces() {
         return places;
     }
-    public EntityPlace getPlace(int id) {
-        return places.get(id);
+    public EntityPlace getPlace(String id) {
+        EntityPlace placeFound = null;
+
+        for(EntityPlace place : places) {
+            if(place.getIdentifier().equals(id)) {
+                placeFound = place;
+                break;
+            }
+        }
+
+        return placeFound;
     }
     public void addPlace(EntityPlace place) {
         this.places.add(place);
     }
-    public void removePlace(int id) {
-        this.places.remove(id);
+    public void removePlace(String id) {
+        EntityPlace placeFound = null;
+
+        for(EntityPlace place : places) {
+            if(place.getIdentifier().equals(id)) {
+                placeFound = place;
+                break;
+            }
+        }
+
+        if(placeFound != null) {
+            this.places.remove(placeFound);
+        }
     }
 
     @Override

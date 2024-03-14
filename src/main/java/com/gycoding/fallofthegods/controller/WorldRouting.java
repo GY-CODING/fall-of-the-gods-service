@@ -26,9 +26,19 @@ public class WorldRouting {
             return ServerStatus.NOT_FOUND.toString();
         }
     }
+    
 
-    @GetMapping("/get/place")
-    public String getWorldPlace(@RequestParam int idWorld, @RequestParam int idPlace) {
+    @GetMapping("/list")
+    public String listWorlds() {
+        try {
+            return worldService.listWorlds().toString();
+        } catch (Exception e) {
+            return ServerStatus.NOT_FOUND.toString();
+        }
+    }
+
+    @GetMapping("/places/get")
+    public String getWorldPlace(@RequestParam String idWorld, @RequestParam String idPlace) {
         try {
             return worldService.getWorldPlace(idWorld, idPlace).toString();
         } catch (Exception e) {
@@ -36,10 +46,10 @@ public class WorldRouting {
         }
     }
 
-    @GetMapping("/list")
-    public String listWorld() {
+    @GetMapping("/places/list")
+    public String listWorldPlaces(@RequestParam String id) {
         try {
-            return worldService.listWorlds().toString();
+            return worldService.listWorldPlaces(id).toString();
         } catch (Exception e) {
             return ServerStatus.NOT_FOUND.toString();
         }

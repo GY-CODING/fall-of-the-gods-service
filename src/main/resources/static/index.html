@@ -68,8 +68,8 @@
             <ul class="api-endpoints">
                 <li class="api-endpoint">
                     <h3 class="api-type" type="GET">GET</h3>
-                    <a href="/worlds/story/get?id=asgard"><code class="api-endpoint-code">/worlds/story/get</code></a>
-                    <p class="api-desc">Devuelve un mundo concreto de la historia de Fall of the Gods.</p>
+                    <a href="/worlds/get?id=asgard"><code class="api-endpoint-code">/worlds/get</code></a>
+                    <p class="api-desc">Devuelve un mundo concreto de la historia y del videojuego de Fall of the Gods.</p>
                     <ul class="api-params">
                         <li class="api-param">
                             <code class="api-param-name">id</code>
@@ -79,24 +79,28 @@
                 </li>
                 <li class="api-endpoint">
                     <h3 class="api-type" type="GET">GET</h3>
-                    <a href="/worlds/story/list"><code class="api-endpoint-code">/worlds/story/list</code></a>
-                    <p class="api-desc">Devuelve todos los mundos de la historia de Fall of the Gods.</p>
+                    <a href="/worlds/list"><code class="api-endpoint-code">/worlds/list</code></a>
+                    <p class="api-desc">Devuelve todos los mundos de la historia y del videojuego de Fall of the Gods.</p>
                 </li>
                 <li class="api-endpoint">
                     <h3 class="api-type" type="GET">GET</h3>
-                    <a href="/worlds/game/get?id=asgard"><code class="api-endpoint-code">/worlds/game/get</code></a>
-                    <p class="api-desc">Devuelve un mundo concreto del videojuego de Fall of the Gods.</p>
+                    <a href="/worlds/places/get?idWorld=asgard&idPlace=idavoll"><code class="api-endpoint-code">/worlds/places/get</code></a>
+                    <p class="api-desc">Devuelve un lugar concreto de un mundo concreto de la historia y del videojuego de Fall of the Gods.</p>
                     <ul class="api-params">
                         <li class="api-param">
-                            <code class="api-param-name">id</code>
-                            <p class="api-param-desc"> — Identificador de tipo cadena de texto del mundo del videojuego.</p>
+                            <code class="api-param-name">idWorld</code>
+                            <p class="api-param-desc"> — Identificador de tipo cadena de texto del mundo.</p>
+                        </li>
+                        <li class="api-param">
+                            <code class="api-param-name">idPlace</code>
+                            <p class="api-param-desc"> — Identificador de tipo cadena de texto del lugar del mundo indicado en el anterior parámetro.</p>
                         </li>
                     </ul>
                 </li>
                 <li class="api-endpoint">
                     <h3 class="api-type" type="GET">GET</h3>
-                    <a href="/worlds/game/list"><code class="api-endpoint-code">/worlds/game/list</code></a>
-                    <p class="api-desc">Devuelve todos los mundos del videojuego de Fall of the Gods.</p>
+                    <a href="/worlds/places/list"><code class="api-endpoint-code">/worlds/places/list</code></a>
+                    <p class="api-desc">Devuelve todos los lugares de un mundo de la historia y del videojuego de Fall of the Gods.</p>
                 </li>
             </ul>
         </div>
