@@ -1,9 +1,9 @@
-package com.gycoding.fallofthegods.model.entities.Characters;
+package com.gycoding.fallofthegods.model.entities.characters;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.gycoding.fallofthegods.model.entities.Worlds.EntityWorld;
+import com.gycoding.fallofthegods.model.entities.worlds.EntityWorld;
 
 @Document(collection = "Character")
 public class EntityCharacter {

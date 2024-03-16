@@ -84,23 +84,30 @@
                 </li>
                 <li class="api-endpoint">
                     <h3 class="api-type" type="GET">GET</h3>
-                    <a href="/worlds/places/get?idWorld=asgard&idPlace=idavoll"><code class="api-endpoint-code">/worlds/places/get</code></a>
+                    <a href="/worlds/places/get?id=idavoll"><code class="api-endpoint-code">/worlds/places/get</code></a>
                     <p class="api-desc">Devuelve un lugar concreto de un mundo concreto de la historia y del videojuego de Fall of the Gods.</p>
                     <ul class="api-params">
                         <li class="api-param">
-                            <code class="api-param-name">idWorld</code>
-                            <p class="api-param-desc"> — Identificador de tipo cadena de texto del mundo.</p>
-                        </li>
-                        <li class="api-param">
-                            <code class="api-param-name">idPlace</code>
-                            <p class="api-param-desc"> — Identificador de tipo cadena de texto del lugar del mundo indicado en el anterior parámetro.</p>
+                            <code class="api-param-name">id</code>
+                            <p class="api-param-desc"> — Identificador de tipo cadena de texto del lugar de la historia y del videojuego de Fall of the Gods.</p>
                         </li>
                     </ul>
                 </li>
                 <li class="api-endpoint">
                     <h3 class="api-type" type="GET">GET</h3>
+                    <a href="/worlds/places/listAll"><code class="api-endpoint-code">/worlds/places/listAll</code></a>
+                    <p class="api-desc">Devuelve todos los lugares de la historia y del videojuego de Fall of the Gods.</p>
+                </li>
+                <li class="api-endpoint">
+                    <h3 class="api-type" type="GET">GET</h3>
                     <a href="/worlds/places/list"><code class="api-endpoint-code">/worlds/places/list</code></a>
-                    <p class="api-desc">Devuelve todos los lugares de un mundo de la historia y del videojuego de Fall of the Gods.</p>
+                    <p class="api-desc">Devuelve todos los lugares de un mundo concreto de la historia y del videojuego de Fall of the Gods.</p>
+                    <ul class="api-params">
+                        <li class="api-param">
+                            <code class="api-param-name">id</code>
+                            <p class="api-param-desc"> — Identificador de tipo cadena de texto del mundo de los cuales se quieren retornar sus lugares de la historia y del videojuego de Fall of the Gods.</p>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -140,6 +147,40 @@
                     <h3 class="api-type" type="GET">GET</h3>
                     <a href="/items/game/list"><code class="api-endpoint-code">/items/game/list</code></a>
                     <p class="api-desc">Devuelve todos los objetos del videojuego de Fall of the Gods.</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="api-worlds api">
+            <h2 class="api-title">Stories</h2>
+            <hr>
+            <ul class="api-endpoints">
+                <li class="api-endpoint">
+                    <h3 class="api-type" type="GET">GET</h3>
+                    <a href="/stories/get?id=la_sombra_del_bosque"><code class="api-endpoint-code">/stories/get</code></a>
+                    <p class="api-desc">Devuelve una historia concreta de Fall of the Gods.</p>
+                    <ul class="api-params">
+                        <li class="api-param">
+                            <code class="api-param-name">id</code>
+                            <p class="api-param-desc"> — Identificador de tipo cadena de texto de la historia.</p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="api-endpoint">
+                    <h3 class="api-type" type="GET">GET</h3>
+                    <a href="/stories/list"><code class="api-endpoint-code">/stories/list</code></a>
+                    <p class="api-desc">Devuelve todas las historias de Fall of the Gods.</p>
+                </li>
+                <li class="api-endpoint">
+                    <h3 class="api-type" type="GET">GET</h3>
+                    <a href="/stories/character/list?id=gullveig"><code class="api-endpoint-code">/stories/character/list</code></a>
+                    <p class="api-desc">Devuelve todas las historias en las que se encuentre el personaje indicado de la historia y del videojuego de Fall of the Gods.</p>
+                    <ul class="api-params">
+                        <li class="api-param">
+                            <code class="api-param-name">id</code>
+                            <p class="api-param-desc"> — Identificador de tipo cadena de texto del personaje de la historia y del videojuego de Fall of the Gods.</p>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>

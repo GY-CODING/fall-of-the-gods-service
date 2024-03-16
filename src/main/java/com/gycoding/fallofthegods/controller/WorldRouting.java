@@ -2,6 +2,7 @@ package com.gycoding.fallofthegods.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gycoding.fallofthegods.model.database.PlaceService;
 import com.gycoding.fallofthegods.model.database.WorldService;
 import com.gycoding.fallofthegods.model.entities.ServerStatus;
 
@@ -13,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/worlds")
 public class WorldRouting {
     private final WorldService worldService;
+    private final PlaceService placeService;
 
-    public WorldRouting(WorldService worldService) {
+    public WorldRouting(WorldService worldService, PlaceService placeService) {
         this.worldService = worldService;
+        this.placeService = placeService;
     }
 
     @GetMapping("/get")
@@ -38,9 +41,18 @@ public class WorldRouting {
     }
 
     @GetMapping("/places/get")
-    public String getWorldPlace(@RequestParam String idWorld, @RequestParam String idPlace) {
+    public String getPlace(@RequestParam String id) {
         try {
-            return worldService.getWorldPlace(idWorld, idPlace).toString();
+            return placeService.getPlace(id).toString();
+        } catch (Exception e) {
+            return ServerStatus.NOT_FOUND.toString();
+        }
+    }
+
+    @GetMapping("/places/listAll")
+    public String listPlaces() {
+        try {
+            return placeService.listPlaces().toString();
         } catch (Exception e) {
             return ServerStatus.NOT_FOUND.toString();
         }

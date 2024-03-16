@@ -1,4 +1,4 @@
-package com.gycoding.fallofthegods.model.entities.Items;
+package com.gycoding.fallofthegods.model.entities.items;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

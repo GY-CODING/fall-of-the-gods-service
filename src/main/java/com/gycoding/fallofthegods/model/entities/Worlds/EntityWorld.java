@@ -1,4 +1,4 @@
-package com.gycoding.fallofthegods.model.entities.Worlds;
+package com.gycoding.fallofthegods.model.entities.worlds;
 
 import java.util.ArrayList;
 import java.util.List;

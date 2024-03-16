@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.gycoding.fallofthegods.model.entities.Characters.EntityCharacter;
+import com.gycoding.fallofthegods.model.entities.characters.EntityCharacter;
 
 @Service
 public class CharacterService {

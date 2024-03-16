@@ -1,4 +1,4 @@
-package com.gycoding.fallofthegods.model.entities.Characters;
+package com.gycoding.fallofthegods.model.entities.characters;
 
 public class EntityAbility {
     private String abilityName;

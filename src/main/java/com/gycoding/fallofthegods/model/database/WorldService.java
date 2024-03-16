@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.gycoding.fallofthegods.model.entities.Worlds.EntityPlace;
-import com.gycoding.fallofthegods.model.entities.Worlds.EntityWorld;
+import com.gycoding.fallofthegods.model.entities.worlds.EntityPlace;
+import com.gycoding.fallofthegods.model.entities.worlds.EntityWorld;
 
 @Service
 public class WorldService {
