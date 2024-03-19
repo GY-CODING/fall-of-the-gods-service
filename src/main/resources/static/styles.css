@@ -98,7 +98,7 @@
 
 body {
     width: 100vw;
-    height: 450vh;
+    height: auto;
 
     display: flex;
     flex-direction: column;
@@ -259,16 +259,19 @@ a:hover {
     flex-direction: column;
     flex-wrap: nowrap;
 
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     align-content: center;
 
-    gap: 50px;
+    margin-top: 20vh;
+    margin-bottom: 20vh;
+
+    gap: 150px;
 }
 
 .api {
     width: 90%;
-    height: 30%;
+    height: auto;
 
     display: flex;
     flex-direction: column;
