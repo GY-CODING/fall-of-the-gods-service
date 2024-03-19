@@ -17,7 +17,6 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -27,11 +26,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-
-		<!-- <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -48,11 +42,11 @@
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
 
-		<!-- <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-docker-compose</artifactId>
-			<scope>runtime</scope>
-		</dependency> -->
+		<dependency>
+			<groupId>org.springframework.restdocs</groupId>
+			<artifactId>spring-restdocs-mockmvc</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -61,6 +55,17 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+	
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.6.3</version>
+				<configuration>
+					<reportOutputDirectory>src/main/resources/static/docs</reportOutputDirectory>
+					<destDir>javadoc</destDir>
+					<docTitle>Fall of the Gods v1.0.0</docTitle>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

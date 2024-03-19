@@ -15,7 +15,7 @@ import com.gycoding.fallofthegods.model.entities.ServerStatus;
 public class HomeRouting {
     @GetMapping("/")
     public String home() {
-        Resource resource = new ClassPathResource("static/index.html");
+        Resource resource = new ClassPathResource("static/reference-site/index.html");
 
         try {
             return new String(Files.readAllBytes(Paths.get(resource.getURI())));

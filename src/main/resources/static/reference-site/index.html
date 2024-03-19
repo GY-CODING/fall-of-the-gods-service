@@ -18,6 +18,9 @@
                 <h4 class="nav-link nav-link-endpoints">Endpoints</h4>
             </li>
             <li class="nav-element">
+                <h4 class="nav-link nav-link-docs">Documentation</h4>
+            </li>
+            <li class="nav-element">
                 <h4 class="nav-link nav-link-about">About</h4>
             </li>
         </ul>
@@ -201,6 +204,7 @@
 
     <script>
         const navLinkEndpoints  = document.querySelector('.nav-link-endpoints');
+        const navLinkDocs       = document.querySelector('.nav-link-docs');
         const navLinkAbout      = document.querySelector('.nav-link-about');
         const endpointsPage     = document.querySelector('.endpoints-page');
         const aboutPage         = document.querySelector('.about-page');
@@ -208,6 +212,10 @@
         navLinkEndpoints.addEventListener('click', () => {
             endpointsPage.style.display     = 'flex';
             aboutPage.style.display         = 'none';
+        });
+
+        navLinkDocs.addEventListener('click', () => {
+            window.open("../docs/javadoc/index.html", "_blank");
         });
 
         navLinkAbout.addEventListener('click', () => {
