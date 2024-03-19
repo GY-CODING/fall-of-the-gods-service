@@ -3,6 +3,8 @@ package com.gycoding.fallofthegods.model.entities.characters;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.gycoding.fallofthegods.model.entities.EntityStat;
+import com.gycoding.fallofthegods.model.entities.items.EntityItemStat;
 import com.gycoding.fallofthegods.model.entities.worlds.EntityWorld;
 
 @Document(collection = "Character")
@@ -16,10 +18,10 @@ public class EntityCharacter {
     private EntityWorld world;
     private Boolean inGame;
     private String image;
-    private EntityStat stats;
+    private EntityStat<Double> stats;
     private EntityAbility ability;
 
-    public EntityCharacter(String mongoId, String identifier, String name, String title, String description, EntityWorld world, Boolean inGame, String image, EntityStat stats, EntityAbility ability) {
+    public EntityCharacter(String mongoId, String identifier, String name, String title, String description, EntityWorld world, Boolean inGame, String image, EntityStat<Double> stats, EntityAbility ability) {
         this.mongoId        = mongoId;
         this.identifier     = identifier;
         this.name           = name;
@@ -88,10 +90,10 @@ public class EntityCharacter {
         this.image = image;
     }
     
-    public EntityStat getStats() {
+    public EntityStat<Double> getStats() {
         return stats;
     }
-    public void setStats(EntityStat stats) {
+    public void setStats(EntityStat<Double> stats) {
         this.stats = stats;
     }
     
@@ -109,7 +111,7 @@ public class EntityCharacter {
                 "\"name\": \"" + name + "\"," +
                 "\"title\": \"" + title + "\"," +
                 "\"description\": \"" + description + "\"," +
-                "\"world\": " + "\"" + world.getIdentifier() + "\"," +
+                "\"world\": " + world + "," +
                 "\"image\": \"" + image + "\"," +
                 "\"stats\": " + stats + "," +
                 "\"ability\": " + ability +

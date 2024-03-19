@@ -264,7 +264,7 @@ a:hover {
     align-content: center;
 
     margin-top: 20vh;
-    margin-bottom: 20vh;
+    margin-bottom: 30px;
 
     gap: 150px;
 }
@@ -470,4 +470,17 @@ a:hover {
 
 .footer-logo {
     height: 70px;
+
+    filter: grayscale(100%);
+
+    transition: .5s;
+}
+
+.footer-logo:hover {
+    cursor: pointer;
+    transition: .5s;
+
+    filter: grayscale(0%);
+
+    transform: translateY(-5px);
 }
