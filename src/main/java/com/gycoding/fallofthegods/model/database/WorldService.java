@@ -2,6 +2,7 @@ package com.gycoding.fallofthegods.model.database;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gycoding.fallofthegods.model.entities.worlds.EntityPlace;
@@ -16,11 +17,8 @@ import com.gycoding.fallofthegods.model.entities.worlds.EntityWorld;
  */
 @Service
 public class WorldService {
-    private final WorldRepository worldRepository;
-
-    public WorldService(WorldRepository worldRepository) {
-        this.worldRepository = worldRepository;
-    }
+    @Autowired
+    private final WorldRepository worldRepository = null;
 
     /**
      * Finds a World by its identifier.

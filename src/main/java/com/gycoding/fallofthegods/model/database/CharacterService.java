@@ -2,6 +2,7 @@ package com.gycoding.fallofthegods.model.database;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gycoding.fallofthegods.model.entities.characters.EntityCharacter;
@@ -15,11 +16,11 @@ import com.gycoding.fallofthegods.model.entities.characters.EntityCharacter;
  */
 @Service
 public class CharacterService {
-    private final CharacterRepository characterRepository;
-
-    public CharacterService(CharacterRepository characterRepository) {
-        this.characterRepository = characterRepository;
-    }
+    @Autowired
+    private final CharacterRepository characterRepository = null;
+    
+    @Autowired
+    private final StoryService storyService = null;
 
     /**
      * Finds a Character from the story by its identifier.
@@ -29,7 +30,11 @@ public class CharacterService {
      * @see CharacterRepository
      */
     public EntityCharacter getStoryCharacter(String id) {
-        return characterRepository.findByIdentifier(id).orElse(null);
+        EntityCharacter character = characterRepository.findByIdentifier(id).orElse(null);
+
+        character.setStories(storyService.listStoriesByCharacter(id));
+
+        return character;
     }
 
     /**
@@ -40,7 +45,13 @@ public class CharacterService {
      * @see CharacterRepository
      */
     public List<EntityCharacter> listStoryCharacters() {
-        return characterRepository.findAll();
+        List<EntityCharacter> characters = characterRepository.findAll();
+
+        for(EntityCharacter character : characters) {
+            character.setStories(storyService.listStoriesByCharacter(character.getIdentifier()));
+        }
+
+        return characters;
     }
 
     /**
@@ -51,7 +62,11 @@ public class CharacterService {
      * @see CharacterRepository
      */
     public EntityCharacter getGameCharacter(String id) {
-        return characterRepository.findByIdentifierAndInGame(id, true).orElse(null);
+        EntityCharacter character = characterRepository.findByIdentifierAndInGame(id, true).orElse(null);
+
+        character.setStories(storyService.listStoriesByCharacter(id));
+
+        return character;
     }
 
     /**
@@ -62,6 +77,12 @@ public class CharacterService {
      * @see CharacterRepository
      */
     public List<EntityCharacter> listGameCharacters() {
-        return characterRepository.findByInGame(true).orElse(null);
+        List<EntityCharacter> characters = characterRepository.findByInGame(true).orElse(null);
+
+        for(EntityCharacter character : characters) {
+            character.setStories(storyService.listStoriesByCharacter(character.getIdentifier()));
+        }
+
+        return characters;
     }
 }

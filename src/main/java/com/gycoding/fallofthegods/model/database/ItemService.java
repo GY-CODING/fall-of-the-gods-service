@@ -2,6 +2,7 @@ package com.gycoding.fallofthegods.model.database;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gycoding.fallofthegods.model.entities.items.EntityItem;
@@ -15,11 +16,8 @@ import com.gycoding.fallofthegods.model.entities.items.EntityItem;
  */
 @Service
 public class ItemService {
-    private final ItemRepository itemRepository;
-
-    public ItemService(ItemRepository worldRepository) {
-        this.itemRepository = worldRepository;
-    }
+    @Autowired
+    private final ItemRepository itemRepository = null;
 
     /**
      * Finds an Item from the story by its identifier.
