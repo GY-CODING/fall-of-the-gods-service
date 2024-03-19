@@ -1,5 +1,7 @@
 package com.gycoding.fallofthegods.model.entities.characters;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -20,6 +22,7 @@ public class EntityCharacter {
     private String image;
     private EntityStat<Double> stats;
     private EntityAbility ability;
+    private List<EntityStory> stories;
 
     public EntityCharacter(String mongoId, String identifier, String name, String title, String description, EntityWorld world, Boolean inGame, String image, EntityStat<Double> stats, EntityAbility ability) {
         this.mongoId        = mongoId;
@@ -104,6 +107,13 @@ public class EntityCharacter {
         this.ability = ability;
     }
 
+    public List<EntityStory> getStories() {
+        return stories;
+    }
+    public void setStories(List<EntityStory> stories) {
+        this.stories = stories;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -114,7 +124,8 @@ public class EntityCharacter {
                 "\"world\": " + world + "," +
                 "\"image\": \"" + image + "\"," +
                 "\"stats\": " + stats + "," +
-                "\"ability\": " + ability +
+                "\"ability\": " + ability + "," +
+                "\"stories\": " + stories +
                 "}";
     }
 }
