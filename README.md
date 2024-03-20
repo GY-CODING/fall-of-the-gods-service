@@ -5,7 +5,6 @@
 [![reference](https://img.shields.io/badge/reference-api_reference-silver?style=for-the-badge)](https://fallofthegods-data.onrender.com)
 
 # Introduction
-***
 
 This is the official **Fall of the Gods API REST**, containing endpoints to get data about **characters**, **items**, **worlds**, **places** and **stories** from the main lore and the videogame.
 
@@ -14,7 +13,6 @@ We provide a full **[API reference](https://fallofthegods-data.onrender.com)**, 
 <br>
 
 # How it was made?
-***
 
 This API REST uses **Spring Web** for the whole API REST functionality and **Spring Data** to access to our **MongoDB** database.
 
