@@ -24,7 +24,7 @@ public class EntityCharacter {
     private EntityAbility ability;
     private List<EntityStory> stories;
 
-    public EntityCharacter(String mongoId, String identifier, String name, String title, String description, EntityWorld world, Boolean inGame, String image, EntityStat<Double> stats, EntityAbility ability) {
+    public EntityCharacter(String mongoId, String identifier, String name, String title, String description, EntityWorld world, Boolean inGame, String image, EntityStat<Double> stats, EntityAbility ability, List<EntityStory> stories) {
         this.mongoId        = mongoId;
         this.identifier     = identifier;
         this.name           = name;
@@ -35,6 +35,7 @@ public class EntityCharacter {
         this.image          = image;
         this.stats          = stats;
         this.ability        = ability;
+        this.stories        = stories;
     }
 
     public String getMongoId() {

@@ -35,13 +35,4 @@ public class StoryRouting {
             return ServerStatus.NOT_FOUND.toString();
         }
     }
-
-    @GetMapping("/character/list")
-    public String listStoriesByCharacter(@RequestParam String id) {
-        try {
-            return storyService.listStoriesByCharacter(id).toString();
-        } catch (Exception e) {
-            return ServerStatus.NOT_FOUND.toString();
-        }
-    }
 }

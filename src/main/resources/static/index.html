@@ -11,14 +11,20 @@
     <nav class="navbar">
         <div class="nav-left">
             <img src="./img/FOTG_logo.webp" class="nav-logo"/>
-            <h1 class="nav-title">Fall of the Gods API</h1>
+            <div class="nav-title-box">
+                <h1 class="nav-title">Fall of the Gods API</h1>
+                <h3 class="nav-version">v1.0.0</h3>
+            </div>
         </div>
         <ul class="nav-right">
             <li class="nav-element">
-                <h4 class="nav-link nav-link-endpoints">Endpoints</h4>
+                <h4 class="nav-link nav-link-api">API</h4>
             </li>
             <li class="nav-element">
-                <h4 class="nav-link nav-link-docs">Documentation</h4>
+                <h4 class="nav-link nav-link-docs">Docs</h4>
+            </li>
+            <li class="nav-element">
+                <h4 class="nav-link nav-link-changelog">Changelog</h4>
             </li>
             <li class="nav-element">
                 <h4 class="nav-link nav-link-about">About</h4>
@@ -26,7 +32,7 @@
         </ul>
     </nav>
 
-    <div class="endpoints-page">
+    <div class="api-page">
         <div class="api-characters api">
             <h2 class="api-title">Characters</h2>
             <hr>
@@ -175,23 +181,21 @@
                     <a href="/stories/list"><code class="api-endpoint-code">/stories/list</code></a>
                     <p class="api-desc">Devuelve todas las historias de Fall of the Gods.</p>
                 </li>
-                <li class="api-endpoint">
-                    <h3 class="api-type" type="GET">GET</h3>
-                    <a href="/stories/character/list?id=gullveig"><code class="api-endpoint-code">/stories/character/list</code></a>
-                    <p class="api-desc">Devuelve todas las historias en las que se encuentre el personaje indicado de la historia y del videojuego de Fall of the Gods.</p>
-                    <ul class="api-params">
-                        <li class="api-param">
-                            <code class="api-param-name">id</code>
-                            <p class="api-param-desc"> — Identificador de tipo cadena de texto del personaje de la historia y del videojuego de Fall of the Gods.</p>
-                        </li>
-                    </ul>
-                </li>
             </ul>
         </div>
+    </div>
 
-        <footer class="footer">
-            <img class="footer-logo" src="./img/gy-logo.webp" alt="gycoding"/>
-        </footer>
+    <div class="changelog-page">
+        <div class="changelog-content">
+            <h2 class="version-title">1.0.0</h2>
+            <hr>
+            <p class="version-text">
+                Se puede acceder a toda la información básica de los personajes, objetos, mundos, lugares e historias tanto del lore principal<br>
+                como del seleccionado para el videojuego oficial de Fall of the Gods a través de los <a class="inline-link link-api">endpoints</a> provistos.
+                <br><br>
+                Se provee de una <a class="inline-link link-docs">documentación</a> pública del código fuente de la API.
+            </p>
+        </div>
     </div>
 
     <div class="about-page">
@@ -202,15 +206,34 @@
         </div>
     </div>
 
+    <footer class="footer">
+        <img class="footer-logo" src="./img/gy-logo.webp" alt="gycoding"/>
+    </footer>
+
     <script>
-        const navLinkEndpoints  = document.querySelector('.nav-link-endpoints');
+        const navLinkAPI        = document.querySelector('.nav-link-api');
         const navLinkDocs       = document.querySelector('.nav-link-docs');
+        const navLinkChangelog  = document.querySelector('.nav-link-changelog');
         const navLinkAbout      = document.querySelector('.nav-link-about');
-        const endpointsPage     = document.querySelector('.endpoints-page');
+
+        const linkAPI           = document.querySelector('.link-api');
+        const linkDocs          = document.querySelector('.link-docs');
+
+        const APIPage           = document.querySelector('.api-page');
+        const changelogPage     = document.querySelector('.changelog-page');
         const aboutPage         = document.querySelector('.about-page');
+
+        const footerLogo        = document.querySelector('.footer-logo');
     
-        navLinkEndpoints.addEventListener('click', () => {
-            endpointsPage.style.display     = 'flex';
+        navLinkAPI.addEventListener('click', () => {
+            APIPage.style.display           = 'flex';
+            changelogPage.style.display     = 'none';
+            aboutPage.style.display         = 'none';
+        });
+
+        linkAPI.addEventListener('click', () => {
+            APIPage.style.display           = 'flex';
+            changelogPage.style.display     = 'none';
             aboutPage.style.display         = 'none';
         });
 
@@ -218,9 +241,24 @@
             window.open("./docs/javadoc/index.html", "_blank");
         });
 
+        linkDocs.addEventListener('click', () => {
+            window.open("./docs/javadoc/index.html", "_blank");
+        });
+
+        navLinkChangelog.addEventListener('click', () => {
+            APIPage.style.display           = 'none';
+            changelogPage.style.display     = 'flex';
+            aboutPage.style.display         = 'none';
+        });
+
         navLinkAbout.addEventListener('click', () => {
-            endpointsPage.style.display     = 'none';
+            APIPage.style.display           = 'none';
+            changelogPage.style.display     = 'none';
             aboutPage.style.display         = 'flex';
+        });
+
+        footerLogo.addEventListener('click', () => {
+            window.open("https://www.gycoding.com", "_blank");
         });
     </script>
 </body>

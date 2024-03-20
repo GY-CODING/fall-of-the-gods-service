@@ -40,19 +40,4 @@ public class StoryService {
     public List<EntityStory> listStories() {
         return storyRepository.findAll();
     }
-
-    /**
-     * Lists all the stories in which the specific character (specified by its identifier) is involved.
-     * @param participantIdentifier Character's identifier.
-     * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
-     * @see List
-     * @see EntityStory
-     * @see StoryRepository
-     */
-    public List<EntityStory> listStoriesByCharacter(String participantIdentifier) {
-        return this.listStories().stream()
-            .filter(story -> story.getParticipants().stream()
-                .anyMatch(character -> character.getIdentifier().equals(participantIdentifier)))
-            .toList();
-    }
 }
