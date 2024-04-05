@@ -1,6 +1,7 @@
 package com.gycoding.fallofthegods.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -16,10 +17,10 @@ public class CORSConfig implements WebMvcConfigurer {
     @SuppressWarnings("null")
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOriginPatterns("*") // Cambiado de allowedOrigins("*") a allowedOriginPatterns("*")
-                .allowedMethods("*")
+                .allowedOriginPatterns("*")
+                .allowedMethods(HttpMethod.GET.name())
                 .allowedHeaders("*")
-                .allowCredentials(true) // Cambiado a true para permitir credenciales
+                .allowCredentials(true)
                 .maxAge(3600);
     }
 }
