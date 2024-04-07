@@ -13,10 +13,16 @@ import com.gycoding.fallofthegods.model.entities.characters.EntityCharacter;
 public class CharacterRouting {
     private final CharacterService characterService;
     private final TokenService tokenService;
+    private GYToken token;
 
     public CharacterRouting(CharacterService characterService, TokenService tokenService) {
         this.characterService = characterService;
         this.tokenService = tokenService;
+    }
+
+    @ModelAttribute
+    public void setToken(@PathVariable String token) {
+        this.token = new GYToken(token);
     }
 
     @GetMapping("/story/get")
@@ -39,10 +45,10 @@ public class CharacterRouting {
         }
     }
 
-    @GetMapping("/{token}/game/get")
-    public String getGameCharacter(@PathVariable String token, @RequestParam String id) {
+    @GetMapping("/game/get")
+    public String getGameCharacter(@RequestParam String id) {
         try {
-            if(tokenService.checkToken(new GYToken(token))) {
+            if(tokenService.checkToken(token)) {
                 return characterService.getGameCharacter(id).toString();
             } else {
                 return "Invalid token";
