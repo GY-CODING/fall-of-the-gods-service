@@ -9,7 +9,7 @@ import com.gycoding.fallofthegods.model.entities.ServerStatus;
 import com.gycoding.fallofthegods.model.entities.characters.EntityCharacter;
 
 @RestController
-@RequestMapping("/characters")
+@RequestMapping("/{token}/characters")
 public class CharacterRouting {
     private final CharacterService characterService;
     private final TokenService tokenService;
