@@ -1,30 +1,40 @@
 package com.gycoding.fallofthegods.controller;
 
-import org.springframework.web.bind.annotation.RestController;
+import com.gycoding.fallofthegods.model.database.TokenService;
+import com.gycoding.fallofthegods.model.entities.accounts.GYToken;
+import org.springframework.web.bind.annotation.*;
 
 import com.gycoding.fallofthegods.model.database.PlaceService;
 import com.gycoding.fallofthegods.model.database.WorldService;
 import com.gycoding.fallofthegods.model.entities.ServerStatus;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 @RestController
-@RequestMapping("/worlds")
+@RequestMapping("/{token}/worlds")
 public class WorldRouting {
     private final WorldService worldService;
     private final PlaceService placeService;
+    private final TokenService tokenService;
+    private GYToken token;
 
-    public WorldRouting(WorldService worldService, PlaceService placeService) {
-        this.worldService = worldService;
-        this.placeService = placeService;
+    public WorldRouting(WorldService worldService, PlaceService placeService, TokenService tokenService) {
+        this.worldService   = worldService;
+        this.placeService   = placeService;
+        this.tokenService   = tokenService;
+    }
+
+    @ModelAttribute
+    public void setToken(@PathVariable String token) {
+        this.token = new GYToken(token);
     }
 
     @GetMapping("/get")
     public String getWorld(@RequestParam String id) {
         try {
-            return worldService.getWorld(id).toString();
+            if(tokenService.checkToken(token)) {
+                return worldService.getWorld(id).toString();
+            } else {
+                return ServerStatus.INVALID_TOKEN.toString();
+            }
         } catch (Exception e) {
             return ServerStatus.NOT_FOUND.toString();
         }
@@ -34,7 +44,11 @@ public class WorldRouting {
     @GetMapping("/list")
     public String listWorlds() {
         try {
-            return worldService.listWorlds().toString();
+            if(tokenService.checkToken(token)) {
+                return worldService.listWorlds().toString();
+            } else {
+                return ServerStatus.INVALID_TOKEN.toString();
+            }
         } catch (Exception e) {
             return ServerStatus.NOT_FOUND.toString();
         }
@@ -43,7 +57,11 @@ public class WorldRouting {
     @GetMapping("/places/get")
     public String getPlace(@RequestParam String id) {
         try {
-            return placeService.getPlace(id).toString();
+            if(tokenService.checkToken(token)) {
+                return placeService.getPlace(id).toString();
+            } else {
+                return ServerStatus.INVALID_TOKEN.toString();
+            }
         } catch (Exception e) {
             return ServerStatus.NOT_FOUND.toString();
         }
@@ -52,7 +70,11 @@ public class WorldRouting {
     @GetMapping("/places/listAll")
     public String listPlaces() {
         try {
-            return placeService.listPlaces().toString();
+            if(tokenService.checkToken(token)) {
+                return placeService.listPlaces().toString();
+            } else {
+                return ServerStatus.INVALID_TOKEN.toString();
+            }
         } catch (Exception e) {
             return ServerStatus.NOT_FOUND.toString();
         }
@@ -61,7 +83,11 @@ public class WorldRouting {
     @GetMapping("/places/list")
     public String listWorldPlaces(@RequestParam String id) {
         try {
-            return worldService.listWorldPlaces(id).toString();
+            if(tokenService.checkToken(token)) {
+                return worldService.listWorldPlaces(id).toString();
+            } else {
+                return ServerStatus.INVALID_TOKEN.toString();
+            }
         } catch (Exception e) {
             return ServerStatus.NOT_FOUND.toString();
         }

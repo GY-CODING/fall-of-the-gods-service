@@ -1,27 +1,37 @@
 package com.gycoding.fallofthegods.controller;
 
-import org.springframework.web.bind.annotation.RestController;
+import com.gycoding.fallofthegods.model.database.TokenService;
+import com.gycoding.fallofthegods.model.entities.accounts.GYToken;
+import org.springframework.web.bind.annotation.*;
 
 import com.gycoding.fallofthegods.model.database.StoryService;
 import com.gycoding.fallofthegods.model.entities.ServerStatus;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 @RestController
-@RequestMapping("/stories")
+@RequestMapping("/{token}/stories")
 public class StoryRouting {
     private final StoryService storyService;
+    private final TokenService tokenService;
+    private GYToken token;
 
-    public StoryRouting(StoryService storyService) {
-        this.storyService = storyService;
+    public StoryRouting(StoryService storyService, TokenService tokenService) {
+        this.storyService   = storyService;
+        this.tokenService   = tokenService;
+    }
+
+    @ModelAttribute
+    public void setToken(@PathVariable String token) {
+        this.token = new GYToken(token);
     }
 
     @GetMapping("/get")
     public String getStory(@RequestParam String id) {
         try {
-            return storyService.getStory(id).toString();
+            if(tokenService.checkToken(token)) {
+                return storyService.getStory(id).toString();
+            } else{
+                return ServerStatus.INVALID_TOKEN.toString();
+            }
         } catch (Exception e) {
             return ServerStatus.NOT_FOUND.toString();
         }
@@ -30,7 +40,11 @@ public class StoryRouting {
     @GetMapping("/list")
     public String listStories() {
         try {
-            return storyService.listStories().toString();
+            if(tokenService.checkToken(token)) {
+                return storyService.listStories().toString();
+            } else{
+                return ServerStatus.INVALID_TOKEN.toString();
+            }
         } catch (Exception e) {
             return ServerStatus.NOT_FOUND.toString();
         }

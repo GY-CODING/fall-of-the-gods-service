@@ -24,4 +24,15 @@ public class HomeRouting {
             return ServerStatus.NOT_FOUND.toString();
         }
     }
+    @GetMapping("/error")
+    public String error() {
+        Resource resource = new ClassPathResource("static/error.html");
+
+        try {
+            return new String(Files.readAllBytes(Paths.get(resource.getURI())));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ServerStatus.NOT_FOUND.toString();
+        }
+    }
 }

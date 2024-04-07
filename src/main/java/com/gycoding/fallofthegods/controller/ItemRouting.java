@@ -1,27 +1,37 @@
 package com.gycoding.fallofthegods.controller;
 
-import org.springframework.web.bind.annotation.RestController;
+import com.gycoding.fallofthegods.model.database.TokenService;
+import com.gycoding.fallofthegods.model.entities.accounts.GYToken;
+import org.springframework.web.bind.annotation.*;
 
 import com.gycoding.fallofthegods.model.database.ItemService;
 import com.gycoding.fallofthegods.model.entities.ServerStatus;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 @RestController
-@RequestMapping("/items")
+@RequestMapping("/{token}/items")
 public class ItemRouting {
     private final ItemService itemService;
+    private final TokenService tokenService;
+    private GYToken token;
 
-    public ItemRouting(ItemService itemService) {
-        this.itemService = itemService;
+    public ItemRouting(ItemService itemService, TokenService tokenService) {
+        this.itemService    = itemService;
+        this.tokenService   = tokenService;
+    }
+
+    @ModelAttribute
+    public void setToken(@PathVariable String token) {
+        this.token = new GYToken(token);
     }
 
     @GetMapping("/story/get")
     public String getStoryCharacter(@RequestParam String id) {
         try {
-            return itemService.getStoryItem(id).toString();
+            if(tokenService.checkToken(token)) {
+                return itemService.getStoryItem(id).toString();
+            } else{
+                return ServerStatus.INVALID_TOKEN.toString();
+            }
         } catch (Exception e) {
             return ServerStatus.NOT_FOUND.toString();
         }
@@ -30,7 +40,11 @@ public class ItemRouting {
     @GetMapping("/story/list")
     public String listStoryCharacters() {
         try {
-            return itemService.listStoryItems().toString();
+            if(tokenService.checkToken(token)) {
+                return itemService.listStoryItems().toString();
+            } else{
+                return ServerStatus.INVALID_TOKEN.toString();
+            }
         } catch (Exception e) {
             return ServerStatus.NOT_FOUND.toString();
         }
@@ -39,7 +53,11 @@ public class ItemRouting {
     @GetMapping("/game/get")
     public String getGameCharacter(@RequestParam String id) {
         try {
-            return itemService.getGameItem(id).toString();
+            if(tokenService.checkToken(token)) {
+                return itemService.getGameItem(id).toString();
+            } else{
+                return ServerStatus.INVALID_TOKEN.toString();
+            }
         } catch (Exception e) {
             return ServerStatus.NOT_FOUND.toString();
         }
@@ -48,7 +66,11 @@ public class ItemRouting {
     @GetMapping("/game/list")
     public String listGameCharacters() {
         try {
-            return itemService.listGameItems().toString();
+            if(tokenService.checkToken(token)) {
+                return itemService.listGameItems().toString();
+            } else{
+                return ServerStatus.INVALID_TOKEN.toString();
+            }
         } catch (Exception e) {
             return ServerStatus.NOT_FOUND.toString();
         }

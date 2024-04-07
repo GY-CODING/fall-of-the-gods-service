@@ -1,7 +1,8 @@
 package com.gycoding.fallofthegods.model.entities;
 
 public enum ServerStatus {
-    NOT_FOUND(-1);
+    NOT_FOUND(-1),
+    INVALID_TOKEN(-2);
 
     private final int status;
 

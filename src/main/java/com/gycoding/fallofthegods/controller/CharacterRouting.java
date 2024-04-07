@@ -16,8 +16,8 @@ public class CharacterRouting {
     private GYToken token;
 
     public CharacterRouting(CharacterService characterService, TokenService tokenService) {
-        this.characterService = characterService;
-        this.tokenService = tokenService;
+        this.characterService   = characterService;
+        this.tokenService       = tokenService;
     }
 
     @ModelAttribute
@@ -28,7 +28,11 @@ public class CharacterRouting {
     @GetMapping("/story/get")
     public String getStoryCharacter(@RequestParam String id) {
         try {
-            return characterService.getStoryCharacter(id).toString();
+            if(tokenService.checkToken(token)) {
+                return characterService.getStoryCharacter(id).toString();
+            } else {
+                return ServerStatus.INVALID_TOKEN.toString();
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return ServerStatus.NOT_FOUND.toString();
@@ -38,7 +42,11 @@ public class CharacterRouting {
     @GetMapping("/story/list")
     public String listStoryCharacters() {
         try {
-            return characterService.listStoryCharacters().toString();
+            if(tokenService.checkToken(token)) {
+                return characterService.listStoryCharacters().toString();
+            } else {
+                return ServerStatus.INVALID_TOKEN.toString();
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return ServerStatus.NOT_FOUND.toString();
@@ -51,9 +59,8 @@ public class CharacterRouting {
             if(tokenService.checkToken(token)) {
                 return characterService.getGameCharacter(id).toString();
             } else {
-                return "Invalid token";
+                return ServerStatus.INVALID_TOKEN.toString();
             }
-
         } catch (Exception e) {
             e.printStackTrace();
             return ServerStatus.NOT_FOUND.toString();
@@ -63,7 +70,11 @@ public class CharacterRouting {
     @GetMapping("/game/list")
     public String listGameCharacters() {
         try {
-            return characterService.listGameCharacters().toString();
+            if(tokenService.checkToken(token)) {
+                return characterService.listGameCharacters().toString();
+            } else {
+                return ServerStatus.INVALID_TOKEN.toString();
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return ServerStatus.NOT_FOUND.toString();
