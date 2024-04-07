@@ -1,21 +1,22 @@
 package com.gycoding.fallofthegods.model.entities;
 
 public enum ServerStatus {
-    NOT_FOUND(-1),
-    INVALID_TOKEN(-2);
+    NOT_FOUND("Not found."),
+    INVALID_TOKEN("Invalid API token."),
+    INTERNAL_ERROR("An internal server error has occurred.");
 
-    private final int status;
+    private final String status;
 
-    private ServerStatus(int status) {
+    private ServerStatus(String status) {
         this.status = status;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(status);
+        return status;
     }
 }

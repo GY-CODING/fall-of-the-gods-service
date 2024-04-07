@@ -2,6 +2,9 @@ package com.gycoding.fallofthegods.controller;
 
 import com.gycoding.fallofthegods.model.database.TokenService;
 import com.gycoding.fallofthegods.model.entities.accounts.GYToken;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.gycoding.fallofthegods.model.database.CharacterService;
@@ -26,16 +29,16 @@ public class CharacterRouting {
     }
 
     @GetMapping("/story/get")
-    public String getStoryCharacter(@RequestParam String id) {
+    public ResponseEntity<String> getStoryCharacter(@RequestParam String id) {
         try {
             if(tokenService.checkToken(token)) {
-                return characterService.getStoryCharacter(id).toString();
+                return ResponseEntity.ok(characterService.getStoryCharacter(id).toString());
             } else {
-                return ServerStatus.INVALID_TOKEN.toString();
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ServerStatus.INVALID_TOKEN.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return ServerStatus.NOT_FOUND.toString();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ServerStatus.INTERNAL_ERROR.toString());
         }
     }
 
