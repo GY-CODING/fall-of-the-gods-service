@@ -1,21 +1,22 @@
 package com.gycoding.fallofthegods.controller;
 
-import org.springframework.web.bind.annotation.RestController;
+import com.gycoding.fallofthegods.model.database.TokenService;
+import com.gycoding.fallofthegods.model.entities.accounts.GYToken;
+import org.springframework.web.bind.annotation.*;
 
 import com.gycoding.fallofthegods.model.database.CharacterService;
 import com.gycoding.fallofthegods.model.entities.ServerStatus;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.gycoding.fallofthegods.model.entities.characters.EntityCharacter;
 
 @RestController
 @RequestMapping("/characters")
 public class CharacterRouting {
     private final CharacterService characterService;
+    private final TokenService tokenService;
 
-    public CharacterRouting(CharacterService characterService) {
+    public CharacterRouting(CharacterService characterService, TokenService tokenService) {
         this.characterService = characterService;
+        this.tokenService = tokenService;
     }
 
     @GetMapping("/story/get")
@@ -38,10 +39,15 @@ public class CharacterRouting {
         }
     }
 
-    @GetMapping("/game/get")
-    public String getGameCharacter(@RequestParam String id) {
+    @GetMapping("/{token}/game/get")
+    public String getGameCharacter(@PathVariable String token, @RequestParam String id) {
         try {
-            return characterService.getGameCharacter(id).toString();
+            if(tokenService.checkToken(new GYToken(token))) {
+                return characterService.getGameCharacter(id).toString();
+            } else {
+                return "Invalid token";
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             return ServerStatus.NOT_FOUND.toString();
