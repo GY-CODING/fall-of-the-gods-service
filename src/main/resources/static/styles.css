@@ -464,6 +464,10 @@ span {
     align-content: center;
 }
 
+.changelog-content hr {
+    margin-bottom: 20px;
+}
+
 .about-text {
     width: 100%;
     height: 100%;
@@ -492,7 +496,7 @@ span {
 
     justify-content: flex-start;
     align-items: flex-start;
-    align-content: center;
+    align-content: flex-start;
 
     font-family: 'Cormorant Garamond';
     font-size: 18px;
