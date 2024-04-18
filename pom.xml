@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.gycoding</groupId>
 	<artifactId>fallofthegods</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.3</version>
 	<name>fallofthegods</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -72,6 +72,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.restdocs</groupId>
+			<artifactId>spring-restdocs-mockmvc</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -89,6 +95,36 @@
 				<configuration>
 					<reportOutputDirectory>src/main/resources/static/docs</reportOutputDirectory>
 					<destDir>javadoc</destDir>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jetbrains.dokka</groupId>
+				<artifactId>dokka-maven-plugin</artifactId>
+				<version>1.9.20</version>
+				<executions>
+					<execution>
+						<phase>pre-site</phase>
+						<goals>
+							<goal>dokka</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<skip>false</skip>
+					<moduleName>Fall of the Gods API</moduleName>
+					<outputDir>./src/main/resources/static/docs</outputDir>
+					<cacheRoot>default</cacheRoot>
+					<offlineMode>false</offlineMode>
+					<samples>
+						<dir>src/test/samples</dir>
+					</samples>
+					<suppressObviousFunctions>false</suppressObviousFunctions>
+					<suppressInheritedMembers>true</suppressInheritedMembers>
+					<jdkVersion>17</jdkVersion>
+					<skipDeprecated>false</skipDeprecated>
+					<reportUndocumented>true</reportUndocumented>
+					<skipEmptyPackages>true</skipEmptyPackages>
 				</configuration>
 			</plugin>
 		</plugins>
