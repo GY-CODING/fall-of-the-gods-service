@@ -12,7 +12,6 @@ public enum ServerStatus {
     PLACE_NOT_FOUND("Place not found.", HttpStatus.NOT_FOUND),
     STORY_NOT_FOUND("Story not found.", HttpStatus.NOT_FOUND),
     BAD_REQUEST("The endpoint is malformed.", HttpStatus.BAD_REQUEST),
-    INVALID_TOKEN("Invalid or null token provided in order to access to this data.", HttpStatus.UNAUTHORIZED),
     SERVER_ERROR("An internal server error has occurred, sorry for the inconvenience.", HttpStatus.INTERNAL_SERVER_ERROR);
 
     @Getter
