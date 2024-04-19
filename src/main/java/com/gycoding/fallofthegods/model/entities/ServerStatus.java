@@ -1,22 +1,32 @@
 package com.gycoding.fallofthegods.model.entities;
 
+import lombok.Getter;
+import org.springframework.http.HttpStatus;
+
+// TODO. Lists not found.
 public enum ServerStatus {
-    NOT_FOUND("Not found."),
-    INVALID_TOKEN("Invalid API token."),
-    INTERNAL_ERROR("An internal server error has occurred.");
+    HOME_NOT_FOUND("API reference not found.", HttpStatus.NOT_FOUND),
+    CHARACTER_NOT_FOUND("Character not found.", HttpStatus.NOT_FOUND),
+    ITEM_NOT_FOUND("Item not found.", HttpStatus.NOT_FOUND),
+    WORLD_NOT_FOUND("World not found.", HttpStatus.NOT_FOUND),
+    PLACE_NOT_FOUND("Place not found.", HttpStatus.NOT_FOUND),
+    STORY_NOT_FOUND("Story not found.", HttpStatus.NOT_FOUND),
+    BAD_REQUEST("The endpoint is malformed.", HttpStatus.BAD_REQUEST),
+    INVALID_TOKEN("Invalid or null token provided in order to access to this data.", HttpStatus.UNAUTHORIZED),
+    SERVER_ERROR("An internal server error has occurred, sorry for the inconvenience.", HttpStatus.INTERNAL_SERVER_ERROR);
 
-    private final String status;
+    @Getter
+    public final String msg;
+    @Getter
+    public final HttpStatus status;
 
-    private ServerStatus(String status) {
+    private ServerStatus(String msg, HttpStatus status) {
+        this.msg    = msg;
         this.status = status;
-    }
-
-    public String getStatus() {
-        return status;
     }
 
     @Override
     public String toString() {
-        return status;
+        return String.format("{\n\t\"error\": \"%s\",\n\n\t\"status\": %d,\n\t\"message\": \"%s\"}", this.status.getReasonPhrase().toUpperCase(), this.status.value(), this.msg);
     }
 }

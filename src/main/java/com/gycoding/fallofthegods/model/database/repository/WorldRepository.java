@@ -1,11 +1,10 @@
-package com.gycoding.fallofthegods.model.database;
+package com.gycoding.fallofthegods.model.database.repository;
 
-import java.util.Optional;
-
+import com.gycoding.fallofthegods.model.entities.worlds.EntityWorld;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import com.gycoding.fallofthegods.model.entities.worlds.EntityWorld;
+import java.util.Optional;
 
 /**
  * Repository for the World entity.

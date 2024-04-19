@@ -1,13 +1,11 @@
-package com.gycoding.fallofthegods.model.database;
+package com.gycoding.fallofthegods.model.database.repository;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.gycoding.fallofthegods.model.entities.items.EntityItem;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import com.gycoding.fallofthegods.model.entities.characters.EntityStory;
-import com.gycoding.fallofthegods.model.entities.items.EntityItem;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Repository for the Item entity.

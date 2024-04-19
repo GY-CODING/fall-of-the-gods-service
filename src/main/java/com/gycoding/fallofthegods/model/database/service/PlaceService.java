@@ -1,11 +1,11 @@
-package com.gycoding.fallofthegods.model.database;
+package com.gycoding.fallofthegods.model.database.service;
 
-import java.util.List;
-
+import com.gycoding.fallofthegods.model.database.repository.PlaceRepository;
+import com.gycoding.fallofthegods.model.entities.worlds.EntityPlace;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gycoding.fallofthegods.model.entities.worlds.EntityPlace;
+import java.util.List;
 
 /**
  * Service for the Place entity.

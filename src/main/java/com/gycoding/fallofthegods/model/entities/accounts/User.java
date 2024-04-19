@@ -1,15 +1,11 @@
 package com.gycoding.fallofthegods.model.entities.accounts;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.UUID;
 
 @Entity
 @Table(name = "User")
@@ -25,10 +21,10 @@ public class User {
     @Setter
     private String username;
 
-    @Embedded
+    @Column
     @Getter
     @Setter
-    private Email email;
+    private String email;
 
     @Column
     @Getter
@@ -40,13 +36,13 @@ public class User {
     @Setter
     private String salt;
 
-    @Embedded
+    @Column
     @Getter
     @Setter
-    private GYToken token;
+    private UUID token;
 
     @Builder
-    public User(String username, Email email) {
+    public User(String username, String email) {
         this.username       = username;
         this.email          = email;
     }

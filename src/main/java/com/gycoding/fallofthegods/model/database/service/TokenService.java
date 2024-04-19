@@ -1,11 +1,11 @@
-package com.gycoding.fallofthegods.model.database;
+package com.gycoding.fallofthegods.model.database.service;
 
-import com.gycoding.fallofthegods.model.entities.accounts.GYToken;
+import com.gycoding.fallofthegods.model.database.repository.TokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TokenService {
@@ -16,9 +16,9 @@ public class TokenService {
         this.tokenRepository = tokenRepository;
     }
 
-    public Boolean checkToken(GYToken token) {
-        for(GYToken gyToken : listTokens()) {
-            if(token.equals(gyToken)) {
+    public Boolean checkToken(UUID token) {
+        for(UUID singleToken : listTokens()) {
+            if(token.equals(singleToken)) {
                 return true;
             } else {
                 continue;
@@ -28,7 +28,7 @@ public class TokenService {
         return false;
     }
 
-    private List<GYToken> listTokens() {
+    private List<UUID> listTokens() {
         return tokenRepository.findAllTokens().orElse(null);
     }
 }
