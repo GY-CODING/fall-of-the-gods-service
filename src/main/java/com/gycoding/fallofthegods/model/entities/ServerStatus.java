@@ -3,7 +3,6 @@ package com.gycoding.fallofthegods.model.entities;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
-// TODO. Lists not found.
 public enum ServerStatus {
     HOME_NOT_FOUND("API reference not found.", HttpStatus.NOT_FOUND),
     CHARACTER_NOT_FOUND("Character not found.", HttpStatus.NOT_FOUND),

@@ -44,7 +44,8 @@ public class WorldService {
 
     /**
      * Finds a specific Place in a specific World, both identified by their own identifier.
-     * @param id
+     * @param idWorld World's identifier.
+     * @param idPlace idPlace Place's identifier.
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see EntityPlace
      * @see WorldRepository
@@ -54,7 +55,7 @@ public class WorldService {
     }
 
     /**
-     * Lists all the places in an specific world (specified by its identifier).
+     * Lists all the places in a specific world (specified by its identifier).
      * @param id World's identifier.
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see List

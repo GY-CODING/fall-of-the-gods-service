@@ -14,7 +14,7 @@ public class ItemController {
     private final ItemService itemService;
 
     public ItemController(ItemService itemService) {
-        this.itemService    = itemService;
+        this.itemService = itemService;
     }
 
     @GetMapping("/story/get")

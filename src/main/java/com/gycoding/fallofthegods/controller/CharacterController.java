@@ -14,7 +14,7 @@ public class CharacterController {
     private final CharacterService characterService;
 
     public CharacterController(CharacterService characterService) {
-        this.characterService   = characterService;
+        this.characterService = characterService;
     }
 
     @GetMapping("/story/get")
