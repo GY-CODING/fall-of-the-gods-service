@@ -5,8 +5,8 @@ public class EntityItemStat {
     private double value;
 
     public EntityItemStat(String type, double value) {
-        this.type = type;
-        this.value = value;
+        this.type   = type;
+        this.value  = value;
     }
 
     public String getType() {
