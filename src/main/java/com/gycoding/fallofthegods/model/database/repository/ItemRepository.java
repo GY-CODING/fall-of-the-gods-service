@@ -19,6 +19,7 @@ public interface ItemRepository extends MongoRepository<EntityItem, String> {
     /**
      * Finds an Item by its identifier.
      * @param identifier
+     * @return EntityItem
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see Optional
      * @see EntityItem
@@ -29,6 +30,7 @@ public interface ItemRepository extends MongoRepository<EntityItem, String> {
      * Finds an Item by its identifier and its inGame parameter.
      * @param identifier
      * @param inGame
+     * @return EntityItem
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see Optional
      * @see EntityItem
@@ -38,6 +40,7 @@ public interface ItemRepository extends MongoRepository<EntityItem, String> {
     /**
      * Lists all items filtred by their inGame parameters.
      * @param inGame
+     * @return List of EntityItem
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see Optional
      * @see List

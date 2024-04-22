@@ -10,10 +10,10 @@
 <body>
     <nav class="navbar">
         <div class="nav-left">
-            <img src="./img/FOTG_logo.webp" class="nav-logo"/>
+            <img src="./img/icons/FOTG_logo.webp" class="nav-logo" draggable="false"/>
             <div class="nav-title-box">
                 <h1 class="nav-title">Fall of the Gods API</h1>
-                <h3 class="nav-version">v1.0.3</h3>
+                <h3 class="nav-version">v2.0.0</h3>
             </div>
         </div>
         <ul class="nav-right">
@@ -24,7 +24,7 @@
                 <h4 class="nav-link nav-link-docs">Docs</h4>
             </li>
             <li class="nav-element">
-                <h4 class="nav-link nav-link-changelog">Changelog</h4>
+                <h4 class="nav-link nav-link-changelog">Versions</h4>
             </li>
             <li class="nav-element">
                 <h4 class="nav-link nav-link-about">About</h4>
@@ -32,154 +32,27 @@
         </ul>
     </nav>
 
-    <div class="api-page">
-        <div class="api-characters api">
-            <h2 class="api-title">Characters</h2>
+    <div class="about-page">
+        <div class="about-content">
+            <h2 class="about-title">Fall of the Gods API</h2>
             <hr>
-            <ul class="api-endpoints">
-                <li class="api-endpoint">
-                    <h3 class="api-type" type="GET">GET</h3>
-                    <a href="3ebac085-da0f-477e-9383-85a2c0d983be/characters/story/get?id=odin"><code class="api-endpoint-code">/characters/story/get</code></a>
-                    <p class="api-desc">Devuelve un personaje concreto de la historia de Fall of the Gods.</p>
-                    <ul class="api-params">
-                        <li class="api-param">
-                            <code class="api-param-name">id</code>
-                            <p class="api-param-desc"> — Identificador de tipo cadena de texto del personaje de la historia.</p>
-                        </li>
-                    </ul>
-                </li>
-                <li class="api-endpoint">
-                    <h3 class="api-type" type="GET">GET</h3>
-                    <a href="3ebac085-da0f-477e-9383-85a2c0d983be/characters/story/list"><code class="api-endpoint-code">/characters/story/list</code></a>
-                    <p class="api-desc">Devuelve todos los personajes de la historia de Fall of the Gods.</p>
-                </li>
-                <li class="api-endpoint">
-                    <h3 class="api-type" type="GET">GET</h3>
-                    <a href="3ebac085-da0f-477e-9383-85a2c0d983be/characters/game/get?id=odin"><code class="api-endpoint-code">/characters/game/get</code></a>
-                    <p class="api-desc">Devuelve un personaje concreto del videojuego de Fall of the Gods.</p>
-                    <ul class="api-params">
-                        <li class="api-param">
-                            <code class="api-param-name">id</code>
-                            <p class="api-param-desc"> — Identificador de tipo cadena de texto del personaje del videojuego.</p>
-                        </li>
-                    </ul>
-                </li>
-                <li class="api-endpoint">
-                    <h3 class="api-type" type="GET">GET</h3>
-                    <a href="3ebac085-da0f-477e-9383-85a2c0d983be/characters/game/list"><code class="api-endpoint-code">/characters/game/list</code></a>
-                    <p class="api-desc">Devuelve todos los personajes del videojuego de Fall of the Gods.</p>
-                </li>
-            </ul>
-        </div>
-    
-        <div class="api-worlds api">
-            <h2 class="api-title">Worlds</h2>
-            <hr>
-            <ul class="api-endpoints">
-                <li class="api-endpoint">
-                    <h3 class="api-type" type="GET">GET</h3>
-                    <a href="3ebac085-da0f-477e-9383-85a2c0d983be/worlds/get?id=asgard"><code class="api-endpoint-code">/worlds/get</code></a>
-                    <p class="api-desc">Devuelve un mundo concreto de la historia y del videojuego de Fall of the Gods.</p>
-                    <ul class="api-params">
-                        <li class="api-param">
-                            <code class="api-param-name">id</code>
-                            <p class="api-param-desc"> — Identificador de tipo cadena de texto del mundo de la historia.</p>
-                        </li>
-                    </ul>
-                </li>
-                <li class="api-endpoint">
-                    <h3 class="api-type" type="GET">GET</h3>
-                    <a href="3ebac085-da0f-477e-9383-85a2c0d983be/worlds/list"><code class="api-endpoint-code">/worlds/list</code></a>
-                    <p class="api-desc">Devuelve todos los mundos de la historia y del videojuego de Fall of the Gods.</p>
-                </li>
-                <li class="api-endpoint">
-                    <h3 class="api-type" type="GET">GET</h3>
-                    <a href="3ebac085-da0f-477e-9383-85a2c0d983be/worlds/places/get?id=idavoll"><code class="api-endpoint-code">/worlds/places/get</code></a>
-                    <p class="api-desc">Devuelve un lugar concreto de un mundo concreto de la historia y del videojuego de Fall of the Gods.</p>
-                    <ul class="api-params">
-                        <li class="api-param">
-                            <code class="api-param-name">id</code>
-                            <p class="api-param-desc"> — Identificador de tipo cadena de texto del lugar de la historia y del videojuego de Fall of the Gods.</p>
-                        </li>
-                    </ul>
-                </li>
-                <li class="api-endpoint">
-                    <h3 class="api-type" type="GET">GET</h3>
-                    <a href="3ebac085-da0f-477e-9383-85a2c0d983be/worlds/places/listAll"><code class="api-endpoint-code">/worlds/places/listAll</code></a>
-                    <p class="api-desc">Devuelve todos los lugares de la historia y del videojuego de Fall of the Gods.</p>
-                </li>
-                <li class="api-endpoint">
-                    <h3 class="api-type" type="GET">GET</h3>
-                    <a href="3ebac085-da0f-477e-9383-85a2c0d983be/worlds/places/list"><code class="api-endpoint-code">/worlds/places/list</code></a>
-                    <p class="api-desc">Devuelve todos los lugares de un mundo concreto de la historia y del videojuego de Fall of the Gods.</p>
-                    <ul class="api-params">
-                        <li class="api-param">
-                            <code class="api-param-name">id</code>
-                            <p class="api-param-desc"> — Identificador de tipo cadena de texto del mundo de los cuales se quieren retornar sus lugares de la historia y del videojuego de Fall of the Gods.</p>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    
-        <div class="api-items api">
-            <h2 class="api-title">Items</h2>
-            <hr>
-            <ul class="api-endpoints">
-                <li class="api-endpoint">
-                    <h3 class="api-type" type="GET">GET</h3>
-                    <a href="3ebac085-da0f-477e-9383-85a2c0d983be/items/story/get?id=mjolnir"><code class="api-endpoint-code">/items/story/get</code></a>
-                    <p class="api-desc">Devuelve un objeto concreto de la historia de Fall of the Gods.</p>
-                    <ul class="api-params">
-                        <li class="api-param">
-                            <code class="api-param-name">id</code>
-                            <p class="api-param-desc"> — Identificador de tipo cadena de texto del objeto de la historia.</p>
-                        </li>
-                    </ul>
-                </li>
-                <li class="api-endpoint">
-                    <h3 class="api-type" type="GET">GET</h3>
-                    <a href="3ebac085-da0f-477e-9383-85a2c0d983be/items/story/list"><code class="api-endpoint-code">/items/story/list</code></a>
-                    <p class="api-desc">Devuelve todos los objetos de la historia de Fall of the Gods.</p>
-                </li>
-                <li class="api-endpoint">
-                    <h3 class="api-type" type="GET">GET</h3>
-                    <a href="3ebac085-da0f-477e-9383-85a2c0d983be/items/game/get?id=mjolnir"><code class="api-endpoint-code">/items/game/get</code></a>
-                    <p class="api-desc">Devuelve un objeto concreto del videojuego de Fall of the Gods.</p>
-                    <ul class="api-params">
-                        <li class="api-param">
-                            <code class="api-param-name">id</code>
-                            <p class="api-param-desc"> — Identificador de tipo cadena de texto del objeto del videojuego.</p>
-                        </li>
-                    </ul>
-                </li>
-                <li class="api-endpoint">
-                    <h3 class="api-type" type="GET">GET</h3>
-                    <a href="3ebac085-da0f-477e-9383-85a2c0d983be/items/game/list"><code class="api-endpoint-code">/items/game/list</code></a>
-                    <p class="api-desc">Devuelve todos los objetos del videojuego de Fall of the Gods.</p>
-                </li>
-            </ul>
-        </div>
+            <p class="about-text">
+                This is the reference API of the entire Fall of the Gods story, it currently serves as a query for characters, stories, items, worlds and places of the story, as well as the official video game,<br>
+                and as a query of the achievements and users registered in every video game inside this amazing universe.
+            </p>
 
-        <div class="api-worlds api">
-            <h2 class="api-title">Stories</h2>
-            <hr>
-            <ul class="api-endpoints">
-                <li class="api-endpoint">
-                    <h3 class="api-type" type="GET">GET</h3>
-                    <a href="3ebac085-da0f-477e-9383-85a2c0d983be/stories/get?id=la_sombra_del_bosque"><code class="api-endpoint-code">/stories/get</code></a>
-                    <p class="api-desc">Devuelve una historia concreta de Fall of the Gods.</p>
-                    <ul class="api-params">
-                        <li class="api-param">
-                            <code class="api-param-name">id</code>
-                            <p class="api-param-desc"> — Identificador de tipo cadena de texto de la historia.</p>
-                        </li>
-                    </ul>
+            <ul class="about-links">
+                <li class="about-box about-api">
+                    <img src="./img/svg/api.svg" class="about-box-icon"/>
+                    <h3 class="about-box-title">API Docs</h3>
                 </li>
-                <li class="api-endpoint">
-                    <h3 class="api-type" type="GET">GET</h3>
-                    <a href="3ebac085-da0f-477e-9383-85a2c0d983be/stories/list"><code class="api-endpoint-code">/stories/list</code></a>
-                    <p class="api-desc">Devuelve todas las historias de Fall of the Gods.</p>
+                <li class="about-box about-docs">
+                    <img src="./img/svg/docs.svg" class="about-box-icon"/>
+                    <h3 class="about-box-title">Code Docs</h3>
+                </li>
+                <li class="about-box about-changelog">
+                    <img src="./img/svg/changelog.svg" class="about-box-icon"/>
+                    <h3 class="about-box-title">Versions</h3>
                 </li>
             </ul>
         </div>
@@ -187,68 +60,90 @@
 
     <div class="changelog-page">
         <div class="changelog-content">
+            <h2 class="version-title">2.0.0</h2>
+            <hr>
+            <p class="version-text">
+                BREAKING VERSION.<br>
+                New endpoints to access Achievements from Fall of the Gods games (Leaves and Shadows).
+                At the same time, new endpoints to access selected user information and their unlocked achievements.
+                <br><br>
+                The main changes that might imply the breaking with previous versions are the refactoring of every endpoint and the new request/response management<br>
+                now. The old API KEY functionality has been completely deleted.
+            </p>
+        </div>
+        <div class="changelog-content">
             <h2 class="version-title">1.0.3</h2>
             <hr>
             <p class="version-text">
-                Generación de documentación del código y refactorización importante del mismo.
+                Automatic code documentation generation and important code refactoring.
             </p>
         </div>
         <div class="changelog-content">
             <h2 class="version-title">1.0.2</h2>
             <hr>
             <p class="version-text">
-                Implementación de un sistema de API KEY para garantizar más seguridad en el acceso a los datos.
+                API KEY system implementation in order to ensure more security when accessing to data.
             </p>
         </div>
         <div class="changelog-content">
             <h2 class="version-title">1.0.0</h2>
             <hr>
             <p class="version-text">
-                Se puede acceder a toda la información básica de los personajes, objetos, mundos, lugares e historias tanto del lore principal<br>
-                como del seleccionado para el videojuego oficial de Fall of the Gods a través de los <a class="inline-link link-api">endpoints</a> provistos.
+                It is possible to access all the basic information of the characters, items, worlds, places and stories of both the main lore<br>
+                and the one selected for the official video game of Fall of the Gods through the provided <a class="inline-link link-api">endpoints</a>.
                 <br><br>
-                Se provee de una <a class="inline-link link-docs">documentación</a> pública del código fuente de la API.
+                Public <a class="inline-link link-docs">documentation</a> is provided.
             </p>
         </div>
     </div>
 
-    <div class="about-page">
-        <div class="about-content">
-            <h2 class="about-title">About</h2>
-            <hr>
-            <p class="about-text">Esta es la API de referencia de toda la historia de Fall of the Gods, sirve actualmente tanto como consulta de personajes, relatos, objetos, mundos y lugares de la historia, como del videojuego oficial.</p>
-        </div>
-    </div>
-
     <footer class="footer">
-        <img class="footer-logo" src="./img/gy-logo.webp" alt="gycoding"/>
+        <img class="footer-logo" src="./img/icons/gy-logo.webp" alt="gycoding"/>
     </footer>
 
     <script>
+        const navLeft           = document.querySelector('.nav-left');
         const navLinkAPI        = document.querySelector('.nav-link-api');
         const navLinkDocs       = document.querySelector('.nav-link-docs');
         const navLinkChangelog  = document.querySelector('.nav-link-changelog');
         const navLinkAbout      = document.querySelector('.nav-link-about');
 
+        const boxAPI            = document.querySelector('.about-api');
+        const boxDocs           = document.querySelector('.about-docs');
+        const boxChangelog      = document.querySelector('.about-changelog');
+
         const linkAPI           = document.querySelector('.link-api');
         const linkDocs          = document.querySelector('.link-docs');
 
-        const APIPage           = document.querySelector('.api-page');
         const changelogPage     = document.querySelector('.changelog-page');
         const aboutPage         = document.querySelector('.about-page');
 
         const footerLogo        = document.querySelector('.footer-logo');
-    
-        navLinkAPI.addEventListener('click', () => {
-            APIPage.style.display           = 'flex';
-            changelogPage.style.display     = 'none';
+
+        boxAPI.addEventListener('click', () => {
+            window.open("https://documenter.getpostman.com/view/34091334/2sA3Bq3Adw", "_blank");
+        });
+
+        boxDocs.addEventListener('click', () => {
+            window.open("./docs/index.html", "_blank");
+        });
+
+        boxChangelog.addEventListener('click', () => {
+            changelogPage.style.display     = 'flex';
             aboutPage.style.display         = 'none';
         });
 
-        linkAPI.addEventListener('click', () => {
-            APIPage.style.display           = 'flex';
+        navLeft.addEventListener('click', () => {
             changelogPage.style.display     = 'none';
-            aboutPage.style.display         = 'none';
+            aboutPage.style.display         = 'flex';
+        });
+    
+        navLinkAPI.addEventListener('click', () => {
+            window.open("https://documenter.getpostman.com/view/34091334/2sA3Bq3Adw", "_blank");
+        });
+
+        linkAPI.addEventListener('click', () => {
+            window.open("https://documenter.getpostman.com/view/34091334/2sA3Bq3Adw", "_blank");
         });
 
         navLinkDocs.addEventListener('click', () => {
@@ -260,13 +155,11 @@
         });
 
         navLinkChangelog.addEventListener('click', () => {
-            APIPage.style.display           = 'none';
             changelogPage.style.display     = 'flex';
             aboutPage.style.display         = 'none';
         });
 
         navLinkAbout.addEventListener('click', () => {
-            APIPage.style.display           = 'none';
             changelogPage.style.display     = 'none';
             aboutPage.style.display         = 'flex';
         });

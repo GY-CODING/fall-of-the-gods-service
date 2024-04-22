@@ -18,6 +18,7 @@ public interface StoryRepository extends MongoRepository<EntityStory, String> {
     /**
      * Finds a Story by its identifier.
      * @param identifier
+     * @return EntityStory
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see Optional
      * @see EntityStory

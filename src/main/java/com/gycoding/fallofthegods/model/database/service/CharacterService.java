@@ -21,6 +21,7 @@ public class CharacterService {
 
     /**
      * Finds a Character from the story by its identifier.
+     * @return EntityCharacter
      * @param id
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see EntityCharacter
@@ -32,6 +33,7 @@ public class CharacterService {
 
     /**
      * Lists all characters from the story.
+     * @return List of EntityCharacter
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see List
      * @see EntityCharacter
@@ -44,6 +46,7 @@ public class CharacterService {
     /**
      * Finds a Character from the game by its identifier.
      * @param id
+     * @return EntityCharacter
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see EntityCharacter
      * @see CharacterRepository
@@ -54,6 +57,7 @@ public class CharacterService {
 
     /**
      * Lists all characters from the game.
+     * @return List of EntityCharacter
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see List
      * @see EntityCharacter
