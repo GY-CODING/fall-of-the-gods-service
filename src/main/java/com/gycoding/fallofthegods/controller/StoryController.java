@@ -2,6 +2,7 @@ package com.gycoding.fallofthegods.controller;
 
 import com.gycoding.fallofthegods.model.database.service.StoryService;
 import com.gycoding.fallofthegods.model.entities.ServerStatus;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ public class StoryController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<String> getStory(@RequestParam String id) {
+    public ResponseEntity<?> getStory(@RequestParam String id) {
         try {
             return ResponseEntity.ok(storyService.getStory(id).toString());
         } catch (Exception e) {
@@ -27,9 +28,9 @@ public class StoryController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<String> listStories() {
+    public ResponseEntity<?> listStories(Pageable pageable) {
         try {
-            return ResponseEntity.ok(storyService.listStories().toString());
+            return ResponseEntity.ok(storyService.listStories(pageable).getContent());
         } catch (Exception e) {
             return ResponseEntity.status(ServerStatus.LIST_STORY_NOT_FOUND.status).body(ServerStatus.LIST_STORY_NOT_FOUND.toString());
         }

@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
+import java.util.Map;
 
 @Builder
 @Document(collection = "User")
@@ -29,5 +30,14 @@ public record EntityUser(
                 "\"email\": \"" + email + "\"," +
                 "\"achievements\": " + achievements +
                 "}";
+    }
+
+    public Map<String, Object> toMap() {
+        return Map.of(
+            "identifier", identifier,
+            "username", username,
+            "email", email,
+            "achievements", achievements
+        );
     }
 }

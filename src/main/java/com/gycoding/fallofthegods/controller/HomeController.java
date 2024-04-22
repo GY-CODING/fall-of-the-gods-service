@@ -19,7 +19,6 @@ public class HomeController {
         try {
             return new String(Files.readAllBytes(Paths.get(resource.getURI())));
         } catch (IOException e) {
-            e.printStackTrace();
             return ServerStatus.HOME_NOT_FOUND.toString();
         }
     }

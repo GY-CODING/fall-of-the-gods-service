@@ -3,9 +3,12 @@ package com.gycoding.fallofthegods.model.database.service;
 import com.gycoding.fallofthegods.model.database.repository.CharacterRepository;
 import com.gycoding.fallofthegods.model.entities.characters.EntityCharacter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Service for the Character entity.
@@ -39,8 +42,9 @@ public class CharacterService {
      * @see EntityCharacter
      * @see CharacterRepository
      */
-    public List<EntityCharacter> listStoryCharacters() {
-        return characterRepository.findAll();
+    public Page<Map<String, Object>> listStoryCharacters(Pageable pageable) {
+        return characterRepository.findAll(pageable)
+                .map(EntityCharacter::toMap);
     }
 
     /**
@@ -59,11 +63,12 @@ public class CharacterService {
      * Lists all characters from the game.
      * @return List of EntityCharacter
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
-     * @see List
+     * @see Map
      * @see EntityCharacter
      * @see CharacterRepository
      */
-    public List<EntityCharacter> listGameCharacters() {
-        return characterRepository.findByInGame(true).orElse(null);
+    public Page<Map<String, Object>> listGameCharacters(Pageable pageable) {
+        return characterRepository.findByInGame(true, pageable)
+                .map(EntityCharacter::toMap);
     }
 }

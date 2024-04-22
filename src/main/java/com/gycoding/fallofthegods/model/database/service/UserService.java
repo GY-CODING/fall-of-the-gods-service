@@ -7,10 +7,14 @@ import com.gycoding.fallofthegods.model.entities.ServerStatus;
 import com.gycoding.fallofthegods.model.entities.achievements.EntityAchievement;
 import com.gycoding.fallofthegods.model.entities.achievements.EntityUser;
 import com.gycoding.fallofthegods.model.entities.characters.EntityStory;
+import com.gycoding.fallofthegods.model.entities.utiles.PagingConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserService {
@@ -136,7 +140,8 @@ public class UserService {
      * @see EntityAchievement
      * @see UserRepository
      */
-    public List<EntityAchievement> listAchievements(String identifier) {
-        return this.getUser(identifier).achievements();
+    public Page<Map<String, Object>> listAchievements(String identifier, Pageable pageable) {
+        return PagingConverter.listToPage(this.getUser(identifier).achievements(), pageable)
+                .map(EntityAchievement::toMap);
     }
 }

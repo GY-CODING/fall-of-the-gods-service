@@ -2,6 +2,7 @@ package com.gycoding.fallofthegods.model.entities.worlds;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import lombok.Builder;
 import org.springframework.data.annotation.Id;
@@ -63,5 +64,15 @@ public record EntityWorld(
                 "\"image\": \"" + image + "\"," +
                 "\"places\": " + places.toString() +
                 "}";
+    }
+
+    public Map<String, Object> toMap() {
+        return Map.of(
+                "identifier", identifier,
+                "name", name,
+                "description", description,
+                "image", image,
+                "places", places
+        );
     }
 }

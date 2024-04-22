@@ -3,9 +3,12 @@ package com.gycoding.fallofthegods.model.database.service;
 import com.gycoding.fallofthegods.model.database.repository.StoryRepository;
 import com.gycoding.fallofthegods.model.entities.characters.EntityStory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Service for the Story entity.
@@ -39,7 +42,8 @@ public class StoryService {
      * @see EntityStory
      * @see StoryRepository
      */
-    public List<EntityStory> listStories() {
-        return storyRepository.findAll();
+    public Page<Map<String, Object>> listStories(Pageable pageable) {
+        return storyRepository.findAll(pageable)
+                .map(EntityStory::toMap);
     }
 }

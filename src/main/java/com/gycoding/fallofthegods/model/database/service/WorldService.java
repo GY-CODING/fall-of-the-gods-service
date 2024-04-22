@@ -1,12 +1,16 @@
 package com.gycoding.fallofthegods.model.database.service;
 
 import com.gycoding.fallofthegods.model.database.repository.WorldRepository;
+import com.gycoding.fallofthegods.model.entities.utiles.PagingConverter;
 import com.gycoding.fallofthegods.model.entities.worlds.EntityPlace;
 import com.gycoding.fallofthegods.model.entities.worlds.EntityWorld;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Service for the World entity.
@@ -38,8 +42,9 @@ public class WorldService {
      * @see EntityWorld
      * @see WorldRepository
      */
-    public List<EntityWorld> listWorlds() {
-        return worldRepository.findAll();
+    public Page<Map<String, Object>> listWorlds(Pageable pageable) {
+        return worldRepository.findAll(pageable)
+                .map(EntityWorld::toMap);
     }
 
     /**
@@ -62,7 +67,8 @@ public class WorldService {
      * @see EntityPlace
      * @see WorldRepository
      */
-    public List<EntityPlace> listWorldPlaces(String id) {
-        return worldRepository.findByIdentifier(id).orElse(null).listPlaces();
+    public Page<Map<String, Object>> listWorldPlaces(String id, Pageable pageable) {
+        return PagingConverter.listToPage(worldRepository.findByIdentifier(id).orElse(null).listPlaces(), pageable)
+                    .map(EntityPlace::toMap);
     }
 }
