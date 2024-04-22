@@ -22,6 +22,7 @@ public class StoryService {
     /**
      * Finds a Story by its identifier.
      * @param id
+     * @return EntityStory
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see EntityStory
      * @see StoryRepository
@@ -32,6 +33,7 @@ public class StoryService {
 
     /**
      * Lists all stories.
+     * @return List of EntityStory
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see List
      * @see EntityStory

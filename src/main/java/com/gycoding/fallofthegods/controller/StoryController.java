@@ -31,7 +31,7 @@ public class StoryController {
         try {
             return ResponseEntity.ok(storyService.listStories().toString());
         } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.STORY_NOT_FOUND.status).body(ServerStatus.STORY_NOT_FOUND.toString());
+            return ResponseEntity.status(ServerStatus.LIST_STORY_NOT_FOUND.status).body(ServerStatus.LIST_STORY_NOT_FOUND.toString());
         }
     }
 }

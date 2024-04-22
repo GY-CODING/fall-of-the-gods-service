@@ -31,7 +31,7 @@ public class CharacterController {
         try {
             return ResponseEntity.ok(characterService.listStoryCharacters().toString());
         } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.CHARACTER_NOT_FOUND.status).body(ServerStatus.CHARACTER_NOT_FOUND.toString());
+            return ResponseEntity.status(ServerStatus.LIST_CHARACTER_NOT_FOUND.status).body(ServerStatus.LIST_CHARACTER_NOT_FOUND.toString());
         }
     }
 
@@ -49,7 +49,7 @@ public class CharacterController {
         try {
             return ResponseEntity.ok(characterService.listGameCharacters().toString());
         } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.CHARACTER_NOT_FOUND.status).body(ServerStatus.CHARACTER_NOT_FOUND.toString());
+            return ResponseEntity.status(ServerStatus.LIST_CHARACTER_NOT_FOUND.status).body(ServerStatus.LIST_CHARACTER_NOT_FOUND.toString());
         }
     }
 }

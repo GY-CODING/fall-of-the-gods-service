@@ -22,6 +22,7 @@ public class ItemService {
     /**
      * Finds an Item from the story by its identifier.
      * @param id
+     * @return EntityItem
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see EntityItem
      * @see ItemRepository
@@ -32,6 +33,7 @@ public class ItemService {
 
     /**
      * Lists all items from the story.
+     * @return List of EntityItem
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see List
      * @see EntityItem
@@ -44,6 +46,7 @@ public class ItemService {
     /**
      * Finds an Item from the game by its identifier.
      * @param id
+     * @return EntityItem
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see EntityItem
      * @see ItemRepository
@@ -54,6 +57,7 @@ public class ItemService {
 
     /**
      * Lists all items from the game.
+     * @return List of EntityItem
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see List
      * @see EntityItem

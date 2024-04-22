@@ -22,6 +22,7 @@ public class PlaceService {
     /**
      * Finds a Place by its identifier.
      * @param id
+     * @return EntityPlace
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see EntityPlace
      * @see PlaceRepository
@@ -32,6 +33,7 @@ public class PlaceService {
 
     /**
      * Lists all places.
+     * @return List of EntityPlace
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see List
      * @see EntityPlace

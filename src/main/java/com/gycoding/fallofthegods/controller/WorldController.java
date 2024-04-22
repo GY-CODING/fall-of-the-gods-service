@@ -35,7 +35,7 @@ public class WorldController {
         try {
             return ResponseEntity.ok(worldService.listWorlds().toString());
         } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.WORLD_NOT_FOUND.status).body(ServerStatus.WORLD_NOT_FOUND.toString());
+            return ResponseEntity.status(ServerStatus.LIST_WORLD_NOT_FOUND.status).body(ServerStatus.LIST_WORLD_NOT_FOUND.toString());
         }
     }
 
@@ -53,7 +53,7 @@ public class WorldController {
         try {
             return ResponseEntity.ok(placeService.listPlaces().toString());
         } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.PLACE_NOT_FOUND.status).body(ServerStatus.PLACE_NOT_FOUND.toString());
+            return ResponseEntity.status(ServerStatus.LIST_PLACE_NOT_FOUND.status).body(ServerStatus.LIST_PLACE_NOT_FOUND.toString());
         }
     }
 
@@ -62,7 +62,7 @@ public class WorldController {
         try {
             return ResponseEntity.ok(worldService.listWorldPlaces(id).toString());
         } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.WORLD_NOT_FOUND.status).body(ServerStatus.WORLD_NOT_FOUND.toString());
+            return ResponseEntity.status(ServerStatus.LIST_WORLD_NOT_FOUND.status).body(ServerStatus.LIST_WORLD_NOT_FOUND.toString());
         }
     }
 }
