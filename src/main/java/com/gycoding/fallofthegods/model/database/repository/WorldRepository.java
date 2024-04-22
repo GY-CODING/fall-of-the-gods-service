@@ -18,6 +18,7 @@ public interface WorldRepository extends MongoRepository<EntityWorld, String> {
     /**
      * Finds a World by its identifier.
      * @param identifier
+     * @return EntityWorld
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see Optional
      * @see EntityWorld

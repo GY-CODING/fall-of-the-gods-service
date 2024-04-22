@@ -18,6 +18,7 @@ public interface PlaceRepository extends MongoRepository<EntityPlace, String> {
     /**
      * Finds a Place by its identifier.
      * @param identifier
+     * @return EntityPlace
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see Optional
      * @see EntityPlace

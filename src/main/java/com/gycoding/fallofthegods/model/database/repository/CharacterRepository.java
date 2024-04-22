@@ -19,6 +19,7 @@ public interface CharacterRepository extends MongoRepository<EntityCharacter, St
     /**
      * Finds a Character by its identifier.
      * @param identifier
+     * @return EntityCharacter
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see Optional
      * @see EntityCharacter
@@ -29,6 +30,7 @@ public interface CharacterRepository extends MongoRepository<EntityCharacter, St
      * Finds a Character by its identifier and inGame parameter.
      * @param identifier
      * @param inGame
+     * @return EntityCharacter
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see Optional
      * @see EntityCharacter
@@ -38,6 +40,7 @@ public interface CharacterRepository extends MongoRepository<EntityCharacter, St
     /**
      * Lists all characters filtered by their inGame parameters.
      * @param inGame
+     * @return List of EntityCharacter
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see Optional
      * @see List
