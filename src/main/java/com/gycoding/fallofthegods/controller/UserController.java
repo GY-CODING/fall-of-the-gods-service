@@ -5,6 +5,7 @@ import com.gycoding.fallofthegods.model.database.service.UserService;
 import com.gycoding.fallofthegods.model.entities.ServerStatus;
 import com.gycoding.fallofthegods.model.entities.achievements.EntityUser;
 import com.gycoding.fallofthegods.model.entities.dto.UnlockAchievementRQDTO;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class UserController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<String> getUser(@RequestParam String id) {
+    public ResponseEntity<?> getUser(@RequestParam String id) {
         try {
             return ResponseEntity.ok(userService.getUser(id).toString());
         } catch (Exception e) {
@@ -27,7 +28,7 @@ public class UserController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<String> saveUser(@RequestBody EntityUser user) {
+    public ResponseEntity<?> saveUser(@RequestBody EntityUser user) {
         try {
             System.out.println(user.toString());
             return ResponseEntity.ok(userService.save(user).toString());
@@ -37,7 +38,7 @@ public class UserController {
     }
 
     @PutMapping("/achievements/add")
-    public ResponseEntity<String> addAchievement(@RequestBody UnlockAchievementRQDTO unlockAchievementRQDTO) {
+    public ResponseEntity<?> addAchievement(@RequestBody UnlockAchievementRQDTO unlockAchievementRQDTO) {
         try {
             return ResponseEntity.ok(userService.addAchievement(unlockAchievementRQDTO.idUser(), unlockAchievementRQDTO.idAchievement()).toString());
         } catch (Exception e) {
@@ -46,7 +47,7 @@ public class UserController {
     }
 
     @DeleteMapping("/achievements/remove")
-    public ResponseEntity<String> removeAchievement(@RequestParam String idUser, @RequestParam String idAchievement) {
+    public ResponseEntity<?> removeAchievement(@RequestParam String idUser, @RequestParam String idAchievement) {
         try {
             return ResponseEntity.ok(userService.removeAchievement(idUser, idAchievement).toString());
         } catch (Exception e) {
@@ -55,7 +56,7 @@ public class UserController {
     }
 
     @GetMapping("/achievements/get")
-    public ResponseEntity<String> getAchievement(@RequestParam String idUser, @RequestParam String idAchievement) {
+    public ResponseEntity<?> getAchievement(@RequestParam String idUser, @RequestParam String idAchievement) {
         try {
             return ResponseEntity.ok(userService.getAchievement(idUser, idAchievement).toString());
         } catch (Exception e) {
@@ -64,9 +65,9 @@ public class UserController {
     }
 
     @GetMapping("/achievements/list")
-    public ResponseEntity<String> listAchievements(@RequestParam String id) {
+    public ResponseEntity<?> listAchievements(@RequestParam String id, Pageable pageable) {
         try {
-            return ResponseEntity.ok(userService.listAchievements(id).toString());
+            return ResponseEntity.ok(userService.listAchievements(id, pageable).getContent());
         } catch (Exception e) {
             return ResponseEntity.status(ServerStatus.LIST_ACHIEVEMENT_NOT_FOUND.status).body(ServerStatus.LIST_ACHIEVEMENT_NOT_FOUND.toString());
         }

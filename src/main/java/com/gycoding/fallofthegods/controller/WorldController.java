@@ -3,6 +3,7 @@ package com.gycoding.fallofthegods.controller;
 import com.gycoding.fallofthegods.model.database.service.PlaceService;
 import com.gycoding.fallofthegods.model.database.service.WorldService;
 import com.gycoding.fallofthegods.model.entities.ServerStatus;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,7 @@ public class WorldController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<String> getWorld(@RequestParam String id) {
+    public ResponseEntity<?> getWorld(@RequestParam String id) {
         try {
             return ResponseEntity.ok(worldService.getWorld(id).toString());
         } catch (Exception e) {
@@ -31,16 +32,16 @@ public class WorldController {
     
 
     @GetMapping("/list")
-    public ResponseEntity<String> listWorlds() {
+    public ResponseEntity<?> listWorlds(Pageable pageable) {
         try {
-            return ResponseEntity.ok(worldService.listWorlds().toString());
+            return ResponseEntity.ok(worldService.listWorlds(pageable).getContent());
         } catch (Exception e) {
             return ResponseEntity.status(ServerStatus.LIST_WORLD_NOT_FOUND.status).body(ServerStatus.LIST_WORLD_NOT_FOUND.toString());
         }
     }
 
     @GetMapping("/places/get")
-    public ResponseEntity<String> getPlace(@RequestParam String id) {
+    public ResponseEntity<?> getPlace(@RequestParam String id) {
         try {
             return ResponseEntity.ok(placeService.getPlace(id).toString());
         } catch (Exception e) {
@@ -49,18 +50,18 @@ public class WorldController {
     }
 
     @GetMapping("/places/listAll")
-    public ResponseEntity<String> listPlaces() {
+    public ResponseEntity<?> listPlaces(Pageable pageable) {
         try {
-            return ResponseEntity.ok(placeService.listPlaces().toString());
+            return ResponseEntity.ok(placeService.listPlaces(pageable).getContent());
         } catch (Exception e) {
             return ResponseEntity.status(ServerStatus.LIST_PLACE_NOT_FOUND.status).body(ServerStatus.LIST_PLACE_NOT_FOUND.toString());
         }
     }
 
     @GetMapping("/places/list")
-    public ResponseEntity<String> listWorldPlaces(@RequestParam String id) {
+    public ResponseEntity<?> listWorldPlaces(@RequestParam String id, Pageable pageable) {
         try {
-            return ResponseEntity.ok(worldService.listWorldPlaces(id).toString());
+            return ResponseEntity.ok(worldService.listWorldPlaces(id, pageable).getContent());
         } catch (Exception e) {
             return ResponseEntity.status(ServerStatus.LIST_WORLD_NOT_FOUND.status).body(ServerStatus.LIST_WORLD_NOT_FOUND.toString());
         }

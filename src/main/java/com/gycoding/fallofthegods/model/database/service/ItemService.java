@@ -3,9 +3,12 @@ package com.gycoding.fallofthegods.model.database.service;
 import com.gycoding.fallofthegods.model.database.repository.ItemRepository;
 import com.gycoding.fallofthegods.model.entities.items.EntityItem;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Service for the Item entity.
@@ -39,8 +42,9 @@ public class ItemService {
      * @see EntityItem
      * @see ItemRepository
      */
-    public List<EntityItem> listStoryItems() {
-        return itemRepository.findAll();
+    public Page<Map<String, Object>> listStoryItems(Pageable pageable) {
+        return itemRepository.findAll(pageable)
+                .map(EntityItem::toMap);
     }
 
     /**
@@ -63,7 +67,8 @@ public class ItemService {
      * @see EntityItem
      * @see ItemRepository
      */
-    public List<EntityItem> listGameItems() {
-        return itemRepository.findByInGame(true).orElse(null);
+    public Page<Map<String, Object>> listGameItems(Pageable pageable) {
+        return itemRepository.findByInGame(true, pageable)
+                .map(EntityItem::toMap);
     }
 }

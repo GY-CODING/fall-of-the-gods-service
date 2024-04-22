@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.gycoding.fallofthegods.model.entities.EntityStat;
 
+import java.util.Map;
+
 @Builder
 @Document(collection = "Item")
 public record EntityItem(
@@ -27,5 +29,15 @@ public record EntityItem(
                 "\"image\": \"" + image + "\"," +
                 "\"stats\": " + stats +
                 "}";
+    }
+
+    public Map<String, Object> toMap() {
+        return Map.of(
+                "identifier", identifier,
+                "name", name,
+                "description", description,
+                "image", image,
+                "stats", stats
+        );
     }
 }

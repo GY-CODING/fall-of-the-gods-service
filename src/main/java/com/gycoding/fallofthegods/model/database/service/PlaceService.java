@@ -3,9 +3,12 @@ package com.gycoding.fallofthegods.model.database.service;
 import com.gycoding.fallofthegods.model.database.repository.PlaceRepository;
 import com.gycoding.fallofthegods.model.entities.worlds.EntityPlace;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Service for the Place entity.
@@ -39,7 +42,8 @@ public class PlaceService {
      * @see EntityPlace
      * @see PlaceRepository
      */
-    public List<EntityPlace> listPlaces() {
-        return placeRepository.findAll();
+    public Page<Map<String, Object>> listPlaces(Pageable pageable) {
+        return placeRepository.findAll(pageable)
+                .map(EntityPlace::toMap);
     }
 }

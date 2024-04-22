@@ -1,6 +1,9 @@
 package com.gycoding.fallofthegods.model.database.repository;
 
+import com.gycoding.fallofthegods.model.entities.characters.EntityCharacter;
 import com.gycoding.fallofthegods.model.entities.items.EntityItem;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -46,5 +49,5 @@ public interface ItemRepository extends MongoRepository<EntityItem, String> {
      * @see List
      * @see EntityItem
      */
-    Optional<List<EntityItem>> findByInGame(Boolean inGame);
+    Page<EntityItem> findByInGame(Boolean inGame, Pageable pageable);
 }

@@ -1,6 +1,8 @@
 package com.gycoding.fallofthegods.model.database.repository;
 
 import com.gycoding.fallofthegods.model.entities.characters.EntityCharacter;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -42,9 +44,10 @@ public interface CharacterRepository extends MongoRepository<EntityCharacter, St
      * @param inGame
      * @return List of EntityCharacter
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
-     * @see Optional
+     * @see Pageable
+     * @see Page
      * @see List
      * @see EntityCharacter
      */
-    Optional<List<EntityCharacter>> findByInGame(Boolean inGame);
+    Page<EntityCharacter> findByInGame(Boolean inGame, Pageable pageable);
 }

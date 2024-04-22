@@ -60,6 +60,13 @@
 
     <div class="changelog-page">
         <div class="changelog-content">
+            <h2 class="version-title">2.1.0</h2>
+            <hr>
+            <p class="version-text">
+                Now, all listing endpoints are paginated by default (and at the same time, that pagination can be modified in the same endpoint via request params).
+            </p>
+        </div>
+        <div class="changelog-content">
             <h2 class="version-title">2.0.0</h2>
             <hr>
             <p class="version-text">
@@ -118,6 +125,7 @@
         const changelogPage     = document.querySelector('.changelog-page');
         const aboutPage         = document.querySelector('.about-page');
 
+        const footer            = document.querySelector('.footer');
         const footerLogo        = document.querySelector('.footer-logo');
 
         boxAPI.addEventListener('click', () => {
@@ -131,11 +139,15 @@
         boxChangelog.addEventListener('click', () => {
             changelogPage.style.display     = 'flex';
             aboutPage.style.display         = 'none';
+
+            footer.style.display            = 'none';
         });
 
         navLeft.addEventListener('click', () => {
             changelogPage.style.display     = 'none';
             aboutPage.style.display         = 'flex';
+
+            footer.style.display            = 'flex';
         });
     
         navLinkAPI.addEventListener('click', () => {
@@ -157,11 +169,15 @@
         navLinkChangelog.addEventListener('click', () => {
             changelogPage.style.display     = 'flex';
             aboutPage.style.display         = 'none';
+
+            footer.style.display            = 'none';
         });
 
         navLinkAbout.addEventListener('click', () => {
             changelogPage.style.display     = 'none';
             aboutPage.style.display         = 'flex';
+
+            footer.style.display            = 'flex';
         });
 
         footerLogo.addEventListener('click', () => {

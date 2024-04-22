@@ -2,6 +2,7 @@ package com.gycoding.fallofthegods.controller;
 
 import com.gycoding.fallofthegods.model.database.service.AchievementService;
 import com.gycoding.fallofthegods.model.entities.ServerStatus;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ public class AchievementController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<String> getAchievement(@RequestParam String id) {
+    public ResponseEntity<?> getAchievement(@RequestParam String id) {
         try {
             return ResponseEntity.ok(achievementService.getAchievement(id).toString());
         } catch (Exception e) {
@@ -27,9 +28,9 @@ public class AchievementController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<String> listAchievements() {
+    public ResponseEntity<?> listAchievements(Pageable pageable) {
         try {
-            return ResponseEntity.ok(achievementService.listAchievements().toString());
+            return ResponseEntity.ok(achievementService.listAchievements(pageable).getContent());
         } catch (Exception e) {
             return ResponseEntity.status(ServerStatus.LIST_ACHIEVEMENT_NOT_FOUND.status).body(ServerStatus.LIST_ACHIEVEMENT_NOT_FOUND.toString());
         }
