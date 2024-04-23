@@ -16,7 +16,7 @@ We provide a full **[API reference](https://fallofthegods-data.onrender.com)**, 
 
 This API REST uses **Spring Web** for the whole API REST functionality and **Spring Data** to access to our **MongoDB** database. For the deployment, **Docker** is being used along with **Render** for the hosting.
 
-The reference static website was made using just **HTML**, **CSS** and some **JavaScript**, while the documentation was made automatically using **Maven Javadoc Plugin** and **Javadoc comments**.
+The reference static website was made using just **HTML**, **CSS** and some **JavaScript**, while the documentation was made automatically using **Maven Javadoc Plugin** and **Javadoc comments**. 
 
 <br>
 
