@@ -1,66 +1,11 @@
 @font-face {
-    font-family: 'Cinzel';
-    src: url(./fonts/Cinzel-Regular.otf);
+    font-family: 'Montserrat';
+    src: url(./fonts/Montserrat-VariableFont_wght.ttf);
 }
 
 @font-face {
-    font-family: 'Cinzel-Bold';
-    src: url(./fonts/Cinzel-Bold.otf);
-}
-
-@font-face {
-    font-family: 'Cinzel-SuperBold';
-    src: url(./fonts/Cinzel-Black.otf);
-}
-
-@font-face {
-    font-family: 'CormorantGaramond';
-    src: url(./fonts/CormorantGaramond-Regular.ttf);
-}
-
-@font-face {
-    font-family: 'CormorantGaramond-Italic';
-    src: url(./fonts/CormorantGaramond-Italic.ttf);
-}
-
-@font-face {
-    font-family: 'CormorantGaramond-Light';
-    src: url(./fonts/CormorantGaramond-Light.ttf);
-}
-
-@font-face {
-    font-family: 'CormorantGaramond-Light-Italic';
-    src: url(./fonts/CormorantGaramond-LightItalic.ttf);
-}
-
-@font-face {
-    font-family: 'CormorantGaramond-Medium';
-    src: url(./fonts/CormorantGaramond-Medium.ttf);
-}
-
-@font-face {
-    font-family: 'CormorantGaramond-Medium-Italic';
-    src: url(./fonts/CormorantGaramond-MediumItalic.ttf);
-}
-
-@font-face {
-    font-family: 'CormorantGaramond-Semibold';
-    src: url(./fonts/CormorantGaramond-SemiBold.ttf);
-}
-
-@font-face {
-    font-family: 'CormorantGaramond-Bold-Italic';
-    src: url(./fonts/CormorantGaramond-BoldItalic.ttf);
-}
-
-@font-face {
-    font-family: 'CormorantGaramond-Bold';
-    src: url(./fonts/CormorantGaramond-Bold.ttf);
-}
-
-@font-face {
-    font-family: 'CormorantGaramond-Bold-Italic';
-    src: url(./fonts/CormorantGaramond-BoldItalic.ttf);
+    font-family: 'Montserrat-Italic';
+    src: url(./fonts/Montserrat-Italic-VariableFont_wght.ttf);
 }
 
 :root {
@@ -76,17 +21,11 @@
     --main-color: #d4b755;
 
     --text-color: var(--main-color);
-    --text-highlight-color: #eecf6b;
+    --text-highlight-color: #ecd180;
     --text-selection-color: #d4b75531;
 
     --paragraph-color: #e9e9e9;
     --paragraph-less-important-color: #e9e9e983;
-
-    --get-color: #9a35dd;
-    --get-bg-color: #9a35dd28;
-
-    --post-color: #3562dd;
-    --post-bg-color: #3562dd28;
 }
 
 * {
@@ -115,7 +54,7 @@ body {
 
     gap: 5px;
 
-    font-family: 'CormorantGaramond';
+    font-family: 'Montserrat';
 
     overflow-x: hidden;
 }
@@ -130,7 +69,7 @@ code {
 
     border-radius: 6px;
 
-    font-family: 'CormorantGaramond-Bold';
+    font-family: 'Montserrat';
 }
 
 hr {
@@ -205,7 +144,7 @@ span {
     align-items: center;
     align-content: center;
 
-    font-family: 'Cinzel-Bold';
+    font-family: 'Montserrat';
     font-size: 18px;
 
     gap: 20px;
@@ -238,8 +177,8 @@ span {
 }
 
 .nav-version {
-    font-family: 'Cinzel';
-    font-weight: 100;
+    font-family: 'Montserrat';
+    font-weight: 400;
 
     font-size: 16px;
 }
@@ -260,7 +199,7 @@ span {
     align-items: center;
     align-content: center;
 
-    font-family: 'Cinzel';
+    font-family: 'Montserrat';
 
     gap: 30px;
 }
@@ -328,7 +267,7 @@ span {
 }
 
 .about-title {
-    font-family: 'Cinzel';
+    font-family: 'Montserrat';
     font-size: 50px;
 
     color: var(--text-color);
@@ -350,7 +289,7 @@ span {
 
     gap: 20px;
 
-    font-family: 'Cormorant Garamond';
+    font-family: 'Montserrat';
     font-size: 18px;
 
     color: var(--paragraph-color);
@@ -411,7 +350,7 @@ span {
 }
 
 .about-box-title {
-    font-family: 'Cinzel';
+    font-family: 'Montserrat';
     font-size: 16px;
 
     color: var(--text-color);
@@ -424,7 +363,7 @@ span {
 
 .changelog-page {
     width: 100%;
-    height: 80vh;
+    height: 90vh;
 
     padding-top: 20vh;
     margin-bottom: 10vh;
@@ -458,7 +397,7 @@ span {
 }
 
 .version-title {
-    font-family: 'Cinzel';
+    font-family: 'Montserrat';
     font-size: 30px;
 
     color: var(--text-color);
@@ -475,7 +414,7 @@ span {
     align-items: flex-start;
     align-content: flex-start;
 
-    font-family: 'Cormorant Garamond';
+    font-family: 'Montserrat';
     font-size: 18px;
 
     color: var(--paragraph-color);
@@ -507,7 +446,7 @@ span {
     background: transparent;
     color: var(--text-color);
 
-    font-family: 'Cormorant Garamond';
+    font-family: 'Montserrat';
 }
 
 .footer-logo {
