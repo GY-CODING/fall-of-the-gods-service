@@ -10,9 +10,6 @@ This is the official **Fall of the Gods API REST**, containing endpoints to get 
 
 We provide a full **[API reference](https://fallofthegods-data.onrender.com)**, containing all the available **endpoints**, **documentation** *(Javadoc)* and a **changelog** with the new features or bugfixes from all the versions of this API.
 
-> [!IMPORTANT]
-> API reference is currently wntirely written in spanish.
-
 <br>
 
 # How it was made
