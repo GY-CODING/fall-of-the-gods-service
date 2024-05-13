@@ -8,7 +8,7 @@
 
 This is the official **Fall of the Gods API REST**, containing endpoints to get data about **characters**, **items**, **worlds**, **places** and **stories** from the main lore and the videogame.
 
-We provide a full **[API reference](https://fallofthegods-data.onrender.com)**, containing all the available **endpoints**, **documentation** *(Javadoc)* and a **changelog** with the new features or bugfixes from all the versions of this API.
+We provide a full **[API reference](https://fallofthegods-data.onrender.com)**, containing all the available **endpoints**, **documentation** and a **changelog** with the new features or bugfixes from all the versions of this API.
 
 <br>
 
