@@ -42,7 +42,20 @@ public class WorldService {
      * @see EntityWorld
      * @see WorldRepository
      */
-    public Page<Map<String, Object>> listWorlds(Pageable pageable) {
+    public List<EntityWorld> listWorlds() {
+        return worldRepository.findAll();
+    }
+
+    /**
+     * Lists all the worlds with pagination.
+     * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
+     * @see Pageable
+     * @see Page
+     * @see Map
+     * @see EntityWorld
+     * @see WorldRepository
+     */
+    public Page<Map<String, Object>> pageWorlds(Pageable pageable) {
         return worldRepository.findAll(pageable)
                 .map(EntityWorld::toMap);
     }
@@ -67,7 +80,19 @@ public class WorldService {
      * @see EntityPlace
      * @see WorldRepository
      */
-    public Page<Map<String, Object>> listWorldPlaces(String id, Pageable pageable) {
+    public List<EntityPlace> listWorldPlaces(String id) {
+        return worldRepository.findByIdentifier(id).orElse(null).listPlaces();
+    }
+
+    /**
+     * Lists all the places in a specific world (specified by its identifier) with pagination.
+     * @param id World's identifier.
+     * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
+     * @see List
+     * @see EntityPlace
+     * @see WorldRepository
+     */
+    public Page<Map<String, Object>> pageWorldPlaces(String id, Pageable pageable) {
         return PagingConverter.listToPage(worldRepository.findByIdentifier(id).orElse(null).listPlaces(), pageable)
                     .map(EntityPlace::toMap);
     }

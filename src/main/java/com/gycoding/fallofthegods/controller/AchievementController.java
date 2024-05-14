@@ -28,9 +28,18 @@ public class AchievementController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<?> listAchievements(Pageable pageable) {
+    public ResponseEntity<?> listAchievements() {
         try {
-            return ResponseEntity.ok(achievementService.listAchievements(pageable).getContent());
+            return ResponseEntity.ok(achievementService.listAchievements().toString());
+        } catch (Exception e) {
+            return ResponseEntity.status(ServerStatus.LIST_ACHIEVEMENT_NOT_FOUND.status).body(ServerStatus.LIST_ACHIEVEMENT_NOT_FOUND.toString());
+        }
+    }
+
+    @GetMapping("/page")
+    public ResponseEntity<?> pageAchievements(Pageable pageable) {
+        try {
+            return ResponseEntity.ok(achievementService.pageAchievements(pageable).getContent());
         } catch (Exception e) {
             return ResponseEntity.status(ServerStatus.LIST_ACHIEVEMENT_NOT_FOUND.status).body(ServerStatus.LIST_ACHIEVEMENT_NOT_FOUND.toString());
         }

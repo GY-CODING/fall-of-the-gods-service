@@ -42,7 +42,21 @@ public class PlaceService {
      * @see EntityPlace
      * @see PlaceRepository
      */
-    public Page<Map<String, Object>> listPlaces(Pageable pageable) {
+    public List<EntityPlace> listPlaces() {
+        return placeRepository.findAll();
+    }
+
+    /**
+     * Lists all places with pagination.
+     * @return List of EntityPlace
+     * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
+     * @see Pageable
+     * @see Page
+     * @see Map
+     * @see EntityPlace
+     * @see PlaceRepository
+     */
+    public Page<Map<String, Object>> pagePlaces(Pageable pageable) {
         return placeRepository.findAll(pageable)
                 .map(EntityPlace::toMap);
     }

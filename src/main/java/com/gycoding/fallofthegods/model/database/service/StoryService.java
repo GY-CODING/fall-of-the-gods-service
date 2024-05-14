@@ -42,7 +42,21 @@ public class StoryService {
      * @see EntityStory
      * @see StoryRepository
      */
-    public Page<Map<String, Object>> listStories(Pageable pageable) {
+    public List<EntityStory> listStories() {
+        return storyRepository.findAll();
+    }
+
+    /**
+     * Lists all stories with pagination.
+     * @return List of EntityStory
+     * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
+     * @see Pageable
+     * @see Page
+     * @see Map
+     * @see EntityStory
+     * @see StoryRepository
+     */
+    public Page<Map<String, Object>> pageStories(Pageable pageable) {
         return storyRepository.findAll(pageable)
                 .map(EntityStory::toMap);
     }

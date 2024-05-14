@@ -65,9 +65,18 @@ public class UserController {
     }
 
     @GetMapping("/achievements/list")
-    public ResponseEntity<?> listAchievements(@RequestParam String id, Pageable pageable) {
+    public ResponseEntity<?> listAchievements(@RequestParam String id) {
         try {
-            return ResponseEntity.ok(userService.listAchievements(id, pageable).getContent());
+            return ResponseEntity.ok(userService.listAchievements(id).toString());
+        } catch (Exception e) {
+            return ResponseEntity.status(ServerStatus.LIST_ACHIEVEMENT_NOT_FOUND.status).body(ServerStatus.LIST_ACHIEVEMENT_NOT_FOUND.toString());
+        }
+    }
+
+    @GetMapping("/achievements/page")
+    public ResponseEntity<?> pageAchievements(@RequestParam String id, Pageable pageable) {
+        try {
+            return ResponseEntity.ok(userService.pageAchievements(id, pageable).getContent());
         } catch (Exception e) {
             return ResponseEntity.status(ServerStatus.LIST_ACHIEVEMENT_NOT_FOUND.status).body(ServerStatus.LIST_ACHIEVEMENT_NOT_FOUND.toString());
         }
