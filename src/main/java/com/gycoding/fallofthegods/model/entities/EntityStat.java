@@ -17,6 +17,6 @@ public class EntityStat<T> {
 
     @Override
     public String toString() {
-        return "{\"damage\": " + attack + ", \"defense\": " + defense + ", \"accuracy\": " + accuracy + ", \"life\": " + life + ", \"ether\": " + ether + ", \"movement\": " + movement + "}";
+        return "{\"attack\": " + attack + ", \"defense\": " + defense + ", \"accuracy\": " + accuracy + ", \"life\": " + life + ", \"ether\": " + ether + ", \"movement\": " + movement + "}";
     }
 }
