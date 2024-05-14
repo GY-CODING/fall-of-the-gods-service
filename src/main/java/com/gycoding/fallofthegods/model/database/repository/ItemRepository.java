@@ -39,14 +39,24 @@ public interface ItemRepository extends MongoRepository<EntityItem, String> {
      * @see EntityItem
      */
     Optional<EntityItem> findByIdentifierAndInGame(String identifier, Boolean inGame);
+
+    /**
+     * Lists all items filtred by their inGame parameters.
+     * @param inGame
+     * @return List of EntityItem
+     * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
+     * @see List
+     * @see EntityItem
+     */
+    List<EntityItem> findByInGame(Boolean inGame);
     
     /**
      * Lists all items filtred by their inGame parameters.
      * @param inGame
      * @return List of EntityItem
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
-     * @see Optional
-     * @see List
+     * @see Pageable
+     * @see Page
      * @see EntityItem
      */
     Page<EntityItem> findByInGame(Boolean inGame, Pageable pageable);

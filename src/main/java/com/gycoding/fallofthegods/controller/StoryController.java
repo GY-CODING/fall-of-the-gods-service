@@ -28,9 +28,18 @@ public class StoryController {
     }
 
     @GetMapping("/list")
+    public ResponseEntity<?> listStories() {
+        try {
+            return ResponseEntity.ok(storyService.listStories().toString());
+        } catch (Exception e) {
+            return ResponseEntity.status(ServerStatus.LIST_STORY_NOT_FOUND.status).body(ServerStatus.LIST_STORY_NOT_FOUND.toString());
+        }
+    }
+
+    @GetMapping("/page")
     public ResponseEntity<?> listStories(Pageable pageable) {
         try {
-            return ResponseEntity.ok(storyService.listStories(pageable).getContent());
+            return ResponseEntity.ok(storyService.pageStories(pageable).getContent());
         } catch (Exception e) {
             return ResponseEntity.status(ServerStatus.LIST_STORY_NOT_FOUND.status).body(ServerStatus.LIST_STORY_NOT_FOUND.toString());
         }

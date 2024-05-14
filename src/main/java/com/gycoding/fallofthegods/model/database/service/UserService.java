@@ -140,7 +140,22 @@ public class UserService {
      * @see EntityAchievement
      * @see UserRepository
      */
-    public Page<Map<String, Object>> listAchievements(String identifier, Pageable pageable) {
+    public List<EntityAchievement> listAchievements(String identifier) {
+        return this.getUser(identifier).achievements();
+    }
+
+    /**
+     * Lists all the achievements unlocked by a specific User with pagination.
+     * @param identifier
+     * @return List of EntityAchievement
+     * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
+     * @see Pageable
+     * @see Page
+     * @see Map
+     * @see EntityAchievement
+     * @see UserRepository
+     */
+    public Page<Map<String, Object>> pageAchievements(String identifier, Pageable pageable) {
         return PagingConverter.listToPage(this.getUser(identifier).achievements(), pageable)
                 .map(EntityAchievement::toMap);
     }
