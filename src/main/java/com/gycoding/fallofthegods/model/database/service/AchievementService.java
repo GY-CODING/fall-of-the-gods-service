@@ -33,10 +33,24 @@ public class AchievementService {
      * Lists all the Achievements.
      * @return List of EntityAchievement
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
+     * @see List
      * @see EntityAchievement
      * @see AchievementRepository
      */
-    public Page<Map<String, Object>> listAchievements(Pageable pageable) {
+    public List<EntityAchievement> listAchievements() {
+        return achievementRepository.findAll();
+    }
+
+    /**
+     * Lists all the Achievements with pagination.
+     * @return List of EntityAchievement
+     * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
+     * @see Pageable
+     * @see Page
+     * @see EntityAchievement
+     * @see AchievementRepository
+     */
+    public Page<Map<String, Object>> pageAchievements(Pageable pageable) {
         return achievementRepository.findAll(pageable)
                 .map(EntityAchievement::toMap);
     }

@@ -42,7 +42,21 @@ public class ItemService {
      * @see EntityItem
      * @see ItemRepository
      */
-    public Page<Map<String, Object>> listStoryItems(Pageable pageable) {
+    public List<EntityItem> listStoryItems() {
+        return itemRepository.findAll();
+    }
+
+    /**
+     * Lists all items from the story with pagination.
+     * @return List of EntityItem
+     * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
+     * @see Map
+     * @see Pageable
+     * @see Page
+     * @see EntityItem
+     * @see ItemRepository
+     */
+    public Page<Map<String, Object>> pageStoryItems(Pageable pageable) {
         return itemRepository.findAll(pageable)
                 .map(EntityItem::toMap);
     }
@@ -67,7 +81,21 @@ public class ItemService {
      * @see EntityItem
      * @see ItemRepository
      */
-    public Page<Map<String, Object>> listGameItems(Pageable pageable) {
+    public List<EntityItem> listGameItems() {
+        return itemRepository.findByInGame(true);
+    }
+
+    /**
+     * Lists all items from the game with pagination.
+     * @return List of EntityItem
+     * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
+     * @see Map
+     * @see Pageable
+     * @see Page
+     * @see EntityItem
+     * @see ItemRepository
+     */
+    public Page<Map<String, Object>> pageGameItems(Pageable pageable) {
         return itemRepository.findByInGame(true, pageable)
                 .map(EntityItem::toMap);
     }

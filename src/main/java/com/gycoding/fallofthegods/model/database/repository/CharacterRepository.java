@@ -44,9 +44,18 @@ public interface CharacterRepository extends MongoRepository<EntityCharacter, St
      * @param inGame
      * @return List of EntityCharacter
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
+     * @see List
+     * @see EntityCharacter
+     */
+    List<EntityCharacter> findByInGame(Boolean inGame);
+
+    /**
+     * Lists all characters filtered by their inGame parameters.
+     * @param inGame
+     * @return List of EntityCharacter
+     * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see Pageable
      * @see Page
-     * @see List
      * @see EntityCharacter
      */
     Page<EntityCharacter> findByInGame(Boolean inGame, Pageable pageable);

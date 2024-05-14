@@ -42,7 +42,21 @@ public class CharacterService {
      * @see EntityCharacter
      * @see CharacterRepository
      */
-    public Page<Map<String, Object>> listStoryCharacters(Pageable pageable) {
+    public List<EntityCharacter> listStoryCharacters() {
+        return characterRepository.findAll();
+    }
+
+    /**
+     * Lists all characters from the story with pagination.
+     * @return List of EntityCharacter
+     * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
+     * @see Map
+     * @see Pageable
+     * @see Page
+     * @see EntityCharacter
+     * @see CharacterRepository
+     */
+    public Page<Map<String, Object>> pageStoryCharacters(Pageable pageable) {
         return characterRepository.findAll(pageable)
                 .map(EntityCharacter::toMap);
     }
@@ -63,11 +77,25 @@ public class CharacterService {
      * Lists all characters from the game.
      * @return List of EntityCharacter
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
-     * @see Map
+     * @see List
      * @see EntityCharacter
      * @see CharacterRepository
      */
-    public Page<Map<String, Object>> listGameCharacters(Pageable pageable) {
+    public List<EntityCharacter> listGameCharacters() {
+        return characterRepository.findByInGame(true);
+    }
+
+    /**
+     * Lists all characters from the game with pagination.
+     * @return List of EntityCharacter
+     * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
+     * @see Map
+     * @see Pageable
+     * @see Page
+     * @see EntityCharacter
+     * @see CharacterRepository
+     */
+    public Page<Map<String, Object>> pageGameCharacters(Pageable pageable) {
         return characterRepository.findByInGame(true, pageable)
                 .map(EntityCharacter::toMap);
     }

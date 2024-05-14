@@ -30,9 +30,18 @@ public class CharacterController {
     }
 
     @GetMapping("/story/list")
-    public ResponseEntity<?> listStoryCharacters(Pageable pageable) {
+    public ResponseEntity<?> listStoryCharacters() {
         try {
-            return ResponseEntity.ok(characterService.listStoryCharacters(pageable).getContent());
+            return ResponseEntity.ok(characterService.listStoryCharacters().toString());
+        } catch (Exception e) {
+            return ResponseEntity.status(ServerStatus.LIST_CHARACTER_NOT_FOUND.status).body(ServerStatus.LIST_CHARACTER_NOT_FOUND.toString());
+        }
+    }
+
+    @GetMapping("/story/page")
+    public ResponseEntity<?> pageStoryCharacters(Pageable pageable) {
+        try {
+            return ResponseEntity.ok(characterService.pageStoryCharacters(pageable).getContent());
         } catch (Exception e) {
             return ResponseEntity.status(ServerStatus.LIST_CHARACTER_NOT_FOUND.status).body(ServerStatus.LIST_CHARACTER_NOT_FOUND.toString());
         }
@@ -48,9 +57,18 @@ public class CharacterController {
     }
 
     @GetMapping("/game/list")
-    public ResponseEntity<?> listGameCharacters(Pageable pageable) {
+    public ResponseEntity<?> listGameCharacters() {
         try {
-            return ResponseEntity.ok(characterService.listGameCharacters(pageable).getContent());
+            return ResponseEntity.ok(characterService.listGameCharacters().toString());
+        } catch (Exception e) {
+            return ResponseEntity.status(ServerStatus.LIST_CHARACTER_NOT_FOUND.status).body(ServerStatus.LIST_CHARACTER_NOT_FOUND.toString());
+        }
+    }
+
+    @GetMapping("/game/page")
+    public ResponseEntity<?> pageGameCharacters(Pageable pageable) {
+        try {
+            return ResponseEntity.ok(characterService.pageGameCharacters(pageable).getContent());
         } catch (Exception e) {
             return ResponseEntity.status(ServerStatus.LIST_CHARACTER_NOT_FOUND.status).body(ServerStatus.LIST_CHARACTER_NOT_FOUND.toString());
         }
