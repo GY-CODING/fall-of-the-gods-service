@@ -1,9 +1,7 @@
-package com.gycoding.fallofthegods.controller;
+package com.gycoding.fallofthegods.controller.apidata;
 
 import com.gycoding.fallofthegods.model.database.service.CharacterService;
 import com.gycoding.fallofthegods.model.entities.ServerStatus;
-import com.gycoding.fallofthegods.model.entities.characters.EntityCharacter;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
