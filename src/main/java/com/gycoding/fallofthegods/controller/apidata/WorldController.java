@@ -1,4 +1,4 @@
-package com.gycoding.fallofthegods.controller;
+package com.gycoding.fallofthegods.controller.apidata;
 
 import com.gycoding.fallofthegods.model.database.service.PlaceService;
 import com.gycoding.fallofthegods.model.database.service.WorldService;

@@ -1,4 +1,4 @@
-package com.gycoding.fallofthegods.controller;
+package com.gycoding.fallofthegods.controller.apiusers;
 
 
 import com.gycoding.fallofthegods.model.database.service.UserService;

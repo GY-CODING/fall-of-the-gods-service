@@ -10,7 +10,6 @@ import com.gycoding.fallofthegods.model.entities.EntityStat;
 import com.gycoding.fallofthegods.model.entities.worlds.EntityWorld;
 
 import java.util.Map;
-import java.util.HashMap;
 
 @Builder
 @Document(collection = "Character")
@@ -26,7 +25,8 @@ public record EntityCharacter(
         String image,
         EntityStat<Double> stats,
         EntityAbility ability,
-        List<EntityStory> stories
+        List<EntityStory> stories,
+        String race
 ) {
     @Override
     public String toString() {
@@ -36,6 +36,7 @@ public record EntityCharacter(
                 "\"title\": \"" + title + "\"," +
                 "\"description\": \"" + description + "\"," +
                 "\"world\": \"" + world.identifier() + "\"," +
+                "\"race\": \"" + race + "\"," +
                 "\"image\": \"" + image + "\"," +
                 "\"stats\": " + stats + "," +
                 "\"ability\": " + ability + "," +
@@ -50,6 +51,7 @@ public record EntityCharacter(
                 "title", title,
                 "description", description,
                 "world", world.identifier(),
+                "race", race,
                 "image", image,
                 "stats", stats,
                 "ability", ability,
