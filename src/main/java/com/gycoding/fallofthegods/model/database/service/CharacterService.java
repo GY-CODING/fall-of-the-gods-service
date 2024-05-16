@@ -1,7 +1,9 @@
 package com.gycoding.fallofthegods.model.database.service;
 
 import com.gycoding.fallofthegods.model.database.repository.CharacterRepository;
+import com.gycoding.fallofthegods.model.entities.ServerStatus;
 import com.gycoding.fallofthegods.model.entities.characters.EntityCharacter;
+import com.gycoding.fallofthegods.model.entities.exceptions.FOTGAPIException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,9 +31,12 @@ public class CharacterService {
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see EntityCharacter
      * @see CharacterRepository
+     * @throws FOTGAPIException
      */
-    public EntityCharacter getStoryCharacter(String id) {
-        return characterRepository.findByIdentifier(id).orElse(null);
+    public EntityCharacter getStoryCharacter(String id) throws FOTGAPIException {
+        return characterRepository.findByIdentifier(id).orElseThrow(() ->
+            new FOTGAPIException(ServerStatus.CHARACTER_NOT_FOUND)
+        );
     }
 
     /**
@@ -41,9 +46,14 @@ public class CharacterService {
      * @see List
      * @see EntityCharacter
      * @see CharacterRepository
+     * @throws FOTGAPIException
      */
-    public List<EntityCharacter> listStoryCharacters() {
-        return characterRepository.findAll();
+    public List<EntityCharacter> listStoryCharacters() throws FOTGAPIException {
+        try {
+            return characterRepository.findAll();
+        } catch(NullPointerException e) {
+            throw new FOTGAPIException(ServerStatus.LIST_CHARACTER_NOT_FOUND);
+        }
     }
 
     /**
@@ -55,10 +65,15 @@ public class CharacterService {
      * @see Page
      * @see EntityCharacter
      * @see CharacterRepository
+     * @throws FOTGAPIException
      */
-    public Page<Map<String, Object>> pageStoryCharacters(Pageable pageable) {
-        return characterRepository.findAll(pageable)
-                .map(EntityCharacter::toMap);
+    public Page<Map<String, Object>> pageStoryCharacters(Pageable pageable) throws FOTGAPIException {
+        try {
+            return characterRepository.findAll(pageable)
+                    .map(EntityCharacter::toMap);
+        } catch(NullPointerException e) {
+            throw new FOTGAPIException(ServerStatus.LIST_CHARACTER_NOT_FOUND);
+        }
     }
 
     /**
@@ -68,9 +83,12 @@ public class CharacterService {
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see EntityCharacter
      * @see CharacterRepository
+     * @throws FOTGAPIException
      */
-    public EntityCharacter getGameCharacter(String id) {
-        return characterRepository.findByIdentifierAndInGame(id, true).orElse(null);
+    public EntityCharacter getGameCharacter(String id) throws FOTGAPIException {
+        return characterRepository.findByIdentifierAndInGame(id, true).orElseThrow(() ->
+            new FOTGAPIException(ServerStatus.CHARACTER_NOT_FOUND)
+        );
     }
 
     /**
@@ -80,9 +98,12 @@ public class CharacterService {
      * @see List
      * @see EntityCharacter
      * @see CharacterRepository
+     * @throws FOTGAPIException
      */
-    public List<EntityCharacter> listGameCharacters() {
-        return characterRepository.findByInGame(true);
+    public List<EntityCharacter> listGameCharacters() throws FOTGAPIException {
+        return characterRepository.findByInGame(true).orElseThrow(() ->
+            new FOTGAPIException(ServerStatus.LIST_CHARACTER_NOT_FOUND)
+        );
     }
 
     /**
@@ -94,9 +115,13 @@ public class CharacterService {
      * @see Page
      * @see EntityCharacter
      * @see CharacterRepository
+     * @throws FOTGAPIException
      */
-    public Page<Map<String, Object>> pageGameCharacters(Pageable pageable) {
-        return characterRepository.findByInGame(true, pageable)
-                .map(EntityCharacter::toMap);
+    public Page<Map<String, Object>> pageGameCharacters(Pageable pageable) throws FOTGAPIException {
+        final var characters = characterRepository.findByInGame(true, pageable).orElseThrow(() ->
+            new FOTGAPIException(ServerStatus.LIST_CHARACTER_NOT_FOUND)
+        );
+
+        return characters.map(EntityCharacter::toMap);
     }
 }

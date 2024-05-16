@@ -26,5 +26,5 @@ public interface AchievementRepository extends MongoRepository<EntityAchievement
      * @see Optional
      * @see EntityAchievement
      */
-    EntityAchievement findByIdentifier(String identifier);
+    Optional<EntityAchievement> findByIdentifier(String identifier);
 }

@@ -48,7 +48,7 @@ public interface ItemRepository extends MongoRepository<EntityItem, String> {
      * @see List
      * @see EntityItem
      */
-    List<EntityItem> findByInGame(Boolean inGame);
+    Optional<List<EntityItem>> findByInGame(Boolean inGame);
     
     /**
      * Lists all items filtred by their inGame parameters.
@@ -59,5 +59,5 @@ public interface ItemRepository extends MongoRepository<EntityItem, String> {
      * @see Page
      * @see EntityItem
      */
-    Page<EntityItem> findByInGame(Boolean inGame, Pageable pageable);
+    Optional<Page<EntityItem>> findByInGame(Boolean inGame, Pageable pageable);
 }
