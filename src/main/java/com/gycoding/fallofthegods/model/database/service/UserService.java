@@ -81,7 +81,7 @@ public class UserService {
         try {
             final EntityUser user = this.getUser(identifier);
 
-            user.achievements().add(achievementRepository.findByIdentifier(achievement));
+            user.achievements().add(achievementRepository.findByIdentifier(achievement).get());
 
             userRepository.save(user);
 
