@@ -2,8 +2,10 @@ package com.gycoding.fallofthegods.model.database.service;
 
 import com.gycoding.fallofthegods.model.database.repository.AchievementRepository;
 import com.gycoding.fallofthegods.model.database.repository.StoryRepository;
+import com.gycoding.fallofthegods.model.entities.ServerStatus;
 import com.gycoding.fallofthegods.model.entities.achievements.EntityAchievement;
 import com.gycoding.fallofthegods.model.entities.characters.EntityStory;
+import com.gycoding.fallofthegods.model.entities.exceptions.FOTGAPIException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,9 +26,12 @@ public class AchievementService {
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see EntityAchievement
      * @see AchievementRepository
+     * @throws FOTGAPIException
      */
-    public EntityAchievement getAchievement(String identifier) {
-        return achievementRepository.findByIdentifier(identifier);
+    public EntityAchievement getAchievement(String identifier) throws FOTGAPIException {
+        return achievementRepository.findByIdentifier(identifier).orElseThrow(() ->
+                new FOTGAPIException(ServerStatus.ACHIEVEMENT_NOT_FOUND)
+        );
     }
 
     /**
@@ -36,9 +41,14 @@ public class AchievementService {
      * @see List
      * @see EntityAchievement
      * @see AchievementRepository
+     * @throws FOTGAPIException
      */
-    public List<EntityAchievement> listAchievements() {
-        return achievementRepository.findAll();
+    public List<EntityAchievement> listAchievements() throws FOTGAPIException {
+        try {
+            return achievementRepository.findAll();
+        } catch (NullPointerException e) {
+            throw new FOTGAPIException(ServerStatus.LIST_ACHIEVEMENT_NOT_FOUND);
+        }
     }
 
     /**
@@ -49,9 +59,14 @@ public class AchievementService {
      * @see Page
      * @see EntityAchievement
      * @see AchievementRepository
+     * @throws FOTGAPIException
      */
-    public Page<Map<String, Object>> pageAchievements(Pageable pageable) {
-        return achievementRepository.findAll(pageable)
-                .map(EntityAchievement::toMap);
+    public Page<Map<String, Object>> pageAchievements(Pageable pageable) throws FOTGAPIException {
+        try {
+            return achievementRepository.findAll(pageable)
+                    .map(EntityAchievement::toMap);
+        } catch (NullPointerException e) {
+            throw new FOTGAPIException(ServerStatus.LIST_ACHIEVEMENT_NOT_FOUND);
+        }
     }
 }

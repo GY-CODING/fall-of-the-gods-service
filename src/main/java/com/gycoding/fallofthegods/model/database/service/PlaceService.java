@@ -1,6 +1,8 @@
 package com.gycoding.fallofthegods.model.database.service;
 
 import com.gycoding.fallofthegods.model.database.repository.PlaceRepository;
+import com.gycoding.fallofthegods.model.entities.ServerStatus;
+import com.gycoding.fallofthegods.model.entities.exceptions.FOTGAPIException;
 import com.gycoding.fallofthegods.model.entities.worlds.EntityPlace;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,9 +31,12 @@ public class PlaceService {
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see EntityPlace
      * @see PlaceRepository
+     * @throws FOTGAPIException
      */
-    public EntityPlace getPlace(String id) {
-        return placeRepository.findByIdentifier(id).orElse(null);
+    public EntityPlace getPlace(String id) throws FOTGAPIException {
+        return placeRepository.findByIdentifier(id).orElseThrow(() ->
+                new FOTGAPIException(ServerStatus.PLACE_NOT_FOUND)
+        );
     }
 
     /**
@@ -41,9 +46,14 @@ public class PlaceService {
      * @see List
      * @see EntityPlace
      * @see PlaceRepository
+     * @throws FOTGAPIException
      */
-    public List<EntityPlace> listPlaces() {
-        return placeRepository.findAll();
+    public List<EntityPlace> listPlaces() throws FOTGAPIException {
+        try {
+            return placeRepository.findAll();
+        } catch (NullPointerException e) {
+            throw new FOTGAPIException(ServerStatus.LIST_PLACE_NOT_FOUND);
+        }
     }
 
     /**
@@ -55,9 +65,14 @@ public class PlaceService {
      * @see Map
      * @see EntityPlace
      * @see PlaceRepository
+     * @throws FOTGAPIException
      */
-    public Page<Map<String, Object>> pagePlaces(Pageable pageable) {
-        return placeRepository.findAll(pageable)
-                .map(EntityPlace::toMap);
+    public Page<Map<String, Object>> pagePlaces(Pageable pageable) throws FOTGAPIException {
+        try {
+            return placeRepository.findAll(pageable)
+                    .map(EntityPlace::toMap);
+        } catch (NullPointerException e) {
+            throw new FOTGAPIException(ServerStatus.LIST_PLACE_NOT_FOUND);
+        }
     }
 }

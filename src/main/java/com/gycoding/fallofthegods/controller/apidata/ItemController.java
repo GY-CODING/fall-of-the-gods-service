@@ -2,6 +2,7 @@ package com.gycoding.fallofthegods.controller.apidata;
 
 import com.gycoding.fallofthegods.model.database.service.ItemService;
 import com.gycoding.fallofthegods.model.entities.ServerStatus;
+import com.gycoding.fallofthegods.model.entities.exceptions.FOTGAPIException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,56 +20,32 @@ public class ItemController {
     }
 
     @GetMapping("/story/get")
-    public ResponseEntity<?> getStoryItem(@RequestParam String id) {
-        try {
-            return ResponseEntity.ok(itemService.getStoryItem(id).toString());
-        } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.ITEM_NOT_FOUND.status).body(ServerStatus.ITEM_NOT_FOUND.toString());
-        }
+    public ResponseEntity<?> getStoryItem(@RequestParam String id) throws FOTGAPIException {
+        return ResponseEntity.ok(itemService.getStoryItem(id).toString());
     }
 
     @GetMapping("/story/list")
-    public ResponseEntity<?> listStoryItems() {
-        try {
-            return ResponseEntity.ok(itemService.listStoryItems().toString());
-        } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.LIST_ITEM_NOT_FOUND.status).body(ServerStatus.LIST_ITEM_NOT_FOUND.toString());
-        }
+    public ResponseEntity<?> listStoryItems() throws FOTGAPIException {
+        return ResponseEntity.ok(itemService.listStoryItems().toString());
     }
 
     @GetMapping("/story/page")
-    public ResponseEntity<?> pageStoryItems(Pageable pageable) {
-        try {
-            return ResponseEntity.ok(itemService.pageStoryItems(pageable).getContent());
-        } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.LIST_ITEM_NOT_FOUND.status).body(ServerStatus.LIST_ITEM_NOT_FOUND.toString());
-        }
+    public ResponseEntity<?> pageStoryItems(Pageable pageable) throws FOTGAPIException {
+        return ResponseEntity.ok(itemService.pageStoryItems(pageable).getContent());
     }
 
     @GetMapping("/game/get")
-    public ResponseEntity<?> getGameItem(@RequestParam String id) {
-        try {
-            return ResponseEntity.ok(itemService.getGameItem(id).toString());
-        } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.ITEM_NOT_FOUND.status).body(ServerStatus.ITEM_NOT_FOUND.toString());
-        }
+    public ResponseEntity<?> getGameItem(@RequestParam String id) throws FOTGAPIException {
+        return ResponseEntity.ok(itemService.getGameItem(id).toString());
     }
 
     @GetMapping("/game/list")
-    public ResponseEntity<?> listGameItems() {
-        try {
-            return ResponseEntity.ok(itemService.listGameItems().toString());
-        } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.LIST_ITEM_NOT_FOUND.status).body(ServerStatus.LIST_ITEM_NOT_FOUND.toString());
-        }
+    public ResponseEntity<?> listGameItems() throws FOTGAPIException {
+        return ResponseEntity.ok(itemService.listGameItems().toString());
     }
 
     @GetMapping("/game/page")
-    public ResponseEntity<?> pageGameItems(Pageable pageable) {
-        try {
-            return ResponseEntity.ok(itemService.pageGameItems(pageable).getContent());
-        } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.LIST_ITEM_NOT_FOUND.status).body(ServerStatus.LIST_ITEM_NOT_FOUND.toString());
-        }
+    public ResponseEntity<?> pageGameItems(Pageable pageable) throws FOTGAPIException {
+        return ResponseEntity.ok(itemService.pageGameItems(pageable).getContent());
     }
 }

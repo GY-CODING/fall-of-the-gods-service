@@ -5,6 +5,7 @@ import com.gycoding.fallofthegods.model.database.service.UserService;
 import com.gycoding.fallofthegods.model.entities.ServerStatus;
 import com.gycoding.fallofthegods.model.entities.achievements.EntityUser;
 import com.gycoding.fallofthegods.model.entities.dto.UnlockAchievementRQDTO;
+import com.gycoding.fallofthegods.model.entities.exceptions.FOTGAPIException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,66 +20,37 @@ public class UserController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<?> getUser(@RequestParam String id) {
-        try {
-            return ResponseEntity.ok(userService.getUser(id).toString());
-        } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.USER_NOT_FOUND.status).body(ServerStatus.USER_NOT_FOUND.toString());
-        }
+    public ResponseEntity<?> getUser(@RequestParam String id) throws FOTGAPIException {
+        return ResponseEntity.ok(userService.getUser(id).toString());
     }
 
     @PostMapping("/save")
-    public ResponseEntity<?> saveUser(@RequestBody EntityUser user) {
-        try {
-            System.out.println(user.toString());
-            return ResponseEntity.ok(userService.save(user).toString());
-        } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.BAD_REQUEST.status).body(ServerStatus.BAD_REQUEST.toString());
-        }
+    public ResponseEntity<?> saveUser(@RequestBody EntityUser user) throws FOTGAPIException {
+        return ResponseEntity.ok(userService.save(user).toString());
     }
 
     @PutMapping("/achievements/add")
-    public ResponseEntity<?> addAchievement(@RequestBody UnlockAchievementRQDTO unlockAchievementRQDTO) {
-        try {
-            return ResponseEntity.ok(userService.addAchievement(unlockAchievementRQDTO.idUser(), unlockAchievementRQDTO.idAchievement()).toString());
-        } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.BAD_REQUEST.status).body(ServerStatus.BAD_REQUEST.toString());
-        }
+    public ResponseEntity<?> addAchievement(@RequestBody UnlockAchievementRQDTO unlockAchievementRQDTO) throws FOTGAPIException {
+        return ResponseEntity.ok(userService.addAchievement(unlockAchievementRQDTO.idUser(), unlockAchievementRQDTO.idAchievement()).toString());
     }
 
     @DeleteMapping("/achievements/remove")
-    public ResponseEntity<?> removeAchievement(@RequestParam String idUser, @RequestParam String idAchievement) {
-        try {
-            return ResponseEntity.ok(userService.removeAchievement(idUser, idAchievement).toString());
-        } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.BAD_REQUEST.status).body(ServerStatus.BAD_REQUEST.toString());
-        }
+    public ResponseEntity<?> removeAchievement(@RequestParam String idUser, @RequestParam String idAchievement) throws FOTGAPIException {
+        return ResponseEntity.ok(userService.removeAchievement(idUser, idAchievement).toString());
     }
 
     @GetMapping("/achievements/get")
-    public ResponseEntity<?> getAchievement(@RequestParam String idUser, @RequestParam String idAchievement) {
-        try {
-            return ResponseEntity.ok(userService.getAchievement(idUser, idAchievement).toString());
-        } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.ACHIEVEMENT_NOT_FOUND.status).body(ServerStatus.ACHIEVEMENT_NOT_FOUND.toString());
-        }
+    public ResponseEntity<?> getAchievement(@RequestParam String idUser, @RequestParam String idAchievement) throws FOTGAPIException {
+        return ResponseEntity.ok(userService.getAchievement(idUser, idAchievement).toString());
     }
 
     @GetMapping("/achievements/list")
-    public ResponseEntity<?> listAchievements(@RequestParam String id) {
-        try {
-            return ResponseEntity.ok(userService.listAchievements(id).toString());
-        } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.LIST_ACHIEVEMENT_NOT_FOUND.status).body(ServerStatus.LIST_ACHIEVEMENT_NOT_FOUND.toString());
-        }
+    public ResponseEntity<?> listAchievements(@RequestParam String id) throws FOTGAPIException {
+        return ResponseEntity.ok(userService.listAchievements(id).toString());
     }
 
     @GetMapping("/achievements/page")
-    public ResponseEntity<?> pageAchievements(@RequestParam String id, Pageable pageable) {
-        try {
-            return ResponseEntity.ok(userService.pageAchievements(id, pageable).getContent());
-        } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.LIST_ACHIEVEMENT_NOT_FOUND.status).body(ServerStatus.LIST_ACHIEVEMENT_NOT_FOUND.toString());
-        }
+    public ResponseEntity<?> pageAchievements(@RequestParam String id, Pageable pageable) throws FOTGAPIException {
+        return ResponseEntity.ok(userService.pageAchievements(id, pageable).getContent());
     }
 }

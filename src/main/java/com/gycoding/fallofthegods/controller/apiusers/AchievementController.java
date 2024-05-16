@@ -2,6 +2,7 @@ package com.gycoding.fallofthegods.controller.apiusers;
 
 import com.gycoding.fallofthegods.model.database.service.AchievementService;
 import com.gycoding.fallofthegods.model.entities.ServerStatus;
+import com.gycoding.fallofthegods.model.entities.exceptions.FOTGAPIException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,29 +20,17 @@ public class AchievementController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<?> getAchievement(@RequestParam String id) {
-        try {
-            return ResponseEntity.ok(achievementService.getAchievement(id).toString());
-        } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.ACHIEVEMENT_NOT_FOUND.status).body(ServerStatus.ACHIEVEMENT_NOT_FOUND.toString());
-        }
+    public ResponseEntity<?> getAchievement(@RequestParam String id) throws FOTGAPIException {
+        return ResponseEntity.ok(achievementService.getAchievement(id).toString());
     }
 
     @GetMapping("/list")
-    public ResponseEntity<?> listAchievements() {
-        try {
-            return ResponseEntity.ok(achievementService.listAchievements().toString());
-        } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.LIST_ACHIEVEMENT_NOT_FOUND.status).body(ServerStatus.LIST_ACHIEVEMENT_NOT_FOUND.toString());
-        }
+    public ResponseEntity<?> listAchievements() throws FOTGAPIException {
+        return ResponseEntity.ok(achievementService.listAchievements().toString());
     }
 
     @GetMapping("/page")
-    public ResponseEntity<?> pageAchievements(Pageable pageable) {
-        try {
-            return ResponseEntity.ok(achievementService.pageAchievements(pageable).getContent());
-        } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.LIST_ACHIEVEMENT_NOT_FOUND.status).body(ServerStatus.LIST_ACHIEVEMENT_NOT_FOUND.toString());
-        }
+    public ResponseEntity<?> pageAchievements(Pageable pageable) throws FOTGAPIException {
+        return ResponseEntity.ok(achievementService.pageAchievements(pageable).getContent());
     }
 }
