@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum ServerStatus {
     HOME_NOT_FOUND("HOME_NOT_FOUND", "API reference not found.", HttpStatus.NOT_FOUND),
+    I_AM_A_TEAPOT("I_AM_A_TEAPOT", "What? I'm a teapot!.", HttpStatus.I_AM_A_TEAPOT),
 
     CHARACTER_NOT_FOUND("CHARACTER_NOT_FOUND", "Character not found.", HttpStatus.NOT_FOUND),
     ITEM_NOT_FOUND("ITEM_NOT_FOUND", "Item not found.", HttpStatus.NOT_FOUND),
