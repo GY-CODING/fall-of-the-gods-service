@@ -47,7 +47,7 @@ public interface CharacterRepository extends MongoRepository<EntityCharacter, St
      * @see List
      * @see EntityCharacter
      */
-    List<EntityCharacter> findByInGame(Boolean inGame);
+    Optional<List<EntityCharacter>> findByInGame(Boolean inGame);
 
     /**
      * Lists all characters filtered by their inGame parameters.
@@ -58,5 +58,5 @@ public interface CharacterRepository extends MongoRepository<EntityCharacter, St
      * @see Page
      * @see EntityCharacter
      */
-    Page<EntityCharacter> findByInGame(Boolean inGame, Pageable pageable);
+    Optional<Page<EntityCharacter>> findByInGame(Boolean inGame, Pageable pageable);
 }

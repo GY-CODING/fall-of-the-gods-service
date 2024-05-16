@@ -2,6 +2,7 @@ package com.gycoding.fallofthegods.controller.apidata;
 
 import com.gycoding.fallofthegods.model.database.service.StoryService;
 import com.gycoding.fallofthegods.model.entities.ServerStatus;
+import com.gycoding.fallofthegods.model.entities.exceptions.FOTGAPIException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,29 +20,17 @@ public class StoryController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<?> getStory(@RequestParam String id) {
-        try {
-            return ResponseEntity.ok(storyService.getStory(id).toString());
-        } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.STORY_NOT_FOUND.status).body(ServerStatus.STORY_NOT_FOUND.toString());
-        }
+    public ResponseEntity<?> getStory(@RequestParam String id) throws FOTGAPIException {
+        return ResponseEntity.ok(storyService.getStory(id).toString());
     }
 
     @GetMapping("/list")
-    public ResponseEntity<?> listStories() {
-        try {
-            return ResponseEntity.ok(storyService.listStories().toString());
-        } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.LIST_STORY_NOT_FOUND.status).body(ServerStatus.LIST_STORY_NOT_FOUND.toString());
-        }
+    public ResponseEntity<?> listStories() throws FOTGAPIException {
+        return ResponseEntity.ok(storyService.listStories().toString());
     }
 
     @GetMapping("/page")
-    public ResponseEntity<?> listStories(Pageable pageable) {
-        try {
-            return ResponseEntity.ok(storyService.pageStories(pageable).getContent());
-        } catch (Exception e) {
-            return ResponseEntity.status(ServerStatus.LIST_STORY_NOT_FOUND.status).body(ServerStatus.LIST_STORY_NOT_FOUND.toString());
-        }
+    public ResponseEntity<?> listStories(Pageable pageable) throws FOTGAPIException {
+        return ResponseEntity.ok(storyService.pageStories(pageable).getContent());
     }
 }

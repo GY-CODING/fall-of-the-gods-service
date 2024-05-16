@@ -1,6 +1,8 @@
 package com.gycoding.fallofthegods.model.database.service;
 
 import com.gycoding.fallofthegods.model.database.repository.WorldRepository;
+import com.gycoding.fallofthegods.model.entities.ServerStatus;
+import com.gycoding.fallofthegods.model.entities.exceptions.FOTGAPIException;
 import com.gycoding.fallofthegods.model.entities.utiles.PagingConverter;
 import com.gycoding.fallofthegods.model.entities.worlds.EntityPlace;
 import com.gycoding.fallofthegods.model.entities.worlds.EntityWorld;
@@ -30,9 +32,12 @@ public class WorldService {
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see EntityWorld
      * @see WorldRepository
+     * @throws FOTGAPIException
      */
-    public EntityWorld getWorld(String id) {
-        return worldRepository.findByIdentifier(id).orElse(null);
+    public EntityWorld getWorld(String id) throws FOTGAPIException {
+        return worldRepository.findByIdentifier(id).orElseThrow(() ->
+                new FOTGAPIException(ServerStatus.WORLD_NOT_FOUND)
+        );
     }
 
     /**
@@ -41,9 +46,14 @@ public class WorldService {
      * @see List
      * @see EntityWorld
      * @see WorldRepository
+     * @throws FOTGAPIException
      */
-    public List<EntityWorld> listWorlds() {
-        return worldRepository.findAll();
+    public List<EntityWorld> listWorlds() throws FOTGAPIException {
+        try {
+            return worldRepository.findAll();
+        } catch(NullPointerException e) {
+            throw new FOTGAPIException(ServerStatus.LIST_WORLD_NOT_FOUND);
+        }
     }
 
     /**
@@ -54,10 +64,15 @@ public class WorldService {
      * @see Map
      * @see EntityWorld
      * @see WorldRepository
+     * @throws FOTGAPIException
      */
-    public Page<Map<String, Object>> pageWorlds(Pageable pageable) {
-        return worldRepository.findAll(pageable)
-                .map(EntityWorld::toMap);
+    public Page<Map<String, Object>> pageWorlds(Pageable pageable) throws FOTGAPIException {
+        try {
+            return worldRepository.findAll(pageable)
+                    .map(EntityWorld::toMap);
+        } catch(NullPointerException e) {
+            throw new FOTGAPIException(ServerStatus.LIST_WORLD_NOT_FOUND);
+        }
     }
 
     /**
@@ -67,9 +82,12 @@ public class WorldService {
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see EntityPlace
      * @see WorldRepository
+     * @throws FOTGAPIException
      */
-    public EntityPlace getWorldPlace(String idWorld, String idPlace) {
-        return worldRepository.findByIdentifier(idWorld).orElse(null).getPlace(idPlace);
+    public EntityPlace getWorldPlace(String idWorld, String idPlace) throws FOTGAPIException {
+        return worldRepository.findByIdentifier(idWorld).orElseThrow(() ->
+                new FOTGAPIException(ServerStatus.WORLD_NOT_FOUND)
+        ).getPlace(idPlace);
     }
 
     /**
@@ -79,9 +97,12 @@ public class WorldService {
      * @see List
      * @see EntityPlace
      * @see WorldRepository
+     * @throws FOTGAPIException
      */
-    public List<EntityPlace> listWorldPlaces(String id) {
-        return worldRepository.findByIdentifier(id).orElse(null).listPlaces();
+    public List<EntityPlace> listWorldPlaces(String id) throws FOTGAPIException {
+        return worldRepository.findByIdentifier(id).orElseThrow(() ->
+                new FOTGAPIException(ServerStatus.LIST_WORLD_NOT_FOUND)
+        ).listPlaces();
     }
 
     /**
@@ -91,9 +112,12 @@ public class WorldService {
      * @see List
      * @see EntityPlace
      * @see WorldRepository
+     * @throws FOTGAPIException
      */
-    public Page<Map<String, Object>> pageWorldPlaces(String id, Pageable pageable) {
-        return PagingConverter.listToPage(worldRepository.findByIdentifier(id).orElse(null).listPlaces(), pageable)
-                    .map(EntityPlace::toMap);
+    public Page<Map<String, Object>> pageWorldPlaces(String id, Pageable pageable) throws FOTGAPIException {
+        return PagingConverter.listToPage(worldRepository.findByIdentifier(id).orElseThrow((() ->
+            new FOTGAPIException(ServerStatus.LIST_PLACE_NOT_FOUND)
+        )).listPlaces(), pageable)
+            .map(EntityPlace::toMap);
     }
 }

@@ -1,7 +1,9 @@
 package com.gycoding.fallofthegods.model.database.service;
 
 import com.gycoding.fallofthegods.model.database.repository.StoryRepository;
+import com.gycoding.fallofthegods.model.entities.ServerStatus;
 import com.gycoding.fallofthegods.model.entities.characters.EntityStory;
+import com.gycoding.fallofthegods.model.entities.exceptions.FOTGAPIException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,10 +14,11 @@ import java.util.Map;
 
 /**
  * Service for the Story entity.
+ * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
  * @see EntityStory
  * @see StoryRepository
  * @see Service
- * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
+ * @throws FOTGAPIException
  */
 @Service
 public class StoryService {
@@ -29,9 +32,12 @@ public class StoryService {
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see EntityStory
      * @see StoryRepository
+     * @throws FOTGAPIException
      */
-    public EntityStory getStory(String id) {
-        return storyRepository.findByIdentifier(id).orElse(null);
+    public EntityStory getStory(String id) throws FOTGAPIException {
+        return storyRepository.findByIdentifier(id).orElseThrow(() ->
+                new FOTGAPIException(ServerStatus.STORY_NOT_FOUND)
+        );
     }
 
     /**
@@ -41,9 +47,14 @@ public class StoryService {
      * @see List
      * @see EntityStory
      * @see StoryRepository
+     * @throws FOTGAPIException
      */
-    public List<EntityStory> listStories() {
-        return storyRepository.findAll();
+    public List<EntityStory> listStories() throws FOTGAPIException {
+        try {
+            return storyRepository.findAll();
+        } catch (NullPointerException e) {
+            throw new FOTGAPIException(ServerStatus.LIST_STORY_NOT_FOUND);
+        }
     }
 
     /**
@@ -55,9 +66,14 @@ public class StoryService {
      * @see Map
      * @see EntityStory
      * @see StoryRepository
+     * @throws FOTGAPIException
      */
-    public Page<Map<String, Object>> pageStories(Pageable pageable) {
-        return storyRepository.findAll(pageable)
-                .map(EntityStory::toMap);
+    public Page<Map<String, Object>> pageStories(Pageable pageable) throws FOTGAPIException {
+        try {
+            return storyRepository.findAll(pageable)
+                    .map(EntityStory::toMap);
+        } catch (NullPointerException e) {
+            throw new FOTGAPIException(ServerStatus.LIST_STORY_NOT_FOUND);
+        }
     }
 }

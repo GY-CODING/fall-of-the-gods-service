@@ -7,6 +7,7 @@ import com.gycoding.fallofthegods.model.entities.ServerStatus;
 import com.gycoding.fallofthegods.model.entities.achievements.EntityAchievement;
 import com.gycoding.fallofthegods.model.entities.achievements.EntityUser;
 import com.gycoding.fallofthegods.model.entities.characters.EntityStory;
+import com.gycoding.fallofthegods.model.entities.exceptions.FOTGAPIException;
 import com.gycoding.fallofthegods.model.entities.utiles.PagingConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,9 +31,12 @@ public class UserService {
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see EntityStory
      * @see StoryRepository
+     * @throws FOTGAPIException
      */
-    public EntityUser getUser(String identifier) {
-        return userRepository.findByIdentifier(identifier).orElse(null);
+    public EntityUser getUser(String identifier) throws FOTGAPIException {
+        return userRepository.findByIdentifier(identifier).orElseThrow(() ->
+            new FOTGAPIException(ServerStatus.USER_NOT_FOUND)
+        );
     }
 
     /**
@@ -43,6 +47,7 @@ public class UserService {
      * @see EntityUser
      * @see ServerStatus
      * @see UserRepository
+     * @throws FOTGAPIException
      */
     public ServerStatus save(EntityUser user) {
         try {
@@ -70,12 +75,13 @@ public class UserService {
      * @see EntityAchievement
      * @see ServerStatus
      * @see UserRepository
+     * @throws FOTGAPIException
      */
     public ServerStatus addAchievement(String identifier, String achievement) {
         try {
             final EntityUser user = this.getUser(identifier);
 
-            user.achievements().add(achievementRepository.findByIdentifier(achievement));
+            user.achievements().add(achievementRepository.findByIdentifier(achievement).get());
 
             userRepository.save(user);
 
@@ -95,6 +101,7 @@ public class UserService {
      * @see EntityAchievement
      * @see ServerStatus
      * @see UserRepository
+     * @throws FOTGAPIException
      */
     public ServerStatus removeAchievement(String identifier, String achievement) {
         try {
@@ -118,8 +125,9 @@ public class UserService {
      * @author Ivan Vicente Morales (<a href="https://toxyc.dev/">ToxYc</a>)
      * @see EntityAchievement
      * @see UserRepository
+     * @throws FOTGAPIException
      */
-    public EntityAchievement getAchievement(String idUser, String idAchievement) throws Exception {
+    public EntityAchievement getAchievement(String idUser, String idAchievement) throws FOTGAPIException {
         final List<EntityAchievement> achievements = this.getUser(idUser).achievements();
 
         for(EntityAchievement achievement : achievements) {
@@ -128,7 +136,7 @@ public class UserService {
             }
         }
 
-        throw new Exception();
+        throw new FOTGAPIException(ServerStatus.ACHIEVEMENT_NOT_FOUND);
     }
 
     /**
@@ -139,8 +147,9 @@ public class UserService {
      * @see List
      * @see EntityAchievement
      * @see UserRepository
+     * @throws FOTGAPIException
      */
-    public List<EntityAchievement> listAchievements(String identifier) {
+    public List<EntityAchievement> listAchievements(String identifier) throws FOTGAPIException {
         return this.getUser(identifier).achievements();
     }
 
@@ -154,8 +163,9 @@ public class UserService {
      * @see Map
      * @see EntityAchievement
      * @see UserRepository
+     * @throws FOTGAPIException
      */
-    public Page<Map<String, Object>> pageAchievements(String identifier, Pageable pageable) {
+    public Page<Map<String, Object>> pageAchievements(String identifier, Pageable pageable) throws FOTGAPIException {
         return PagingConverter.listToPage(this.getUser(identifier).achievements(), pageable)
                 .map(EntityAchievement::toMap);
     }
