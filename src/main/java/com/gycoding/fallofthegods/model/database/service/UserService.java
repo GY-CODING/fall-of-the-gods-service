@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.tags.form.FormTag;
 
 import java.util.List;
 import java.util.Map;
@@ -49,7 +50,7 @@ public class UserService {
      * @see UserRepository
      * @throws FOTGAPIException
      */
-    public ServerStatus save(EntityUser user) {
+    public EntityUser save(EntityUser user) throws FOTGAPIException {
         try {
             final EntityUser formattedUser = EntityUser.builder()
                     .identifier(user.identifier())
@@ -58,10 +59,9 @@ public class UserService {
                     .achievements(List.of())
                     .build();
 
-            userRepository.save(formattedUser);
-            return ServerStatus.USER_CREATED;
+            return userRepository.save(formattedUser);
         } catch (Exception e) {
-            return ServerStatus.SERVER_ERROR;
+            throw new FOTGAPIException(ServerStatus.SERVER_ERROR);
         }
     }
 
@@ -77,18 +77,15 @@ public class UserService {
      * @see UserRepository
      * @throws FOTGAPIException
      */
-    public ServerStatus addAchievement(String identifier, String achievement) {
-        try {
-            final EntityUser user = this.getUser(identifier);
+    public EntityUser addAchievement(String identifier, String achievement) throws FOTGAPIException {
+        final EntityUser user                       = this.getUser(identifier);
+        final EntityAchievement entityAchievement   = achievementRepository.findByIdentifier(achievement).orElseThrow(() ->
+            new FOTGAPIException(ServerStatus.ACHIEVEMENT_NOT_FOUND)
+        );
 
-            user.achievements().add(achievementRepository.findByIdentifier(achievement).get());
+        user.achievements().add(entityAchievement);
 
-            userRepository.save(user);
-
-            return ServerStatus.ACHIEVEMENT_ADDED;
-        } catch (Exception e) {
-            return ServerStatus.SERVER_ERROR;
-        }
+        return userRepository.save(user);
     }
 
     /**
@@ -103,18 +100,15 @@ public class UserService {
      * @see UserRepository
      * @throws FOTGAPIException
      */
-    public ServerStatus removeAchievement(String identifier, String achievement) {
-        try {
-            final EntityUser user = this.getUser(identifier);
+    public EntityUser removeAchievement(String identifier, String achievement) throws FOTGAPIException {
+        final EntityUser user                       = this.getUser(identifier);
+        final EntityAchievement entityAchievement   = achievementRepository.findByIdentifier(achievement).orElseThrow(() ->
+            new FOTGAPIException(ServerStatus.ACHIEVEMENT_NOT_FOUND)
+        );
 
-            user.achievements().remove(achievementRepository.findByIdentifier(achievement));
+        user.achievements().remove(entityAchievement);
 
-            userRepository.save(user);
-
-            return ServerStatus.ACHIEVEMENT_REMOVED;
-        } catch (Exception e) {
-            return ServerStatus.SERVER_ERROR;
-        }
+        return userRepository.save(user);
     }
 
     /**

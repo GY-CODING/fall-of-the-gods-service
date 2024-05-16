@@ -23,4 +23,9 @@ public class HomeController {
             throw new FOTGAPIException(ServerStatus.HOME_NOT_FOUND);
         }
     }
+
+    @GetMapping("/makemeacoffee")
+    public String makeCoffee() throws FOTGAPIException {
+        throw new FOTGAPIException(ServerStatus.I_AM_A_TEAPOT);
+    }
 }
