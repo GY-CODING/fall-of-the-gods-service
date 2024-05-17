@@ -1,12 +1,11 @@
 package com.gycoding.fallofthegods.model.entities.worlds;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import lombok.Builder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
+import java.util.Map;
 
 @Builder
 @Document(collection = "World")
@@ -17,6 +16,7 @@ public record EntityWorld(
     String name,
     String description,
     String image,
+    String detailedIcon,
     List<EntityPlace> places
 ) {
     public List<EntityPlace> listPlaces() {
@@ -62,6 +62,7 @@ public record EntityWorld(
                 "\"name\": \"" + name + "\"," +
                 "\"description\": \"" + description + "\"," +
                 "\"image\": \"" + image + "\"," +
+                "\"detailedIcon\": \"" + detailedIcon + "\"," +
                 "\"places\": " + places.toString() +
                 "}";
     }
@@ -71,7 +72,8 @@ public record EntityWorld(
                 "identifier", identifier,
                 "name", name,
                 "description", description,
-                "image", image,
+                "image", detailedIcon,
+                "detailedIcon", detailedIcon,
                 "places", places
         );
     }
