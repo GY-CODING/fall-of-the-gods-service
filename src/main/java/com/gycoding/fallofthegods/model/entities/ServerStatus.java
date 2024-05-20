@@ -14,7 +14,6 @@ public enum ServerStatus {
     PLACE_NOT_FOUND("PLACE_NOT_FOUND", "Place not found.", HttpStatus.NOT_FOUND),
     STORY_NOT_FOUND("STORY_NOT_FOUND", "Story not found.", HttpStatus.NOT_FOUND),
     ACHIEVEMENT_NOT_FOUND("ACHIEVEMENT_NOT_FOUND", "Achievement not found.", HttpStatus.NOT_FOUND),
-    USER_NOT_FOUND("USER_NOT_FOUND", "User not found.", HttpStatus.NOT_FOUND),
 
     LIST_CHARACTER_NOT_FOUND("LIST_CHARACTER_NOT_FOUND", "List of Characters not found.", HttpStatus.NOT_FOUND),
     LIST_ITEM_NOT_FOUND("LIST_ITEM_NOT_FOUND", "List of Items not found.", HttpStatus.NOT_FOUND),
@@ -22,7 +21,6 @@ public enum ServerStatus {
     LIST_PLACE_NOT_FOUND("LIST_PLACE_NOT_FOUND", "List of Places not found.", HttpStatus.NOT_FOUND),
     LIST_STORY_NOT_FOUND("LIST_STORY_NOT_FOUND", "List of Stories not found.", HttpStatus.NOT_FOUND),
     LIST_ACHIEVEMENT_NOT_FOUND("LIST_ACHIEVEMENT_NOT_FOUND", "List of Achievements not found.", HttpStatus.NOT_FOUND),
-    LIST_USER_NOT_FOUND("LIST_USER_NOT_FOUND", "List of Users not found.", HttpStatus.NOT_FOUND),
 
     USER_CREATED("USER_CREATED", "User has been successfully created.", HttpStatus.CREATED),
     ACHIEVEMENT_ADDED("ACHIEVEMENT_ADDED", "Achievement has been successfully added to the specified User.", HttpStatus.CREATED),

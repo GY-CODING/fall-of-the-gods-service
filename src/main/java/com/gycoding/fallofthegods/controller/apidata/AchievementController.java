@@ -1,7 +1,6 @@
-package com.gycoding.fallofthegods.controller.apiusers;
+package com.gycoding.fallofthegods.controller.apidata;
 
 import com.gycoding.fallofthegods.model.database.service.AchievementService;
-import com.gycoding.fallofthegods.model.entities.ServerStatus;
 import com.gycoding.fallofthegods.model.entities.exceptions.FOTGAPIException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
