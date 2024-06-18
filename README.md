@@ -27,7 +27,7 @@ This API REST uses **Spring Web** for the whole API REST functionality and **Spr
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
 
-The reference static website was made using just **HTML**, **CSS** and some **JavaScript**, while the documentation was made automatically using **Maven Javadoc Plugin** and **Javadoc comments**.
+The reference static website was made using just **HTML**, **CSS** and some **JavaScript**, while the documentation was made automatically using **Dokka** for the Code Docs and **Postman** for the API Docs.
 
 <br>
 
