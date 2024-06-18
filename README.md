@@ -4,7 +4,7 @@
 [![developer](https://img.shields.io/badge/developed-GYCoding-purple?style=for-the-badge)](https://gycoding.com)
 [![reference](https://img.shields.io/badge/reference-api_reference-silver?style=for-the-badge)](https://fallofthegods-data-gycoding.koyeb.app/)
 
-# Introduction
+## Introduction
 
 This is the official **Fall of the Gods API REST**, containing endpoints to get data about **characters**, **items**, **worlds**, **places** and **stories** from the main universe and the videogame.
 This API also serves as the achievement management system for every GYCODING user for the game Leaves & Shadows.
@@ -13,7 +13,7 @@ We provide a full **[API reference](https://fallofthegods-data-gycoding.koyeb.ap
 
 <br>
 
-# How it was made
+## How it was made
   
 ![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
