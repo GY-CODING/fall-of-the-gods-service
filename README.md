@@ -1,7 +1,7 @@
 # Fall of the Gods API
 
 ![version](https://img.shields.io/badge/version-2.3.0-gold?style=for-the-badge)
-[![developer](https://img.shields.io/badge/developed-GYCoding-purple?style=for-the-badge)](https://gycoding.com)
+[![developer](https://img.shields.io/badge/developed-GYCODING-B833FF?style=for-the-badge)](https://gycoding.com)
 [![reference](https://img.shields.io/badge/reference-api_reference-silver?style=for-the-badge)](https://fallofthegods-data-gycoding.koyeb.app/)
 
 ## Introduction
