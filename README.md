@@ -31,4 +31,12 @@ The reference static website was made using just **HTML**, **CSS** and some **Ja
 
 <br>
 
-<pre>Made by GYCODING</pre>
+## Creators
+
+| Product Owner |
+| :---: |
+| <img src="https://github.com/gy-toxyc.png?size=115" width=115> <br> [![toxyc](https://img.shields.io/badge/toxyc-yellow?style=for-the-badge)](https://github.com/gy-toxyc) |
+
+<br>
+
+<pre>GYCODING 2024</pre>
