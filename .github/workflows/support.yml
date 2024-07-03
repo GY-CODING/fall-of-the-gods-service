@@ -24,4 +24,4 @@ jobs:
         uses: softprops/add-to-project-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          project: <ID_DEL_PROYECTO>
+          project: 10
