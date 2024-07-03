@@ -8,12 +8,6 @@ jobs:
   transferir-issue:
     runs-on: ubuntu-latest
     steps:
-      - name: Transfer issue
-        uses: lando/transfer-issue-action@v2
-        with:
-          token: ${{ secrets.SUPPORT_TOKEN }}
-          router: support:support
-
       - name: Add to Support project
         uses: actions/add-to-project@v1.0.2
         with:
