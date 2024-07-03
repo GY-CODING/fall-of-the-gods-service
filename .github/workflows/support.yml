@@ -8,20 +8,18 @@ jobs:
   transferir-issue:
     runs-on: ubuntu-latest
     steps:
-      - name: Check labels
-        id: check-label
-        run: echo "::set-output name=is_bug_or_question::$(jq '.issue.labels[].name | contains("bug", "question")' $GITHUB_EVENT_PATH)"
-
       - name: Transfer issue
         if: steps.check-label.outputs.is_bug_or_question == 'true'
-        uses: softprops/transfer-issue-action@v1
+        uses: lando/transfer-issue-action@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repository: gy-coding/support
+          token: ${{ secrets.TRANSFER_ISSUE_TOKEN }}
+          router: support:support
 
       - name: Add to Support project
         if: steps.check-label.outputs.is_bug_or_question == 'true'
-        uses: softprops/add-to-project-action@v1
+        uses: actions/add-to-project@v1.0.2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          project: 10
+          project-url: https://github.com/orgs/GY-CODING/projects/10
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: support
+          label-operator: OR
