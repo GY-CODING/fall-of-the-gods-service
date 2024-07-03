@@ -9,14 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Transfer issue
-        if: steps.check-label.outputs.is_bug_or_question == 'true'
         uses: lando/transfer-issue-action@v2
         with:
           token: ${{ secrets.TRANSFER_ISSUE_TOKEN }}
           router: support:support
 
       - name: Add to Support project
-        if: steps.check-label.outputs.is_bug_or_question == 'true'
         uses: actions/add-to-project@v1.0.2
         with:
           project-url: https://github.com/orgs/GY-CODING/projects/10
