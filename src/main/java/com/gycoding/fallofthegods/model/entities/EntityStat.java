@@ -8,15 +8,30 @@ import lombok.Setter;
 @Getter
 @Setter
 public class EntityStat<T> {
-    private T attack;
-    private T defense;
-    private T accuracy;
+    private T physicalDamage;
+    private T magicalDamage;
+    private T physicalArmor;
+    private T magicalArmor;
+    private T movementSpeed;
+    private T attackSpeed;
+    private T criticalStrike;
+    private T criticalStrikeProbability;
     private T life;
     private T ether;
-    private T movement;
 
     @Override
     public String toString() {
-        return "{\"attack\": " + attack + ", \"defense\": " + defense + ", \"accuracy\": " + accuracy + ", \"life\": " + life + ", \"ether\": " + ether + ", \"movement\": " + movement + "}";
+        return "{" +
+                "\"physicalDamage\": " + physicalDamage + "," +
+                "\"magicalDamage\": " + magicalDamage + "," +
+                "\"physicalArmor\": " + physicalArmor + "," +
+                "\"magicalArmor\": " + magicalArmor + "," +
+                "\"movementSpeed\": " + movementSpeed + "," +
+                "\"attackSpeed\": " + attackSpeed + "," +
+                "\"criticalStrike\": " + criticalStrike + "," +
+                "\"criticalStrikeProbability\": " + criticalStrikeProbability + "," +
+                "\"life\": " + life + "," +
+                "\"ether\": " + ether +
+                "}";
     }
 }
