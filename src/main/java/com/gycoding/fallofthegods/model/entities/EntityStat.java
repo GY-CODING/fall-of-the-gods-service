@@ -16,7 +16,7 @@ public class EntityStat<T> {
     private T attackSpeed;
     private T criticalStrike;
     private T criticalStrikeProbability;
-    private T life;
+    private T health;
     private T ether;
 
     @Override
@@ -30,7 +30,7 @@ public class EntityStat<T> {
                 "\"attackSpeed\": " + attackSpeed + "," +
                 "\"criticalStrike\": " + criticalStrike + "," +
                 "\"criticalStrikeProbability\": " + criticalStrikeProbability + "," +
-                "\"life\": " + life + "," +
+                "\"health\": " + health + "," +
                 "\"ether\": " + ether +
                 "}";
     }
