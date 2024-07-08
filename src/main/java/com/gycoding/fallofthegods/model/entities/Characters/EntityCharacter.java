@@ -24,7 +24,7 @@ public record EntityCharacter(
         Boolean inGame,
         String image,
         EntityStat<Double> stats,
-        EntityAbility ability,
+        List<EntityAbility> abilities,
         List<EntityStory> stories,
         String race
 ) {
@@ -39,7 +39,7 @@ public record EntityCharacter(
                 "\"race\": \"" + race + "\"," +
                 "\"image\": \"" + image + "\"," +
                 "\"stats\": " + stats + "," +
-                "\"ability\": " + ability + "," +
+                "\"ability\": " + abilities + "," +
                 "\"stories\": " + stories +
                 "}";
     }
@@ -54,7 +54,7 @@ public record EntityCharacter(
                 "race", race,
                 "image", image,
                 "stats", stats,
-                "ability", ability,
+                "ability", abilities,
                 "stories", stories
         );
     }
