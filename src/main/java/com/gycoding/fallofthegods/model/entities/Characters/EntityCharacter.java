@@ -1,14 +1,12 @@
 package com.gycoding.fallofthegods.model.entities.characters;
 
-import java.util.List;
-
+import com.gycoding.fallofthegods.model.entities.EntityStat;
+import com.gycoding.fallofthegods.model.entities.worlds.EntityWorld;
 import lombok.Builder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.gycoding.fallofthegods.model.entities.EntityStat;
-import com.gycoding.fallofthegods.model.entities.worlds.EntityWorld;
-
+import java.util.List;
 import java.util.Map;
 
 @Builder
@@ -39,7 +37,7 @@ public record EntityCharacter(
                 "\"race\": \"" + race + "\"," +
                 "\"image\": \"" + image + "\"," +
                 "\"stats\": " + stats + "," +
-                "\"ability\": " + abilities + "," +
+                "\"abilities\": " + abilities + "," +
                 "\"stories\": " + stories +
                 "}";
     }
@@ -54,7 +52,7 @@ public record EntityCharacter(
                 "race", race,
                 "image", image,
                 "stats", stats,
-                "ability", abilities,
+                "abilities", abilities,
                 "stories", stories
         );
     }
