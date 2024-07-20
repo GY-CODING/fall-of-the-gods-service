@@ -8,7 +8,7 @@
 
 ## Introduction
 
-This is the official **Fall of the Gods API REST**, containing endpoints to get data about **characters**, **items**, **worlds**, **places** and **stories** from the main universe and the videogame.
+This is the official **Fall of the Gods API**, containing endpoints to get data about **characters**, **items**, **worlds**, **places** and **stories** from the main universe and the videogame.
 This API also serves as the achievement management system for every **GYCODING** user for the game Leaves & Shadows.
 
 We provide a full **[API reference](https://fallofthegods-data-gycoding.koyeb.app/)**, containing all the available **endpoints**, **documentation** and a **changelog** with the new features or bugfixes from all the versions of this API.
