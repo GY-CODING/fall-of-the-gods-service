@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.gycoding</groupId>
 	<artifactId>fallofthegods</artifactId>
-	<version>2.3.0</version>
+	<version>2.4.0</version>
 	<name>fallofthegods</name>
 	<description>Fall of the Gods Data is an API REST service that provides information about everything inside the Fall of the Gods universe.</description>
 	<properties>
@@ -63,6 +63,12 @@
 			<artifactId>java-dotenv</artifactId>
 			<version>5.2.2</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.gycoding</groupId>
+			<artifactId>spring-exceptions</artifactId>
+			<version>1.0.7</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -72,44 +78,12 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-	
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.6.3</version>
-				<configuration>
-					<reportOutputDirectory>src/main/resources/static/docs</reportOutputDirectory>
-					<destDir>javadoc</destDir>
-				</configuration>
-			</plugin>
 
 			<plugin>
-				<groupId>org.jetbrains.dokka</groupId>
-				<artifactId>dokka-maven-plugin</artifactId>
-				<version>1.9.20</version>
-				<executions>
-					<execution>
-						<phase>pre-site</phase>
-						<goals>
-							<goal>dokka</goal>
-						</goals>
-					</execution>
-				</executions>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
-					<skip>false</skip>
-					<moduleName>Fall of the Gods API</moduleName>
-					<outputDir>./src/main/resources/static/docs</outputDir>
-					<cacheRoot>default</cacheRoot>
-					<offlineMode>false</offlineMode>
-					<samples>
-						<dir>src/test/samples</dir>
-					</samples>
-					<suppressObviousFunctions>false</suppressObviousFunctions>
-					<suppressInheritedMembers>true</suppressInheritedMembers>
-					<jdkVersion>17</jdkVersion>
-					<skipDeprecated>false</skipDeprecated>
-					<reportUndocumented>true</reportUndocumented>
-					<skipEmptyPackages>true</skipEmptyPackages>
+					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
 		</plugins>
