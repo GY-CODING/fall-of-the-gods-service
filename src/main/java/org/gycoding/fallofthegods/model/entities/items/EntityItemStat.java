@@ -9,6 +9,9 @@ public record EntityItemStat(
 ) {
     @Override 
     public String toString() {
-        return "{\"type\": \"" + type + "\", \"value\": " + value + "}";
+        return "{" +
+                "\"type\": \"" + type + "\"," +
+                "\"value\": " + value +
+                "}";
     }
 }

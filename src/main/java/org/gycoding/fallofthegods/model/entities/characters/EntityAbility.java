@@ -4,14 +4,24 @@ import lombok.Builder;
 
 @Builder
 public record EntityAbility(
-        String abilityName,
-        String abilityDesc
+        String name,
+        String desc,
+        String identifier,
+        Double damage,
+        Double life,
+        Double cooldown,
+        Double timeToHit
 ) {
     @Override
     public String toString() {
         return "{" +
-                "\"abilityName\": \"" + abilityName + "\"," +
-                "\"abilityDesc\": \"" + abilityDesc + "\"" +
+                "\"name\": \"" + name + "\"," +
+                "\"desc\": \"" + desc + "\"" +
+                "\"identifier\": \"" + identifier + "\"" +
+                "\"damage\": " + damage + "," +
+                "\"life\": " + life + "," +
+                "\"cooldown\": " + cooldown + "," +
+                "\"timeToHit\": " + timeToHit +
                 "}";
     }
 }
