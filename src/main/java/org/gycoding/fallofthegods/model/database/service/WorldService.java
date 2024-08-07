@@ -5,7 +5,7 @@ import org.gycoding.fallofthegods.model.entities.exceptions.FOTGAPIError;
 import org.gycoding.fallofthegods.model.entities.utiles.PagingConverter;
 import org.gycoding.fallofthegods.model.entities.worlds.EntityPlace;
 import org.gycoding.fallofthegods.model.entities.worlds.EntityWorld;
-import org.gycoding.springexceptions.model.APIException;
+import org.gycoding.exceptions.model.APIException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

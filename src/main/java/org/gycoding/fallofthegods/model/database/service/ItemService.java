@@ -3,7 +3,7 @@ package org.gycoding.fallofthegods.model.database.service;
 import org.gycoding.fallofthegods.model.database.repository.ItemRepository;
 import org.gycoding.fallofthegods.model.entities.exceptions.FOTGAPIError;
 import org.gycoding.fallofthegods.model.entities.items.EntityItem;
-import org.gycoding.springexceptions.model.APIException;
+import org.gycoding.exceptions.model.APIException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

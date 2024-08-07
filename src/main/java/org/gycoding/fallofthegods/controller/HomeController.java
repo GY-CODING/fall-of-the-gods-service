@@ -1,7 +1,7 @@
 package org.gycoding.fallofthegods.controller;
 
 import org.gycoding.fallofthegods.model.entities.exceptions.FOTGAPIError;
-import org.gycoding.springexceptions.model.APIException;
+import org.gycoding.exceptions.model.APIException;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.GetMapping;

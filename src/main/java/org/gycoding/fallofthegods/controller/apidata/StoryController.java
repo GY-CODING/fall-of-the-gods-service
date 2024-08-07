@@ -1,7 +1,7 @@
 package org.gycoding.fallofthegods.controller.apidata;
 
 import org.gycoding.fallofthegods.model.database.service.StoryService;
-import org.gycoding.springexceptions.model.APIException;
+import org.gycoding.exceptions.model.APIException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
