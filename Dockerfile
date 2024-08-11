@@ -6,8 +6,9 @@ WORKDIR /app
 
 # Copy the settings.xml file to the Maven configuration directory
 COPY src/main/resources/settings.xml /root/.m2/settings.xml
-CMD ["sh", "-c", "echo 'Contenido del archivo 1: ' && cat src/main/resources/settings.xml"]
-CMD ["sh", "-c", "echo 'Contenido del archivo 2: ' && cat /root/.m2/settings.xml"]
+
+# List the contents of the Maven configuration directory to verify the copy
+RUN ls -l /root/.m2/
 
 # Copy the pom.xml file to the working directory
 COPY pom.xml .
