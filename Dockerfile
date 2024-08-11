@@ -29,7 +29,7 @@ WORKDIR /app
 COPY --from=build /app/target/*.jar ./fallofthegods-data.jar
 
 # Expose the port on which the application will run
-EXPOSE 8080
+EXPOSE 8003
 
 # Set the command to run the application
 CMD ["java", "-jar", "fallofthegods-data.jar"]
