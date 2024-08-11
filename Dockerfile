@@ -11,7 +11,7 @@ COPY src/main/resources/settings.xml /root/.m2/settings.xml
 COPY pom.xml .
 
 # Download the project dependencies
-RUN mvn dependency:go-offline -B
+RUN mvn dependency:go-offline -B -s /root/.m2/settings.xml
 
 # Copy the source code to the working directory
 COPY src ./src
