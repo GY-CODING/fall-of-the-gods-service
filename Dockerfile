@@ -8,7 +8,7 @@ WORKDIR /app
 COPY src/main/resources/settings.xml /root/.m2/settings.xml
 
 # List the contents of the Maven configuration directory to verify the copy
-RUN ls -l /root/.m2/
+RUN cat /root/.m2/settings.xml
 
 # Copy the pom.xml file to the working directory
 COPY pom.xml .
