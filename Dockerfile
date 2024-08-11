@@ -4,11 +4,11 @@ FROM maven:3.8.4-openjdk-17-slim AS build
 # Set the working directory
 WORKDIR /app
 
+ENV GITHUB_USERNAME={{env.GITHUB_USERNAME}}
+ENV GITHUB_TOKEN={{env.GITHUB_TOKEN}}
+
 # Copy the settings.xml file to the Maven configuration directory
 COPY src/main/resources/settings.xml /root/.m2/settings.xml
-
-# List the contents of the Maven configuration directory to verify the copy
-RUN cat /root/.m2/settings.xml
 
 # Copy the pom.xml file to the working directory
 COPY pom.xml .
