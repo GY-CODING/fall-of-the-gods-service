@@ -4,10 +4,6 @@ FROM maven:3.8.4-openjdk-17-slim AS build
 # Set the working directory
 WORKDIR /app
 
-# Set environment variables for GitHub credentials
-ENV GITHUB_USERNAME=$GITHUB_USERNAME
-ENV GITHUB_TOKEN=$GITHUB_TOKEN
-
 # Print environment variables for debugging
 RUN echo "GITHUB_USERNAME=$GITHUB_USERNAME"
 RUN echo "GITHUB_TOKEN=$GITHUB_TOKEN"
