@@ -38,4 +38,7 @@ COPY --from=build /app/target/*.jar ./fallofthegods-data.jar
 EXPOSE 8003
 
 # Set the command to run the application
-CMD ["sh", "-c", "java -jar fallofthegods-data.jar > /app/logs/app.log 2>&1"]
+CMD ["java", "-jar", "fallofthegods-data.jar"]
+
+RUN echo "Construcción completada"
+CMD ["sh", "-c", "echo 'Iniciando aplicación'; java -jar fallofthegods-data.jar"]
