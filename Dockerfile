@@ -48,8 +48,8 @@ EXPOSE 8003
 # Add logging to verify the JAR file and environment variables
 RUN ls -la /app
 RUN env
-RUN echo "GITHUB_USERNAME: ${GITHUB_USERNAME}"
-RUN echo "GITHUB_TOKEN: ${GITHUB_TOKEN}"
+RUN echo "GITHUB_USERNAME: $GITHUB_USERNAME"
+RUN echo "GITHUB_TOKEN: $GITHUB_TOKEN"
 
 # Set the command to run the application
 CMD ["sh", "-c", "echo 'Iniciando aplicación'; java -jar fallofthegods-data.jar"]
