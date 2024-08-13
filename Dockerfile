@@ -13,6 +13,11 @@ ENV GITHUB_TOKEN=${GITHUB_TOKEN}
 # Copy the settings.xml file to the Maven configuration directory
 COPY src/main/resources/settings.xml /root/.m2/settings.xml
 
+# Print environment variables for debugging
+CMD ["sh", "-c", "echo 'Contenido del archivo:' && cat /root/.m2/settings.xml"]
+RUN echo "GITHUB_USERNAME=$GITHUB_USERNAME"
+RUN echo "GITHUB_TOKEN=$GITHUB_TOKEN"
+
 # Copy the pom.xml file to the working directory
 COPY pom.xml .
 
