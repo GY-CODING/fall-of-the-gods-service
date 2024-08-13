@@ -36,6 +36,12 @@ FROM openjdk:17-jdk-slim
 # Set the working directory
 WORKDIR /app
 
+ARG GITHUB_USERNAME
+ARG GITHUB_TOKEN
+
+ENV GITHUB_USERNAME=${GITHUB_USERNAME}
+ENV GITHUB_TOKEN=${GITHUB_TOKEN}
+
 # Copy the JAR file from the build stage to the current directory
 COPY --from=build /app/target/*.jar ./fallofthegods-data.jar
 
@@ -48,6 +54,7 @@ EXPOSE 8003
 # Add logging to verify the JAR file and environment variables
 RUN ls -la /app
 RUN env
+CMD ["sh", "-c", "echo 'Contenido del archivo:' && cat /root/.m2/settings.xml"]
 RUN echo "GITHUB_USERNAME: $GITHUB_USERNAME"
 RUN echo "GITHUB_TOKEN: $GITHUB_TOKEN"
 
