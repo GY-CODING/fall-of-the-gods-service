@@ -13,11 +13,6 @@ ENV GITHUB_TOKEN=${GITHUB_TOKEN}
 # Copy the settings.xml file to the Maven configuration directory
 COPY src/main/resources/settings.xml /root/.m2/settings.xml
 
-# List the contents of the Maven configuration directory to verify the copy
-RUN cat /root/.m2/settings.xml
-RUN echo "GITHUB_USERNAME=$GITHUB_USERNAME"
-RUN echo "GITHUB_TOKEN=$GITHUB_TOKEN"
-
 # Copy the pom.xml file to the working directory
 COPY pom.xml .
 
@@ -43,4 +38,4 @@ COPY --from=build /app/target/*.jar ./fallofthegods-data.jar
 EXPOSE 8003
 
 # Set the command to run the application
-CMD ["java", "-jar", "fallofthegods-data.jar"]
+CMD ["sh", "-c", "java -jar fallofthegods-data.jar > /app/logs/app.log 2>&1"]
