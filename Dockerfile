@@ -62,4 +62,4 @@ RUN chmod 777 /app/fallofthegods-data.jar
 EXPOSE 8003
 
 # Set the command to run the application
-CMD ["java", "-jar", "gy-accounts.jar"]
+CMD ["java", "-jar", "fallofthegods-data.jar"]
