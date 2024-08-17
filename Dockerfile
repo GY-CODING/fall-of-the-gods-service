@@ -56,10 +56,10 @@ COPY src/main/resources/settings.xml /root/.m2/settings.xml
 COPY --from=build /app/target/*.jar ./fallofthegods-data.jar
 
 # Ensure the JAR file has the correct permissions
-RUN chmod +x /app/fallofthegods-data.jar
+RUN chmod 777 /app/fallofthegods-data.jar
 
 # Expose the port on which the application will run
 EXPOSE 8003
 
 # Set the command to run the application
-CMD ["sh", "-c", "echo 'Iniciando aplicación'; java -jar fallofthegods-data.jar"]
+CMD ["java", "-jar", "gy-accounts.jar"]
