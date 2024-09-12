@@ -41,7 +41,7 @@ public record EntityCharacter(
                 "\"image\": \"" + image + "\"," +
                 "\"stats\": " + stats + "," +
                 "\"ability\": " + ability + "," +
-                "\"stories\": " + stories +
+                "\"stories\": " + stories + "," +
                 "\"attributes\": " + attributes +
                 "}";
     }
