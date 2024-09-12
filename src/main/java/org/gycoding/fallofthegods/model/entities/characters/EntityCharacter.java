@@ -26,7 +26,8 @@ public record EntityCharacter(
         EntityStat<Double> stats,
         EntityAbility ability,
         List<EntityStory> stories,
-        String race
+        String race,
+        List<EntityAttribute> attributes
 ) {
     @Override
     public String toString() {
@@ -41,11 +42,12 @@ public record EntityCharacter(
                 "\"stats\": " + stats + "," +
                 "\"ability\": " + ability + "," +
                 "\"stories\": " + stories +
+                "\"attributes\": " + attributes +
                 "}";
     }
 
     public Map<String, Object> toMap() {
-        return Map.of(
+        final var map = new java.util.HashMap<>(Map.of(
                 "identifier", identifier,
                 "name", name,
                 "title", title,
@@ -56,7 +58,11 @@ public record EntityCharacter(
                 "stats", stats,
                 "ability", ability,
                 "stories", stories
-        );
+        ));
+
+        map.put("attributes", attributes);
+
+        return map;
     }
 }
 
