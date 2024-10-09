@@ -1,0 +1,14 @@
+name: Deploy to Koyeb
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+     uses: GY-CODING/.github/.github/workflows/koyeb-deploy.yml@master
+     secrets: inherit
+     with: 
+       project-name: "fall-of-the-gods-service"
+       project-id: "e579933a-ea26-4c5d-920c-7e9e65738216"
