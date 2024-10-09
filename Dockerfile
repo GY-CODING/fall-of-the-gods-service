@@ -25,6 +25,9 @@ COPY pom.xml .
 # Download the project dependencies
 RUN mvn dependency:go-offline -B -s /root/.m2/settings.xml
 
+# Verify the settings.xml file exists and print its content
+RUN ls -la /root/.m2/ && cat /root/.m2/settings.xml
+
 # Copy the source code to the working directory
 COPY src ./src
 
@@ -51,6 +54,9 @@ ENV GITHUB_TOKEN=${GITHUB_TOKEN}
 
 # Copy the settings.xml file to the Maven configuration directory
 COPY src/main/resources/settings.xml /root/.m2/settings.xml
+
+# Verify the settings.xml file exists and print its content
+RUN ls -la /root/.m2/ && cat /root/.m2/settings.xml
 
 # Copy the JAR file from the build stage to the current directory
 COPY --from=build /app/target/*.jar ./fallofthegods-data.jar
