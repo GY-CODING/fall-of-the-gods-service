@@ -11,4 +11,4 @@ jobs:
      secrets: inherit
      with: 
        project-name: "fallofthegods-data"
-       project-id: "3fede6a8-6e24-4994-acfe-10a1948dc8fc"
+       project-id: "fall-of-the-gods"
