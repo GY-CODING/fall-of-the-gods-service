@@ -4,10 +4,12 @@ import lombok.Builder;
 import org.gycoding.fallofthegods.model.entities.EntityStat;
 import org.gycoding.fallofthegods.model.entities.TranslatedString;
 import org.gycoding.fallofthegods.model.entities.items.EntityItemStat;
+import org.gycoding.fallofthegods.model.entities.items.ItemType;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.swing.text.html.parser.Entity;
+import java.util.List;
 import java.util.Map;
 
 @Builder
@@ -17,6 +19,8 @@ public record ItemRSDTO(
         String description,
         String image,
         Boolean inGame,
+        ItemType type,
+        List<ItemRSDTO> fragments,
         EntityStat<EntityItemStat> stats
 ) {
     @Override
@@ -26,7 +30,9 @@ public record ItemRSDTO(
                 "\"name\": \"" + name + "\"," +
                 "\"description\": \"" + description + "\"," +
                 "\"image\": \"" + image + "\"," +
-                "\"stats\": " + stats +
+                "\"stats\": " + stats + "," +
+                "\"type\": \"" + type + "\"," +
+                "\"fragments\": \"" + fragments +
                 "}";
     }
 
@@ -36,7 +42,9 @@ public record ItemRSDTO(
                 "name", name,
                 "description", description,
                 "image", image,
-                "stats", stats
+                "stats", stats,
+                "type", type,
+                "fragments", fragments
         );
     }
 }

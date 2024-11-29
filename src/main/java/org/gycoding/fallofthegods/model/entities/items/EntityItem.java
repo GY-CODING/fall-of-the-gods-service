@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import org.gycoding.fallofthegods.model.entities.EntityStat;
 
+import java.util.List;
 import java.util.Map;
 
 @Builder
@@ -19,5 +20,7 @@ public record EntityItem(
     TranslatedString description,
     String image,
     Boolean inGame,
+    ItemType type,
+    List<EntityItem> fragments,
     EntityStat<EntityItemStat> stats
 ) {}
