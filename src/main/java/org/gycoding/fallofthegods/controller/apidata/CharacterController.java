@@ -19,32 +19,32 @@ public class CharacterController {
     }
 
     @GetMapping("/story/get")
-    public ResponseEntity<?> getStoryCharacter(@RequestParam String id) throws APIException {
-        return ResponseEntity.ok(characterService.getStoryCharacter(id).toString());
+    public ResponseEntity<?> getStoryCharacter(@RequestParam String id, @RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(characterService.getStoryCharacter(id, lang).toString());
     }
 
     @GetMapping("/story/list")
-    public ResponseEntity<?> listStoryCharacters() throws APIException {
-        return ResponseEntity.ok(characterService.listStoryCharacters().toString());
+    public ResponseEntity<?> listStoryCharacters(@RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(characterService.listStoryCharacters(lang).toString());
     }
 
     @GetMapping("/story/page")
-    public ResponseEntity<?> pageStoryCharacters(Pageable pageable) throws APIException {
-        return ResponseEntity.ok(characterService.pageStoryCharacters(pageable).getContent());
+    public ResponseEntity<?> pageStoryCharacters(Pageable pageable, @RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(characterService.pageStoryCharacters(pageable, lang).getContent());
     }
 
     @GetMapping("/game/get")
-    public ResponseEntity<?> getGameCharacter(@RequestParam String id) throws APIException {
-        return ResponseEntity.ok(characterService.getGameCharacter(id).toString());
+    public ResponseEntity<?> getGameCharacter(@RequestParam String id, @RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(characterService.getGameCharacter(id, lang).toString());
     }
 
     @GetMapping("/game/list")
-    public ResponseEntity<?> listGameCharacters() throws APIException {
-        return ResponseEntity.ok(characterService.listGameCharacters().toString());
+    public ResponseEntity<?> listGameCharacters(@RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(characterService.listGameCharacters(lang).toString());
     }
 
     @GetMapping("/game/page")
-    public ResponseEntity<?> pageGameCharacters(Pageable pageable) throws APIException {
-        return ResponseEntity.ok(characterService.pageGameCharacters(pageable).getContent());
+    public ResponseEntity<?> pageGameCharacters(Pageable pageable, @RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(characterService.pageGameCharacters(pageable, lang).getContent());
     }
 }

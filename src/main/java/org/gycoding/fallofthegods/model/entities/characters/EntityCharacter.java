@@ -3,6 +3,7 @@ package org.gycoding.fallofthegods.model.entities.characters;
 import java.util.List;
 
 import lombok.Builder;
+import org.gycoding.fallofthegods.model.entities.TranslatedString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,52 +18,15 @@ public record EntityCharacter(
         @Id
         String mongoId,
         String identifier,
-        String name,
-        String title,
-        String description,
+        TranslatedString name,
+        TranslatedString title,
+        TranslatedString description,
         EntityWorld world,
         Boolean inGame,
         String image,
         EntityStat<Double> stats,
         EntityAbility ability,
-        List<EntityStory> stories,
-        String race,
+        TranslatedString race,
         List<EntityAttribute> attributes
-) {
-    @Override
-    public String toString() {
-        return "{" +
-                "\"identifier\": \"" + identifier + "\"," +
-                "\"name\": \"" + name + "\"," +
-                "\"title\": \"" + title + "\"," +
-                "\"description\": \"" + description + "\"," +
-                "\"world\": \"" + world.identifier() + "\"," +
-                "\"race\": \"" + race + "\"," +
-                "\"image\": \"" + image + "\"," +
-                "\"stats\": " + stats + "," +
-                "\"ability\": " + ability + "," +
-                "\"stories\": " + stories + "," +
-                "\"attributes\": " + attributes +
-                "}";
-    }
-
-    public Map<String, Object> toMap() {
-        final var map = new java.util.HashMap<>(Map.of(
-                "identifier", identifier,
-                "name", name,
-                "title", title,
-                "description", description,
-                "world", world.identifier(),
-                "race", race,
-                "image", image,
-                "stats", stats,
-                "ability", ability,
-                "stories", stories
-        ));
-
-        map.put("attributes", attributes);
-
-        return map;
-    }
-}
+) {}
 

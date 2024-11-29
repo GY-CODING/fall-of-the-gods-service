@@ -1,6 +1,8 @@
 package org.gycoding.fallofthegods.model.database.service;
 
 import org.gycoding.fallofthegods.model.database.repository.WorldRepository;
+import org.gycoding.fallofthegods.model.dto.worlds.PlaceRSDTO;
+import org.gycoding.fallofthegods.model.dto.worlds.WorldRSDTO;
 import org.gycoding.fallofthegods.model.entities.exceptions.FOTGAPIError;
 import org.gycoding.fallofthegods.model.entities.utiles.PagingConverter;
 import org.gycoding.fallofthegods.model.entities.worlds.EntityPlace;
@@ -19,19 +21,52 @@ public class WorldService {
     @Autowired
     private final WorldRepository worldRepository = null;
 
-    public EntityWorld getWorld(String id) throws APIException {
-        return worldRepository.findByIdentifier(id).orElseThrow(() ->
+    public WorldRSDTO getWorld(String id, String language) throws APIException {
+        final var worldEntity = worldRepository.findByIdentifier(id).orElseThrow(() ->
                 new APIException(
                         FOTGAPIError.WORLD_NOT_FOUND.getCode(),
                         FOTGAPIError.WORLD_NOT_FOUND.getMessage(),
                         FOTGAPIError.WORLD_NOT_FOUND.getStatus()
                 )
         );
+
+        return WorldRSDTO.builder()
+                .identifier(worldEntity.identifier())
+                .name(worldEntity.name().get(language))
+                .description(worldEntity.description().get(language))
+                .image(worldEntity.image())
+                .detailedIcon(worldEntity.detailedIcon())
+                .places(!worldEntity.places().isEmpty() ? worldEntity.places().stream().map(place -> PlaceRSDTO.builder()
+                        .identifier(place.identifier())
+                        .name(place.name().get(language))
+                        .description(place.description().get(language))
+                        .image(place.image())
+                        .inGame(place.inGame())
+                        .build()
+                ).toList() : List.of())
+                .build();
     }
 
-    public List<EntityWorld> listWorlds() throws APIException {
+    public List<WorldRSDTO> listWorlds(String language) throws APIException {
         try {
-            return worldRepository.findAll();
+            final var worldEntities = worldRepository.findAll();
+
+            return worldEntities.stream().map(worldEntity -> WorldRSDTO.builder()
+                    .identifier(worldEntity.identifier())
+                    .name(worldEntity.name().get(language))
+                    .description(worldEntity.description().get(language))
+                    .image(worldEntity.image())
+                    .detailedIcon(worldEntity.detailedIcon())
+                    .places(!worldEntity.places().isEmpty() ? worldEntity.places().stream().map(place -> PlaceRSDTO.builder()
+                            .identifier(place.identifier())
+                            .name(place.name().get(language))
+                            .description(place.description().get(language))
+                            .image(place.image())
+                            .inGame(place.inGame())
+                            .build()
+                    ).toList() : List.of())
+                    .build()
+            ).toList();
         } catch(NullPointerException e) {
             throw new APIException(
                     FOTGAPIError.LIST_WORLD_NOT_FOUND.getCode(),
@@ -41,10 +76,26 @@ public class WorldService {
         }
     }
 
-    public Page<Map<String, Object>> pageWorlds(Pageable pageable) throws APIException {
+    public Page<Map<String, Object>> pageWorlds(Pageable pageable, String language) throws APIException {
         try {
-            return worldRepository.findAll(pageable)
-                    .map(EntityWorld::toMap);
+            final var worldEntities = worldRepository.findAll(pageable);
+
+            return worldEntities.map(worldEntity -> WorldRSDTO.builder()
+                    .identifier(worldEntity.identifier())
+                    .name(worldEntity.name().get(language))
+                    .description(worldEntity.description().get(language))
+                    .image(worldEntity.image())
+                    .detailedIcon(worldEntity.detailedIcon())
+                    .places(!worldEntity.places().isEmpty() ? worldEntity.places().stream().map(place -> PlaceRSDTO.builder()
+                            .identifier(place.identifier())
+                            .name(place.name().get(language))
+                            .description(place.description().get(language))
+                            .image(place.image())
+                            .inGame(place.inGame())
+                            .build()
+                    ).toList() : List.of())
+                    .build().toMap()
+            );
         } catch(NullPointerException e) {
             throw new APIException(
                     FOTGAPIError.LIST_WORLD_NOT_FOUND.getCode(),
@@ -54,34 +105,81 @@ public class WorldService {
         }
     }
 
-    public EntityPlace getWorldPlace(String idWorld, String idPlace) throws APIException {
-        return worldRepository.findByIdentifier(idWorld).orElseThrow(() ->
+    public PlaceRSDTO getWorldPlace(String idWorld, String idPlace, String language) throws APIException {
+        final var worldEntity = worldRepository.findByIdentifier(idWorld).orElseThrow(() ->
                 new APIException(
                         FOTGAPIError.WORLD_NOT_FOUND.getCode(),
                         FOTGAPIError.WORLD_NOT_FOUND.getMessage(),
                         FOTGAPIError.WORLD_NOT_FOUND.getStatus()
                 )
-        ).getPlace(idPlace);
+        );
+
+        final var worldDTO = WorldRSDTO.builder()
+                .identifier(worldEntity.identifier())
+                .name(worldEntity.name().get(language))
+                .description(worldEntity.description().get(language))
+                .image(worldEntity.image())
+                .detailedIcon(worldEntity.detailedIcon())
+                .places(!worldEntity.places().isEmpty() ? worldEntity.places().stream().map(place -> PlaceRSDTO.builder()
+                        .identifier(place.identifier())
+                        .name(place.name().get(language))
+                        .description(place.description().get(language))
+                        .image(place.image())
+                        .inGame(place.inGame())
+                        .build()
+                ).toList() : List.of())
+                .build();
+
+        return worldDTO.places().stream()
+                .filter(place -> place.identifier().equals(idPlace))
+                .findFirst()
+                .orElseThrow(() ->
+                    new APIException(
+                            FOTGAPIError.PLACE_NOT_FOUND.getCode(),
+                            FOTGAPIError.PLACE_NOT_FOUND.getMessage(),
+                            FOTGAPIError.PLACE_NOT_FOUND.getStatus()
+                    )
+                );
     }
 
-    public List<EntityPlace> listWorldPlaces(String id) throws APIException {
-        return worldRepository.findByIdentifier(id).orElseThrow(() ->
+    public List<PlaceRSDTO> listWorldPlaces(String id, String language) throws APIException {
+        final var worldEntity = worldRepository.findByIdentifier(id).orElseThrow(() ->
                 new APIException(
                         FOTGAPIError.LIST_PLACE_NOT_FOUND.getCode(),
                         FOTGAPIError.LIST_PLACE_NOT_FOUND.getMessage(),
                         FOTGAPIError.LIST_PLACE_NOT_FOUND.getStatus()
                 )
-        ).listPlaces();
+        );
+
+        return worldEntity.places().stream().map(place -> PlaceRSDTO.builder()
+                .identifier(place.identifier())
+                .name(place.name().get(language))
+                .description(place.description().get(language))
+                .image(place.image())
+                .inGame(place.inGame())
+                .build()
+        ).toList();
     }
 
-    public Page<Map<String, Object>> pageWorldPlaces(String id, Pageable pageable) throws APIException {
-        return PagingConverter.listToPage(worldRepository.findByIdentifier(id).orElseThrow((() ->
-            new APIException(
-                FOTGAPIError.LIST_PLACE_NOT_FOUND.getCode(),
-                FOTGAPIError.LIST_PLACE_NOT_FOUND.getMessage(),
-                FOTGAPIError.LIST_PLACE_NOT_FOUND.getStatus()
-            )
-        )).listPlaces(), pageable)
-            .map(EntityPlace::toMap);
+    public Page<Map<String, Object>> pageWorldPlaces(String id, Pageable pageable, String language) throws APIException {
+        final var worldEntity = worldRepository.findByIdentifier(id).orElseThrow(() ->
+                new APIException(
+                        FOTGAPIError.LIST_WORLD_NOT_FOUND.getCode(),
+                        FOTGAPIError.LIST_WORLD_NOT_FOUND.getMessage(),
+                        FOTGAPIError.LIST_WORLD_NOT_FOUND.getStatus()
+                )
+        );
+
+        final var placesDTO = worldEntity.places().stream()
+                .map(place -> PlaceRSDTO.builder()
+                    .identifier(place.identifier())
+                    .name(place.name().get(language))
+                    .description(place.description().get(language))
+                    .image(place.image())
+                    .inGame(place.inGame())
+                    .build().toMap()
+                ).toList();
+
+        return PagingConverter.listToPage(placesDTO, pageable);
     }
 }

@@ -1,20 +1,18 @@
-package org.gycoding.fallofthegods.model.entities.achievements;
+package org.gycoding.fallofthegods.model.dto.achievements;
 
 import lombok.Builder;
 import org.gycoding.fallofthegods.model.entities.TranslatedString;
+import org.gycoding.fallofthegods.model.entities.achievements.AchievementTiers;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Map;
 
 @Builder
-@Document(collection = "Achievement")
-public record EntityAchievement(
-    @Id
-    String mongoId,
+public record AchievementRSDTO(
     String identifier,
-    TranslatedString name,
-    TranslatedString description,
+    String name,
+    String description,
     String image,
     AchievementTiers tier
 ) {

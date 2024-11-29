@@ -12,14 +12,14 @@ public enum FOTGAPIError {
     ITEM_NOT_FOUND("Item not found.", HttpStatus.NOT_FOUND),
     WORLD_NOT_FOUND("World not found.", HttpStatus.NOT_FOUND),
     PLACE_NOT_FOUND("Place not found.", HttpStatus.NOT_FOUND),
-    STORY_NOT_FOUND("Story not found.", HttpStatus.NOT_FOUND),
+    CREATURE_NOT_FOUND("Creature not found.", HttpStatus.NOT_FOUND),
     ACHIEVEMENT_NOT_FOUND("Achievement not found.", HttpStatus.NOT_FOUND),
 
     LIST_CHARACTER_NOT_FOUND("List of Characters not found.", HttpStatus.NOT_FOUND),
     LIST_ITEM_NOT_FOUND("List of Items not found.", HttpStatus.NOT_FOUND),
     LIST_WORLD_NOT_FOUND("List of Worlds not found.", HttpStatus.NOT_FOUND),
     LIST_PLACE_NOT_FOUND("List of Places not found.", HttpStatus.NOT_FOUND),
-    LIST_STORY_NOT_FOUND("List of Stories not found.", HttpStatus.NOT_FOUND),
+    LIST_CREATURE_NOT_FOUND("List of Creatures not found.", HttpStatus.NOT_FOUND),
     LIST_ACHIEVEMENT_NOT_FOUND("List of Achievements not found.", HttpStatus.NOT_FOUND),
 
     USER_CREATED("User has been successfully created.", HttpStatus.CREATED),

@@ -1,6 +1,7 @@
 package org.gycoding.fallofthegods.model.database.service;
 
 import org.gycoding.fallofthegods.model.database.repository.AchievementRepository;
+import org.gycoding.fallofthegods.model.dto.achievements.AchievementRSDTO;
 import org.gycoding.fallofthegods.model.entities.exceptions.FOTGAPIError;
 import org.gycoding.fallofthegods.model.entities.achievements.EntityAchievement;
 import org.gycoding.exceptions.model.APIException;
@@ -17,19 +18,36 @@ public class AchievementService {
     @Autowired
     private AchievementRepository achievementRepository;
 
-    public EntityAchievement getAchievement(String identifier) throws APIException {
-        return achievementRepository.findByIdentifier(identifier).orElseThrow(() ->
+    public AchievementRSDTO getAchievement(String identifier, String language) throws APIException {
+        final var achievementEntity = achievementRepository.findByIdentifier(identifier).orElseThrow(() ->
                 new APIException(
                         FOTGAPIError.ACHIEVEMENT_NOT_FOUND.code,
                         FOTGAPIError.ACHIEVEMENT_NOT_FOUND.message,
                         FOTGAPIError.ACHIEVEMENT_NOT_FOUND.status
                 )
         );
+
+        return AchievementRSDTO.builder()
+                .identifier(achievementEntity.identifier())
+                .name(achievementEntity.name().get(language))
+                .description(achievementEntity.description().get(language))
+                .image(achievementEntity.image())
+                .tier(achievementEntity.tier())
+                .build();
     }
 
-    public List<EntityAchievement> listAchievements() throws APIException {
+    public List<AchievementRSDTO> listAchievements(String language) throws APIException {
         try {
-            return achievementRepository.findAll();
+            final var achievementEntities = achievementRepository.findAll();
+
+            return achievementEntities.stream().map(achievementEntity ->
+                AchievementRSDTO.builder()
+                    .identifier(achievementEntity.identifier())
+                    .name(achievementEntity.name().get(language))
+                    .description(achievementEntity.description().get(language))
+                    .image(achievementEntity.image())
+                    .tier(achievementEntity.tier())
+                    .build()).toList();
         } catch (NullPointerException e) {
             throw new APIException(
                     FOTGAPIError.LIST_ACHIEVEMENT_NOT_FOUND.code,
@@ -39,10 +57,19 @@ public class AchievementService {
         }
     }
 
-    public Page<Map<String, Object>> pageAchievements(Pageable pageable) throws APIException {
+    public Page<Map<String, Object>> pageAchievements(Pageable pageable, String language) throws APIException {
         try {
-            return achievementRepository.findAll(pageable)
-                    .map(EntityAchievement::toMap);
+            final var achievementEntities = achievementRepository.findAll(pageable);
+
+            return achievementEntities.map(achievementEntity ->
+                    AchievementRSDTO.builder()
+                            .identifier(achievementEntity.identifier())
+                            .name(achievementEntity.name().get(language))
+                            .description(achievementEntity.description().get(language))
+                            .image(achievementEntity.image())
+                            .tier(achievementEntity.tier())
+                            .build().toMap()
+            );
         } catch (NullPointerException e) {
             throw new APIException(
                     FOTGAPIError.LIST_ACHIEVEMENT_NOT_FOUND.code,

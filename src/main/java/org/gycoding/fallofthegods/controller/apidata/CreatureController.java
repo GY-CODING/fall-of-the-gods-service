@@ -19,17 +19,17 @@ public class CreatureController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<?> getCreature(@RequestParam String id) throws APIException {
-        return ResponseEntity.ok(creatureService.getCreature(id).toString());
+    public ResponseEntity<?> getCreature(@RequestParam String id, @RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(creatureService.getCreature(id, lang).toString());
     }
 
     @GetMapping("/list")
-    public ResponseEntity<?> listCreatures() throws APIException {
-        return ResponseEntity.ok(creatureService.listCreatures().toString());
+    public ResponseEntity<?> listCreatures(@RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(creatureService.listCreatures(lang).toString());
     }
 
     @GetMapping("/page")
-    public ResponseEntity<?> pageCreatures(Pageable pageable) throws APIException {
-        return ResponseEntity.ok(creatureService.pageCreatures(pageable).getContent());
+    public ResponseEntity<?> pageCreatures(Pageable pageable, @RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(creatureService.pageCreatures(pageable, lang).getContent());
     }
 }

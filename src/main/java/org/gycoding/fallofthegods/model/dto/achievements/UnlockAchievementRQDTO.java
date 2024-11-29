@@ -1,4 +1,4 @@
-package org.gycoding.fallofthegods.model.entities.dto;
+package org.gycoding.fallofthegods.model.dto.achievements;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;

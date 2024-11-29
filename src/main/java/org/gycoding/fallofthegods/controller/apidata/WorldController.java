@@ -22,42 +22,42 @@ public class WorldController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<?> getWorld(@RequestParam String id) throws APIException {
-        return ResponseEntity.ok(worldService.getWorld(id).toString());
+    public ResponseEntity<?> getWorld(@RequestParam String id, @RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(worldService.getWorld(id, lang).toString());
     }
 
     @GetMapping("/list")
-    public ResponseEntity<?> listWorlds() throws APIException {
-        return ResponseEntity.ok(worldService.listWorlds().toString());
+    public ResponseEntity<?> listWorlds(@RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(worldService.listWorlds(lang).toString());
     }
 
     @GetMapping("/page")
-    public ResponseEntity<?> pageWorlds(Pageable pageable) throws APIException {
-        return ResponseEntity.ok(worldService.pageWorlds(pageable).getContent());
+    public ResponseEntity<?> pageWorlds(Pageable pageable, @RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(worldService.pageWorlds(pageable, lang).getContent());
     }
 
     @GetMapping("/places/get")
-    public ResponseEntity<?> getPlace(@RequestParam String id) throws APIException {
-        return ResponseEntity.ok(placeService.getPlace(id).toString());
+    public ResponseEntity<?> getPlace(@RequestParam String id, @RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(placeService.getPlace(id, lang).toString());
     }
 
     @GetMapping("/places/listAll")
-    public ResponseEntity<?> listPlaces() throws APIException {
-        return ResponseEntity.ok(placeService.listPlaces().toString());
+    public ResponseEntity<?> listPlaces(@RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(placeService.listPlaces(lang).toString());
     }
 
     @GetMapping("/places/pageAll")
-    public ResponseEntity<?> pagePlaces(Pageable pageable) throws APIException {
-        return ResponseEntity.ok(placeService.pagePlaces(pageable).getContent());
+    public ResponseEntity<?> pagePlaces(Pageable pageable, @RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(placeService.pagePlaces(pageable, lang).getContent());
     }
 
     @GetMapping("/places/list")
-    public ResponseEntity<?> listWorldPlaces(@RequestParam String id) throws APIException {
-        return ResponseEntity.ok(worldService.listWorldPlaces(id).toString());
+    public ResponseEntity<?> listWorldPlaces(@RequestParam String id, @RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(worldService.listWorldPlaces(id, lang).toString());
     }
 
     @GetMapping("/places/page")
-    public ResponseEntity<?> pageWorldPlaces(@RequestParam String id, Pageable pageable) throws APIException {
-        return ResponseEntity.ok(worldService.pageWorldPlaces(id, pageable).getContent());
+    public ResponseEntity<?> pageWorldPlaces(@RequestParam String id, Pageable pageable, @RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(worldService.pageWorldPlaces(id, pageable, lang).getContent());
     }
 }

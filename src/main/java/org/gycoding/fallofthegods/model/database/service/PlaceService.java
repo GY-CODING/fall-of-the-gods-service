@@ -1,6 +1,7 @@
 package org.gycoding.fallofthegods.model.database.service;
 
 import org.gycoding.fallofthegods.model.database.repository.PlaceRepository;
+import org.gycoding.fallofthegods.model.dto.worlds.PlaceRSDTO;
 import org.gycoding.fallofthegods.model.entities.exceptions.FOTGAPIError;
 import org.gycoding.fallofthegods.model.entities.worlds.EntityPlace;
 import org.gycoding.exceptions.model.APIException;
@@ -17,19 +18,36 @@ public class PlaceService {
     @Autowired
     private final PlaceRepository placeRepository = null;
 
-    public EntityPlace getPlace(String id) throws APIException {
-        return placeRepository.findByIdentifier(id).orElseThrow(() ->
+    public PlaceRSDTO getPlace(String id, String language) throws APIException {
+        final var placeEntity = placeRepository.findByIdentifier(id).orElseThrow(() ->
                 new APIException(
                         FOTGAPIError.PLACE_NOT_FOUND.getCode(),
                         FOTGAPIError.PLACE_NOT_FOUND.getMessage(),
                         FOTGAPIError.PLACE_NOT_FOUND.getStatus()
                 )
         );
+
+        return PlaceRSDTO.builder()
+                .identifier(placeEntity.identifier())
+                .name(placeEntity.name().get(language))
+                .description(placeEntity.description().get(language))
+                .image(placeEntity.image())
+                .inGame(placeEntity.inGame())
+                .build();
     }
 
-    public List<EntityPlace> listPlaces() throws APIException {
+    public List<PlaceRSDTO> listPlaces(String language) throws APIException {
         try {
-            return placeRepository.findAll();
+            final var placeEntities = placeRepository.findAll();
+
+            return placeEntities.stream().map(placeEntity -> PlaceRSDTO.builder()
+                    .identifier(placeEntity.identifier())
+                    .name(placeEntity.name().get(language))
+                    .description(placeEntity.description().get(language))
+                    .image(placeEntity.image())
+                    .inGame(placeEntity.inGame())
+                    .build()
+            ).toList();
         } catch (NullPointerException e) {
             throw new APIException(
                     FOTGAPIError.LIST_PLACE_NOT_FOUND.getCode(),
@@ -39,10 +57,18 @@ public class PlaceService {
         }
     }
 
-    public Page<Map<String, Object>> pagePlaces(Pageable pageable) throws APIException {
+    public Page<Map<String, Object>> pagePlaces(Pageable pageable, String language) throws APIException {
         try {
-            return placeRepository.findAll(pageable)
-                    .map(EntityPlace::toMap);
+            final var placeEntities = placeRepository.findAll(pageable);
+
+            return placeEntities.map(placeEntity -> PlaceRSDTO.builder()
+                    .identifier(placeEntity.identifier())
+                    .name(placeEntity.name().get(language))
+                    .description(placeEntity.description().get(language))
+                    .image(placeEntity.image())
+                    .inGame(placeEntity.inGame())
+                    .build().toMap()
+            );
         } catch (NullPointerException e) {
             throw new APIException(
                     FOTGAPIError.LIST_PLACE_NOT_FOUND.getCode(),

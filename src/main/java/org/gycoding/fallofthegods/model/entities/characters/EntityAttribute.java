@@ -1,19 +1,11 @@
 package org.gycoding.fallofthegods.model.entities.characters;
 
 import lombok.Builder;
+import org.gycoding.fallofthegods.model.entities.TranslatedString;
 
 @Builder
 public record EntityAttribute(
-        String name,
-        String desc,
+        TranslatedString name,
+        TranslatedString description,
         String identifier
-) {
-    @Override
-    public String toString() {
-        return "{" +
-                "\"name\": \"" + name + "\"," +
-                "\"desc\": \"" + desc + "\"" +
-                "\"identifier\": \"" + identifier + "\"" +
-                "}";
-    }
-}
+) {}

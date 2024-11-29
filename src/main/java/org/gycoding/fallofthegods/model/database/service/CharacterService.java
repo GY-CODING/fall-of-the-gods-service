@@ -1,9 +1,14 @@
 package org.gycoding.fallofthegods.model.database.service;
 
 import org.gycoding.fallofthegods.model.database.repository.CharacterRepository;
+import org.gycoding.fallofthegods.model.dto.characters.AbilityRSDTO;
+import org.gycoding.fallofthegods.model.dto.characters.AttributeRSDTO;
+import org.gycoding.fallofthegods.model.dto.characters.CharacterRSDTO;
+import org.gycoding.fallofthegods.model.dto.worlds.WorldRSDTO;
 import org.gycoding.fallofthegods.model.entities.exceptions.FOTGAPIError;
 import org.gycoding.fallofthegods.model.entities.characters.EntityCharacter;
 import org.gycoding.exceptions.model.APIException;
+import org.hibernate.validator.internal.constraintvalidators.bv.NotBlankValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,19 +22,84 @@ public class CharacterService {
     @Autowired
     private final CharacterRepository characterRepository = null;
 
-    public EntityCharacter getStoryCharacter(String id) throws APIException {
-        return characterRepository.findByIdentifier(id).orElseThrow(() ->
+    public CharacterRSDTO getStoryCharacter(String id, String language) throws APIException {
+        final var characterEntity = characterRepository.findByIdentifier(id).orElseThrow(() ->
             new APIException(
                 FOTGAPIError.CHARACTER_NOT_FOUND.code,
                 FOTGAPIError.CHARACTER_NOT_FOUND.message,
                 FOTGAPIError.CHARACTER_NOT_FOUND.status
             )
         );
+
+        return CharacterRSDTO.builder()
+                .identifier(characterEntity.identifier())
+                .name(characterEntity.name().get(language))
+                .description(characterEntity.description().get(language))
+                .race(characterEntity.race().get(language))
+                .title(characterEntity.title().get(language))
+                .image(characterEntity.image())
+                .inGame(characterEntity.inGame())
+                .world(WorldRSDTO.builder()
+                        .identifier(characterEntity.world().identifier())
+                        .name(characterEntity.world().name().get(language))
+                        .description(characterEntity.world().description().get(language))
+                        .image(characterEntity.world().image())
+                        .detailedIcon(characterEntity.world().detailedIcon())
+                        .build())
+                .stats(characterEntity.stats())
+                .ability(AbilityRSDTO.builder()
+                        .identifier(characterEntity.ability().identifier())
+                        .name(characterEntity.ability().name().get(language))
+                        .description(characterEntity.ability().description().get(language))
+                        .damage(characterEntity.ability().damage())
+                        .life(characterEntity.ability().life())
+                        .cooldown(characterEntity.ability().cooldown())
+                        .timeToHit(characterEntity.ability().timeToHit())
+                        .build())
+                .attributes(characterEntity.attributes().stream().map(attribute -> AttributeRSDTO.builder()
+                        .identifier(attribute.identifier())
+                        .name(attribute.name().get(language))
+                        .description(attribute.description().get(language))
+                        .build()).toList())
+                .build();
     }
 
-    public List<EntityCharacter> listStoryCharacters() throws APIException {
+    public List<CharacterRSDTO> listStoryCharacters(String language) throws APIException {
         try {
-            return characterRepository.findAll();
+            final var characterEntities = characterRepository.findAll();
+
+            return characterEntities.stream().map(characterEntity -> CharacterRSDTO.builder()
+                    .identifier(characterEntity.identifier())
+                    .name(characterEntity.name().get(language))
+                    .description(characterEntity.description().get(language))
+                    .race(characterEntity.race().get(language))
+                    .title(characterEntity.title().get(language))
+                    .image(characterEntity.image())
+                    .inGame(characterEntity.inGame())
+                    .world(WorldRSDTO.builder()
+                            .identifier(characterEntity.world().identifier())
+                            .name(characterEntity.world().name().get(language))
+                            .description(characterEntity.world().description().get(language))
+                            .image(characterEntity.world().image())
+                            .detailedIcon(characterEntity.world().detailedIcon())
+                            .build())
+                    .stats(characterEntity.stats())
+                    .ability(AbilityRSDTO.builder()
+                            .identifier(characterEntity.ability().identifier())
+                            .name(characterEntity.ability().name().get(language))
+                            .description(characterEntity.ability().description().get(language))
+                            .damage(characterEntity.ability().damage())
+                            .life(characterEntity.ability().life())
+                            .cooldown(characterEntity.ability().cooldown())
+                            .timeToHit(characterEntity.ability().timeToHit())
+                            .build())
+                    .attributes(characterEntity.attributes().stream().map(attribute -> AttributeRSDTO.builder()
+                            .identifier(attribute.identifier())
+                            .name(attribute.name().get(language))
+                            .description(attribute.description().get(language))
+                            .build()).toList())
+                    .build()
+            ).toList();
         } catch(NullPointerException e) {
             throw new APIException(
                 FOTGAPIError.LIST_CHARACTER_NOT_FOUND.code,
@@ -39,10 +109,42 @@ public class CharacterService {
         }
     }
 
-    public Page<Map<String, Object>> pageStoryCharacters(Pageable pageable) throws APIException {
+    public Page<Map<String, Object>> pageStoryCharacters(Pageable pageable, String language) throws APIException {
         try {
-            return characterRepository.findAll(pageable)
-                    .map(EntityCharacter::toMap);
+            final var characterEntities = characterRepository.findAll(pageable);
+
+            return characterEntities.map(characterEntity -> CharacterRSDTO.builder()
+                    .identifier(characterEntity.identifier())
+                    .name(characterEntity.name().get(language))
+                    .description(characterEntity.description().get(language))
+                    .race(characterEntity.race().get(language))
+                    .title(characterEntity.title().get(language))
+                    .image(characterEntity.image())
+                    .inGame(characterEntity.inGame())
+                    .world(WorldRSDTO.builder()
+                            .identifier(characterEntity.world().identifier())
+                            .name(characterEntity.world().name().get(language))
+                            .description(characterEntity.world().description().get(language))
+                            .image(characterEntity.world().image())
+                            .detailedIcon(characterEntity.world().detailedIcon())
+                            .build())
+                    .stats(characterEntity.stats())
+                    .ability(AbilityRSDTO.builder()
+                            .identifier(characterEntity.ability().identifier())
+                            .name(characterEntity.ability().name().get(language))
+                            .description(characterEntity.ability().description().get(language))
+                            .damage(characterEntity.ability().damage())
+                            .life(characterEntity.ability().life())
+                            .cooldown(characterEntity.ability().cooldown())
+                            .timeToHit(characterEntity.ability().timeToHit())
+                            .build())
+                    .attributes(characterEntity.attributes().stream().map(attribute -> AttributeRSDTO.builder()
+                            .identifier(attribute.identifier())
+                            .name(attribute.name().get(language))
+                            .description(attribute.description().get(language))
+                            .build()).toList())
+                    .build().toMap()
+            );
         } catch(NullPointerException e) {
             throw new APIException(
                 FOTGAPIError.LIST_CHARACTER_NOT_FOUND.code,
@@ -52,28 +154,93 @@ public class CharacterService {
         }
     }
 
-    public EntityCharacter getGameCharacter(String id) throws APIException {
-        return characterRepository.findByIdentifierAndInGame(id, true).orElseThrow(() ->
+    public CharacterRSDTO getGameCharacter(String id, String language) throws APIException {
+        final var characterEntity = characterRepository.findByIdentifierAndInGame(id, true).orElseThrow(() ->
             new APIException(
                 FOTGAPIError.CHARACTER_NOT_FOUND.code,
                 FOTGAPIError.CHARACTER_NOT_FOUND.message,
                 FOTGAPIError.CHARACTER_NOT_FOUND.status
             )
         );
+
+        return CharacterRSDTO.builder()
+                .identifier(characterEntity.identifier())
+                .name(characterEntity.name().get(language))
+                .description(characterEntity.description().get(language))
+                .race(characterEntity.race().get(language))
+                .title(characterEntity.title().get(language))
+                .image(characterEntity.image())
+                .inGame(characterEntity.inGame())
+                .world(characterEntity.world() != null ? WorldRSDTO.builder()
+                        .identifier(characterEntity.world().identifier())
+                        .name(characterEntity.world().name().get(language))
+                        .description(characterEntity.world().description().get(language))
+                        .image(characterEntity.world().image())
+                        .detailedIcon(characterEntity.world().detailedIcon())
+                        .build() : null)
+                .stats(characterEntity.stats())
+                .ability(characterEntity.ability() != null ? AbilityRSDTO.builder()
+                        .identifier(characterEntity.ability().identifier())
+                        .name(characterEntity.ability().name().get(language))
+                        .description(characterEntity.ability().description().get(language))
+                        .damage(characterEntity.ability().damage())
+                        .life(characterEntity.ability().life())
+                        .cooldown(characterEntity.ability().cooldown())
+                        .timeToHit(characterEntity.ability().timeToHit())
+                        .build() : null)
+                .attributes(!characterEntity.attributes().isEmpty() ? characterEntity.attributes().stream().map(attribute -> AttributeRSDTO.builder()
+                        .identifier(attribute.identifier())
+                        .name(attribute.name().get(language))
+                        .description(attribute.description().get(language))
+                        .build()).toList() : List.of())
+                .build();
     }
 
-    public List<EntityCharacter> listGameCharacters() throws APIException {
-        return characterRepository.findByInGame(true).orElseThrow(() ->
+    public List<CharacterRSDTO> listGameCharacters(String language) throws APIException {
+        final var characterEntities = characterRepository.findByInGame(true).orElseThrow(() ->
             new APIException(
                 FOTGAPIError.LIST_CHARACTER_NOT_FOUND.code,
                 FOTGAPIError.LIST_CHARACTER_NOT_FOUND.message,
                 FOTGAPIError.LIST_CHARACTER_NOT_FOUND.status
             )
         );
+
+        return characterEntities.stream().map(characterEntity -> CharacterRSDTO.builder()
+                .identifier(characterEntity.identifier())
+                .name(characterEntity.name().get(language))
+                .description(characterEntity.description().get(language))
+                .race(characterEntity.race().get(language))
+                .title(characterEntity.title().get(language))
+                .image(characterEntity.image())
+                .inGame(characterEntity.inGame())
+                .world(characterEntity.world() != null ? WorldRSDTO.builder()
+                        .identifier(characterEntity.world().identifier())
+                        .name(characterEntity.world().name().get(language))
+                        .description(characterEntity.world().description().get(language))
+                        .image(characterEntity.world().image())
+                        .detailedIcon(characterEntity.world().detailedIcon())
+                        .build() : null)
+                .stats(characterEntity.stats())
+                .ability(characterEntity.ability() != null ? AbilityRSDTO.builder()
+                        .identifier(characterEntity.ability().identifier())
+                        .name(characterEntity.ability().name().get(language))
+                        .description(characterEntity.ability().description().get(language))
+                        .damage(characterEntity.ability().damage())
+                        .life(characterEntity.ability().life())
+                        .cooldown(characterEntity.ability().cooldown())
+                        .timeToHit(characterEntity.ability().timeToHit())
+                        .build() : null)
+                .attributes(!characterEntity.attributes().isEmpty() ? characterEntity.attributes().stream().map(attribute -> AttributeRSDTO.builder()
+                        .identifier(attribute.identifier())
+                        .name(attribute.name().get(language))
+                        .description(attribute.description().get(language))
+                        .build()).toList() : List.of())
+                .build()
+        ).toList();
     }
 
-    public Page<Map<String, Object>> pageGameCharacters(Pageable pageable) throws APIException {
-        final var characters = characterRepository.findByInGame(true, pageable).orElseThrow(() ->
+    public Page<Map<String, Object>> pageGameCharacters(Pageable pageable, String language) throws APIException {
+        final var characterEntities = characterRepository.findByInGame(true, pageable).orElseThrow(() ->
             new APIException(
                 FOTGAPIError.LIST_CHARACTER_NOT_FOUND.code,
                 FOTGAPIError.LIST_CHARACTER_NOT_FOUND.message,
@@ -81,6 +248,37 @@ public class CharacterService {
             )
         );
 
-        return characters.map(EntityCharacter::toMap);
+        return characterEntities.map(characterEntity -> CharacterRSDTO.builder()
+                .identifier(characterEntity.identifier())
+                .name(characterEntity.name().get(language))
+                .description(characterEntity.description().get(language))
+                .race(characterEntity.race().get(language))
+                .title(characterEntity.title().get(language))
+                .image(characterEntity.image())
+                .inGame(characterEntity.inGame())
+                .world(characterEntity.world() != null ? WorldRSDTO.builder()
+                        .identifier(characterEntity.world().identifier())
+                        .name(characterEntity.world().name().get(language))
+                        .description(characterEntity.world().description().get(language))
+                        .image(characterEntity.world().image())
+                        .detailedIcon(characterEntity.world().detailedIcon())
+                        .build() : null)
+                .stats(characterEntity.stats())
+                .ability(characterEntity.ability() != null ? AbilityRSDTO.builder()
+                        .identifier(characterEntity.ability().identifier())
+                        .name(characterEntity.ability().name().get(language))
+                        .description(characterEntity.ability().description().get(language))
+                        .damage(characterEntity.ability().damage())
+                        .life(characterEntity.ability().life())
+                        .cooldown(characterEntity.ability().cooldown())
+                        .timeToHit(characterEntity.ability().timeToHit())
+                        .build() : null)
+                .attributes(!characterEntity.attributes().isEmpty() ? characterEntity.attributes().stream().map(attribute -> AttributeRSDTO.builder()
+                        .identifier(attribute.identifier())
+                        .name(attribute.name().get(language))
+                        .description(attribute.description().get(language))
+                        .build()).toList() : List.of())
+                .build().toMap()
+        );
     }
 }

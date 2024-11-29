@@ -19,32 +19,32 @@ public class ItemController {
     }
 
     @GetMapping("/story/get")
-    public ResponseEntity<?> getStoryItem(@RequestParam String id) throws APIException {
-        return ResponseEntity.ok(itemService.getStoryItem(id).toString());
+    public ResponseEntity<?> getStoryItem(@RequestParam String id, @RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(itemService.getStoryItem(id, lang).toString());
     }
 
     @GetMapping("/story/list")
-    public ResponseEntity<?> listStoryItems() throws APIException {
-        return ResponseEntity.ok(itemService.listStoryItems().toString());
+    public ResponseEntity<?> listStoryItems(@RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(itemService.listStoryItems(lang).toString());
     }
 
     @GetMapping("/story/page")
-    public ResponseEntity<?> pageStoryItems(Pageable pageable) throws APIException {
-        return ResponseEntity.ok(itemService.pageStoryItems(pageable).getContent());
+    public ResponseEntity<?> pageStoryItems(Pageable pageable, @RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(itemService.pageStoryItems(pageable, lang).getContent());
     }
 
     @GetMapping("/game/get")
-    public ResponseEntity<?> getGameItem(@RequestParam String id) throws APIException {
-        return ResponseEntity.ok(itemService.getGameItem(id).toString());
+    public ResponseEntity<?> getGameItem(@RequestParam String id, @RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(itemService.getGameItem(id, lang).toString());
     }
 
     @GetMapping("/game/list")
-    public ResponseEntity<?> listGameItems() throws APIException {
-        return ResponseEntity.ok(itemService.listGameItems().toString());
+    public ResponseEntity<?> listGameItems(@RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(itemService.listGameItems(lang).toString());
     }
 
     @GetMapping("/game/page")
-    public ResponseEntity<?> pageGameItems(Pageable pageable) throws APIException {
-        return ResponseEntity.ok(itemService.pageGameItems(pageable).getContent());
+    public ResponseEntity<?> pageGameItems(Pageable pageable, @RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(itemService.pageGameItems(pageable, lang).getContent());
     }
 }

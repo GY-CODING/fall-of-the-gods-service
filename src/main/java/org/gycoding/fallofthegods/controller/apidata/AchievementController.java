@@ -19,17 +19,17 @@ public class AchievementController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<?> getAchievement(@RequestParam String id) throws APIException {
-        return ResponseEntity.ok(achievementService.getAchievement(id).toString());
+    public ResponseEntity<?> getAchievement(@RequestParam String id, @RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(achievementService.getAchievement(id, lang).toString());
     }
 
     @GetMapping("/list")
-    public ResponseEntity<?> listAchievements() throws APIException {
-        return ResponseEntity.ok(achievementService.listAchievements().toString());
+    public ResponseEntity<?> listAchievements(@RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(achievementService.listAchievements(lang).toString());
     }
 
     @GetMapping("/page")
-    public ResponseEntity<?> pageAchievements(Pageable pageable) throws APIException {
-        return ResponseEntity.ok(achievementService.pageAchievements(pageable).getContent());
+    public ResponseEntity<?> pageAchievements(Pageable pageable, @RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(achievementService.pageAchievements(pageable, lang).getContent());
     }
 }

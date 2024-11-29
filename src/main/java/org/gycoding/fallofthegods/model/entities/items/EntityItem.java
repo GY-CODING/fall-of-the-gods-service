@@ -1,6 +1,7 @@
 package org.gycoding.fallofthegods.model.entities.items;
 
 import lombok.Builder;
+import org.gycoding.fallofthegods.model.entities.TranslatedString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,30 +15,9 @@ public record EntityItem(
     @Id
     String mongoId,
     String identifier,
-    String name,
-    String description,
+    TranslatedString name,
+    TranslatedString description,
     String image,
     Boolean inGame,
     EntityStat<EntityItemStat> stats
-) {
-    @Override
-    public String toString() {
-        return "{" +
-                "\"identifier\": \"" + identifier + "\"," +
-                "\"name\": \"" + name + "\"," +
-                "\"description\": \"" + description + "\"," +
-                "\"image\": \"" + image + "\"," +
-                "\"stats\": " + stats +
-                "}";
-    }
-
-    public Map<String, Object> toMap() {
-        return Map.of(
-                "identifier", identifier,
-                "name", name,
-                "description", description,
-                "image", image,
-                "stats", stats
-        );
-    }
-}
+) {}

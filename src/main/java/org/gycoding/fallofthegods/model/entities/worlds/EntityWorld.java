@@ -1,6 +1,7 @@
 package org.gycoding.fallofthegods.model.entities.worlds;
 
 import lombok.Builder;
+import org.gycoding.fallofthegods.model.entities.TranslatedString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,14 +11,14 @@ import java.util.Map;
 @Builder
 @Document(collection = "World")
 public record EntityWorld(
-    @Id
-    String mongoId,
-    String identifier,
-    String name,
-    String description,
-    String image,
-    String detailedIcon,
-    List<EntityPlace> places
+        @Id
+        String mongoId,
+        String identifier,
+        TranslatedString name,
+        TranslatedString description,
+        String image,
+        String detailedIcon,
+        List<EntityPlace> places
 ) {
     public List<EntityPlace> listPlaces() {
         return places;
@@ -53,28 +54,5 @@ public record EntityWorld(
         if(placeFound != null) {
             this.places.remove(placeFound);
         }
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-                "\"identifier\": \"" + identifier + "\"," +
-                "\"name\": \"" + name + "\"," +
-                "\"description\": \"" + description + "\"," +
-                "\"image\": \"" + image + "\"," +
-                "\"detailedIcon\": \"" + detailedIcon + "\"," +
-                "\"places\": " + places.toString() +
-                "}";
-    }
-
-    public Map<String, Object> toMap() {
-        return Map.of(
-                "identifier", identifier,
-                "name", name,
-                "description", description,
-                "image", detailedIcon,
-                "detailedIcon", detailedIcon,
-                "places", places
-        );
     }
 }
