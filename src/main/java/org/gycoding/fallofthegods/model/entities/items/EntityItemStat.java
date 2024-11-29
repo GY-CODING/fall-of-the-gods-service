@@ -4,7 +4,7 @@ import lombok.Builder;
 
 @Builder
 public record EntityItemStat(
-    String type,
+    String type,    // TODO. Make this enum.
     double value
 ) {
     @Override 
