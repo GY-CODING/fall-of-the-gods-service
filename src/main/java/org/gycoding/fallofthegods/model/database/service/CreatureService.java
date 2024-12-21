@@ -26,9 +26,9 @@ public class CreatureService {
     public CreatureRSDTO getCreature(String id, String language) throws APIException {
         final var creatureEntity = creatureRepository.findByIdentifier(id).orElseThrow(() ->
             new APIException(
-                FOTGAPIError.CREATURE_NOT_FOUND.code,
-                FOTGAPIError.CREATURE_NOT_FOUND.message,
-                FOTGAPIError.CREATURE_NOT_FOUND.status
+                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                    FOTGAPIError.RESOURCE_NOT_FOUND.status
             )
         );
 
@@ -55,9 +55,9 @@ public class CreatureService {
                             .build()).toList();
         } catch(NullPointerException e) {
             throw new APIException(
-                FOTGAPIError.LIST_CREATURE_NOT_FOUND.code,
-                FOTGAPIError.LIST_CREATURE_NOT_FOUND.message,
-                FOTGAPIError.LIST_CREATURE_NOT_FOUND.status
+                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                    FOTGAPIError.RESOURCE_NOT_FOUND.status
             );
         }
     }
@@ -77,9 +77,9 @@ public class CreatureService {
             );
         } catch(NullPointerException e) {
             throw new APIException(
-                FOTGAPIError.LIST_CREATURE_NOT_FOUND.code,
-                FOTGAPIError.LIST_CREATURE_NOT_FOUND.message,
-                FOTGAPIError.LIST_CREATURE_NOT_FOUND.status
+                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                    FOTGAPIError.RESOURCE_NOT_FOUND.status
             );
         }
     }

@@ -21,9 +21,9 @@ public class AchievementService {
     public AchievementRSDTO getAchievement(String identifier, String language) throws APIException {
         final var achievementEntity = achievementRepository.findByIdentifier(identifier).orElseThrow(() ->
                 new APIException(
-                        FOTGAPIError.ACHIEVEMENT_NOT_FOUND.code,
-                        FOTGAPIError.ACHIEVEMENT_NOT_FOUND.message,
-                        FOTGAPIError.ACHIEVEMENT_NOT_FOUND.status
+                        FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.status
                 )
         );
 
@@ -50,9 +50,9 @@ public class AchievementService {
                     .build()).toList();
         } catch (NullPointerException e) {
             throw new APIException(
-                    FOTGAPIError.LIST_ACHIEVEMENT_NOT_FOUND.code,
-                    FOTGAPIError.LIST_ACHIEVEMENT_NOT_FOUND.message,
-                    FOTGAPIError.LIST_ACHIEVEMENT_NOT_FOUND.status
+                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                    FOTGAPIError.RESOURCE_NOT_FOUND.status
             );
         }
     }
@@ -72,9 +72,9 @@ public class AchievementService {
             );
         } catch (NullPointerException e) {
             throw new APIException(
-                    FOTGAPIError.LIST_ACHIEVEMENT_NOT_FOUND.code,
-                    FOTGAPIError.LIST_ACHIEVEMENT_NOT_FOUND.message,
-                    FOTGAPIError.LIST_ACHIEVEMENT_NOT_FOUND.status
+                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                    FOTGAPIError.RESOURCE_NOT_FOUND.status
             );
         }
     }

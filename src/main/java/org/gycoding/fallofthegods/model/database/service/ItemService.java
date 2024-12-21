@@ -21,9 +21,9 @@ public class ItemService {
     public ItemRSDTO getStoryItem(String id, String language) throws APIException {
         final var itemEntity = itemRepository.findByIdentifier(id).orElseThrow(() ->
                 new APIException(
-                        FOTGAPIError.ITEM_NOT_FOUND.code,
-                        FOTGAPIError.ITEM_NOT_FOUND.message,
-                        FOTGAPIError.ITEM_NOT_FOUND.status
+                        FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.status
                 )
         );
 
@@ -76,9 +76,9 @@ public class ItemService {
             ).toList();
         } catch (NullPointerException e) {
             throw new APIException(
-                    FOTGAPIError.LIST_ITEM_NOT_FOUND.code,
-                    FOTGAPIError.LIST_ITEM_NOT_FOUND.message,
-                    FOTGAPIError.LIST_ITEM_NOT_FOUND.status
+                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                    FOTGAPIError.RESOURCE_NOT_FOUND.status
             );
         }
     }
@@ -110,9 +110,9 @@ public class ItemService {
             );
         } catch (NullPointerException e) {
             throw new APIException(
-                    FOTGAPIError.LIST_ITEM_NOT_FOUND.code,
-                    FOTGAPIError.LIST_ITEM_NOT_FOUND.message,
-                    FOTGAPIError.LIST_ITEM_NOT_FOUND.status
+                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                    FOTGAPIError.RESOURCE_NOT_FOUND.status
             );
         }
     }
@@ -120,9 +120,9 @@ public class ItemService {
     public ItemRSDTO getGameItem(String id, String language) throws APIException {
         final var itemEntity = itemRepository.findByIdentifierAndInGame(id, true).orElseThrow(() ->
                 new APIException(
-                        FOTGAPIError.ITEM_NOT_FOUND.code,
-                        FOTGAPIError.ITEM_NOT_FOUND.message,
-                        FOTGAPIError.ITEM_NOT_FOUND.status
+                        FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.status
                 )
         );
 
@@ -151,9 +151,9 @@ public class ItemService {
     public List<ItemRSDTO> listGameItems(String language) throws APIException {
         final var itemEntities = itemRepository.findByInGame(true).orElseThrow(() ->
                 new APIException(
-                        FOTGAPIError.LIST_ITEM_NOT_FOUND.code,
-                        FOTGAPIError.LIST_ITEM_NOT_FOUND.message,
-                        FOTGAPIError.LIST_ITEM_NOT_FOUND.status
+                        FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.status
                 )
         );
 
@@ -183,9 +183,9 @@ public class ItemService {
     public Page<Map<String, Object>> pageGameItems(Pageable pageable, String language) throws APIException {
         final var itemEntities = itemRepository.findByInGame(true, pageable).orElseThrow(() ->
                 new APIException(
-                        FOTGAPIError.LIST_ITEM_NOT_FOUND.code,
-                        FOTGAPIError.LIST_ITEM_NOT_FOUND.message,
-                        FOTGAPIError.LIST_ITEM_NOT_FOUND.status
+                        FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.status
                 )
         );
 

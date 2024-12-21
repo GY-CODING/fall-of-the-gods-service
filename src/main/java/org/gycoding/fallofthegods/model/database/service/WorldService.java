@@ -24,9 +24,9 @@ public class WorldService {
     public WorldRSDTO getWorld(String id, String language) throws APIException {
         final var worldEntity = worldRepository.findByIdentifier(id).orElseThrow(() ->
                 new APIException(
-                        FOTGAPIError.WORLD_NOT_FOUND.getCode(),
-                        FOTGAPIError.WORLD_NOT_FOUND.getMessage(),
-                        FOTGAPIError.WORLD_NOT_FOUND.getStatus()
+                        FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.status
                 )
         );
 
@@ -69,9 +69,9 @@ public class WorldService {
             ).toList();
         } catch(NullPointerException e) {
             throw new APIException(
-                    FOTGAPIError.LIST_WORLD_NOT_FOUND.getCode(),
-                    FOTGAPIError.LIST_WORLD_NOT_FOUND.getMessage(),
-                    FOTGAPIError.LIST_WORLD_NOT_FOUND.getStatus()
+                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                    FOTGAPIError.RESOURCE_NOT_FOUND.status
             );
         }
     }
@@ -98,9 +98,9 @@ public class WorldService {
             );
         } catch(NullPointerException e) {
             throw new APIException(
-                    FOTGAPIError.LIST_WORLD_NOT_FOUND.getCode(),
-                    FOTGAPIError.LIST_WORLD_NOT_FOUND.getMessage(),
-                    FOTGAPIError.LIST_WORLD_NOT_FOUND.getStatus()
+                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                    FOTGAPIError.RESOURCE_NOT_FOUND.status
             );
         }
     }
@@ -108,9 +108,9 @@ public class WorldService {
     public PlaceRSDTO getWorldPlace(String idWorld, String idPlace, String language) throws APIException {
         final var worldEntity = worldRepository.findByIdentifier(idWorld).orElseThrow(() ->
                 new APIException(
-                        FOTGAPIError.WORLD_NOT_FOUND.getCode(),
-                        FOTGAPIError.WORLD_NOT_FOUND.getMessage(),
-                        FOTGAPIError.WORLD_NOT_FOUND.getStatus()
+                        FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.status
                 )
         );
 
@@ -135,9 +135,9 @@ public class WorldService {
                 .findFirst()
                 .orElseThrow(() ->
                     new APIException(
-                            FOTGAPIError.PLACE_NOT_FOUND.getCode(),
-                            FOTGAPIError.PLACE_NOT_FOUND.getMessage(),
-                            FOTGAPIError.PLACE_NOT_FOUND.getStatus()
+                            FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                            FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                            FOTGAPIError.RESOURCE_NOT_FOUND.status
                     )
                 );
     }
@@ -145,9 +145,9 @@ public class WorldService {
     public List<PlaceRSDTO> listWorldPlaces(String id, String language) throws APIException {
         final var worldEntity = worldRepository.findByIdentifier(id).orElseThrow(() ->
                 new APIException(
-                        FOTGAPIError.LIST_PLACE_NOT_FOUND.getCode(),
-                        FOTGAPIError.LIST_PLACE_NOT_FOUND.getMessage(),
-                        FOTGAPIError.LIST_PLACE_NOT_FOUND.getStatus()
+                        FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.status
                 )
         );
 
@@ -164,9 +164,9 @@ public class WorldService {
     public Page<Map<String, Object>> pageWorldPlaces(String id, Pageable pageable, String language) throws APIException {
         final var worldEntity = worldRepository.findByIdentifier(id).orElseThrow(() ->
                 new APIException(
-                        FOTGAPIError.LIST_WORLD_NOT_FOUND.getCode(),
-                        FOTGAPIError.LIST_WORLD_NOT_FOUND.getMessage(),
-                        FOTGAPIError.LIST_WORLD_NOT_FOUND.getStatus()
+                        FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.status
                 )
         );
 

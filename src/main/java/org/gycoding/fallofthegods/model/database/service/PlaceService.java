@@ -21,9 +21,9 @@ public class PlaceService {
     public PlaceRSDTO getPlace(String id, String language) throws APIException {
         final var placeEntity = placeRepository.findByIdentifier(id).orElseThrow(() ->
                 new APIException(
-                        FOTGAPIError.PLACE_NOT_FOUND.getCode(),
-                        FOTGAPIError.PLACE_NOT_FOUND.getMessage(),
-                        FOTGAPIError.PLACE_NOT_FOUND.getStatus()
+                        FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.status
                 )
         );
 
@@ -50,9 +50,9 @@ public class PlaceService {
             ).toList();
         } catch (NullPointerException e) {
             throw new APIException(
-                    FOTGAPIError.LIST_PLACE_NOT_FOUND.getCode(),
-                    FOTGAPIError.LIST_PLACE_NOT_FOUND.getMessage(),
-                    FOTGAPIError.LIST_PLACE_NOT_FOUND.getStatus()
+                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                    FOTGAPIError.RESOURCE_NOT_FOUND.status
             );
         }
     }
@@ -71,9 +71,9 @@ public class PlaceService {
             );
         } catch (NullPointerException e) {
             throw new APIException(
-                    FOTGAPIError.LIST_PLACE_NOT_FOUND.getCode(),
-                    FOTGAPIError.LIST_PLACE_NOT_FOUND.getMessage(),
-                    FOTGAPIError.LIST_PLACE_NOT_FOUND.getStatus()
+                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                    FOTGAPIError.RESOURCE_NOT_FOUND.status
             );
         }
     }
