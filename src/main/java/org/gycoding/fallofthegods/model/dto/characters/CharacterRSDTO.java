@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Builder
 public record CharacterRSDTO(
@@ -46,14 +47,14 @@ public record CharacterRSDTO(
                 "name", name,
                 "title", title,
                 "description", description,
-                "world", world.identifier(),
+                "world", world != null ? world.identifier() : "null",
                 "race", race,
                 "image", image,
                 "stats", stats,
-                "ability", ability
+                "ability", ability != null ? ability : new AbilityRSDTO(null, null, null, null, null, null, null)
         ));
 
-        map.put("attributes", attributes);
+        map.put("attributes", Optional.ofNullable(attributes).orElse(List.of()));
 
         return map;
     }
