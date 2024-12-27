@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum FOTGAPIError {
     RESOURCE_NOT_FOUND("This resource was not found.", HttpStatus.NOT_FOUND),
-    FORBIDDEN("You have no access to this resource.", HttpStatus.FORBIDDEN);
+    FORBIDDEN("The user has no permission to access this resource.", HttpStatus.FORBIDDEN);
 
     public final String code;
     public final String message;
