@@ -11,7 +11,7 @@ public class CORSConfig implements WebMvcConfigurer {
     @SuppressWarnings("null")
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOriginPatterns("*")
+                .allowedOriginPatterns("https://api.gateway.com", "http://localhost")
                 .allowedMethods(HttpMethod.GET.name())
                 .allowedHeaders("*")
                 .allowCredentials(true)
