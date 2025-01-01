@@ -25,7 +25,7 @@ public class CustomCORSFilter extends OncePerRequestFilter {
         String origin = request.getHeader("Host");
         String apiKey = request.getHeader("x-api-key");
 
-        console.log(origin);
+        System.out.println(origin);
 
         if ((origin != null && origin.startsWith(allowedOrigin)) || (apiKey != null && apiKey.equals(allowedApiKey))) {
             filterChain.doFilter(request, response);
