@@ -14,28 +14,22 @@ import java.io.IOException;
 
 @Component
 public class CustomCORSFilter extends OncePerRequestFilter {
-    @Value("${allowed.origin}")
-    private String allowedOrigin;
-
     @Value("${allowed.apiKey}")
     private String allowedApiKey;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String origin = request.getHeader("Host");
         String apiKey = request.getHeader("x-api-key");
 
-        System.out.println(origin);
-
-        if ((origin != null && origin.startsWith(allowedOrigin)) || (apiKey != null && apiKey.equals(allowedApiKey))) {
+        if (apiKey != null && apiKey.equals(allowedApiKey)) {
             filterChain.doFilter(request, response);
         } else {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             response.getWriter().write(
                     new APIException(
-                        FOTGAPIError.FORBIDDEN.getCode(),
-                        FOTGAPIError.FORBIDDEN.getMessage(),
-                        FOTGAPIError.FORBIDDEN.getStatus().value()
+                            FOTGAPIError.FORBIDDEN.getCode(),
+                            FOTGAPIError.FORBIDDEN.getMessage(),
+                            FOTGAPIError.FORBIDDEN.getStatus().value()
                     ).toString()
             );
         }
