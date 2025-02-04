@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.gycoding</groupId>
 	<artifactId>fallofthegods</artifactId>
-	<version>4.2.0</version>
+	<version>4.3.0</version>
 	<name>fallofthegods</name>
 	<description>Fall of the Gods Data is an API REST service that provides information about everything inside the Fall of the Gods universe.</description>
 	<properties>
@@ -64,6 +64,13 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>1.5.5.Final</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>io.github.cdimascio</groupId>
 			<artifactId>java-dotenv</artifactId>
 			<version>5.2.2</version>
@@ -72,19 +79,35 @@
 		<dependency>
 			<groupId>org.gycoding</groupId>
 			<artifactId>spring-exceptions</artifactId>
-			<version>1.1.5</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.gycoding</groupId>
-			<artifactId>spring-logs</artifactId>
-			<version>1.1.5</version>
+			<version>1.1.6</version>
 		</dependency>
 	</dependencies>
 
 	<build>
 		<finalName>fallofthegods-data</finalName>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>1.5.5.Final</version>
+						</path>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>1.18.24</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

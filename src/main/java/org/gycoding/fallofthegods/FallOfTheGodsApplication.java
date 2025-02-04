@@ -4,9 +4,11 @@ import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"org.gycoding"})
+@EnableMongoRepositories
+@ComponentScan(basePackages = "org.gycoding")
 public class FallOfTheGodsApplication {
 	public static void main(String[] args) {
 		try {

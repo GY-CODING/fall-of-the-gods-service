@@ -35,3 +35,4 @@ build/
 ### Project ###
 .env
 .env.pro
+/.mvn/
