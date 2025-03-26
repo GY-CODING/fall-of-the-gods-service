@@ -9,10 +9,10 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.gycoding</groupId>
-	<artifactId>fallofthegods</artifactId>
+	<artifactId>heraldsofchaos</artifactId>
 	<version>4.3.0</version>
-	<name>fallofthegods</name>
-	<description>Fall of the Gods Data is an API REST service that provides information about everything inside the Fall of the Gods universe.</description>
+	<name>heraldsofchaos</name>
+	<description>Heralds of Chaos Service provides information about everything inside the Heralds of Chaos universe.</description>
 	<properties>
 		<java.version>17</java.version>
 		<maven.compiler.source>17</maven.compiler.source>
@@ -84,7 +84,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>fallofthegods-data</finalName>
+		<finalName>heraldsofchaos</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
