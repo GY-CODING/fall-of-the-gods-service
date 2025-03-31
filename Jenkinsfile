@@ -8,12 +8,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout SCM') {
-            steps {
-                git branch: 'main', url: 'https://github.com/GY-CODING/fall-of-the-gods-service.git'
-            }
-        }
-
         stage('Login to Koyeb') {
             steps {
                 script {
