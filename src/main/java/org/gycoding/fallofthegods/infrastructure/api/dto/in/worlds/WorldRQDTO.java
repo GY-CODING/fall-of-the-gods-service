@@ -13,6 +13,7 @@ public record WorldRQDTO(
         TranslatedString description,
         String image,
         String detailedIcon,
+        String mainColor,
         List<PlaceRQDTO> places
 ) {
     public List<PlaceRQDTO> listPlaces() {
@@ -59,6 +60,7 @@ public record WorldRQDTO(
                 "\"description\": \"" + description + "\"," +
                 "\"image\": \"" + image + "\"," +
                 "\"detailedIcon\": \"" + detailedIcon + "\"," +
+                "\"mainColor\": \"" + mainColor + "\"," +
                 "\"places\": " + places.toString() +
                 "}";
     }
@@ -70,6 +72,7 @@ public record WorldRQDTO(
                 "description", description,
                 "image", detailedIcon,
                 "detailedIcon", detailedIcon,
+                "mainColor", mainColor,
                 "places", places
         );
     }

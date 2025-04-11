@@ -22,6 +22,7 @@ public interface WorldServiceMapper {
                 .description(StringTranslator.translate(world.description(), language))
                 .image(world.image())
                 .detailedIcon(world.detailedIcon())
+                .mainColor(world.mainColor())
                 .places(WorldMapperUtils.toPlaceODTOList(world.places(), language))
                 .build();
     }

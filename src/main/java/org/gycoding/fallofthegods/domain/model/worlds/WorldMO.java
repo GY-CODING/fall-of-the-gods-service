@@ -12,6 +12,7 @@ public record WorldMO(
         TranslatedString description,
         String image,
         String detailedIcon,
+        String mainColor,
         List<PlaceMO> places
 ) {
     public List<PlaceMO> listPlaces() {

@@ -17,5 +17,6 @@ public record WorldEntity(
         TranslatedString description,
         String image,
         String detailedIcon,
+        String mainColor,
         List<PlaceEntity> places
 ) {}

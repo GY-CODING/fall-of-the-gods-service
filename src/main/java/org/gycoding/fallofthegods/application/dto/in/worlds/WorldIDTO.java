@@ -12,5 +12,6 @@ public record WorldIDTO(
         TranslatedString description,
         String image,
         String detailedIcon,
+        String mainColor,
         List<PlaceIDTO> places
 ) {}

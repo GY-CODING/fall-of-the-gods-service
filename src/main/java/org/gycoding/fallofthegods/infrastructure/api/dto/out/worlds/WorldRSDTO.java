@@ -12,6 +12,7 @@ public record WorldRSDTO(
         String description,
         String image,
         String detailedIcon,
+        String mainColor,
         List<PlaceRSDTO> places
 ) {
     public List<PlaceRSDTO> listPlaces() {
@@ -58,6 +59,7 @@ public record WorldRSDTO(
                 "\"description\": \"" + description + "\"," +
                 "\"image\": \"" + image + "\"," +
                 "\"detailedIcon\": \"" + detailedIcon + "\"," +
+                "\"mainColor\": \"" + mainColor + "\"," +
                 "\"places\": " + places.toString() +
                 "}";
     }
@@ -69,6 +71,7 @@ public record WorldRSDTO(
                 "description", description,
                 "image", detailedIcon,
                 "detailedIcon", detailedIcon,
+                "mainColor", mainColor,
                 "places", places
         );
     }

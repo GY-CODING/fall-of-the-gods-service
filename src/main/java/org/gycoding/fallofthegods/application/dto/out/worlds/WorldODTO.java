@@ -12,6 +12,7 @@ public record WorldODTO(
         String description,
         String image,
         String detailedIcon,
+        String mainColor,
         List<PlaceODTO> places
 ) {
     public List<PlaceODTO> listPlaces() {
@@ -57,6 +58,7 @@ public record WorldODTO(
                 "description", description,
                 "image", detailedIcon,
                 "detailedIcon", detailedIcon,
+                "mainColor", mainColor,
                 "places", places
         );
     }
