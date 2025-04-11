@@ -16,9 +16,6 @@ public record CharacterMO(
         WorldMO world,
         Boolean inGame,
         String image,
-        StatMO<Double> stats,
-        List<AbilityMO> abilities,
-        TranslatedString race,
-        List<AttributeMO> attributes
+        TranslatedString race
 ) { }
 

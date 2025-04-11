@@ -5,6 +5,7 @@ import org.gycoding.fallofthegods.domain.model.StatMO;
 import org.gycoding.fallofthegods.infrastructure.api.dto.out.StatRSDTO;
 import org.gycoding.fallofthegods.infrastructure.api.dto.out.worlds.WorldRSDTO;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -18,10 +19,7 @@ public record CharacterRSDTO(
         String world,
         Boolean inGame,
         String image,
-        StatRSDTO<Double> stats,
-        List<AbilityRSDTO> abilities,
-        String race,
-        List<AttributeRSDTO> attributes
+        String race
 ) {
     @Override
     public String toString() {
@@ -32,27 +30,20 @@ public record CharacterRSDTO(
                 "\"description\": \"" + description + "\"," +
                 "\"world\": \"" + world + "\"," +
                 "\"race\": \"" + race + "\"," +
-                "\"image\": \"" + image + "\"," +
-                "\"stats\": " + stats + "," +
-                "\"abilities\": " + abilities + "," +
-                "\"attributes\": " + attributes +
+                "\"image\": \"" + image + "\"" +
                 "}";
     }
 
     public Map<String, Object> toMap() {
-        final var map = new java.util.HashMap<>(Map.of(
+        final var map = new HashMap<String, Object>(Map.of(
                 "identifier", identifier,
                 "name", name,
                 "title", title,
                 "description", description,
                 "world", world,
                 "race", race,
-                "image", image,
-                "stats", stats,
-                "abilities", abilities.isEmpty() ? abilities : List.of()
+                "image", image
         ));
-
-        map.put("attributes", Optional.ofNullable(attributes).orElse(List.of()));
 
         return map;
     }

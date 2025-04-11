@@ -5,6 +5,7 @@ import org.gycoding.fallofthegods.application.dto.out.StatODTO;
 import org.gycoding.fallofthegods.application.dto.out.worlds.WorldODTO;
 import org.gycoding.fallofthegods.domain.model.StatMO;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -18,25 +19,19 @@ public record CharacterODTO(
         WorldODTO world,
         Boolean inGame,
         String image,
-        StatODTO<Double> stats,
-        List<AbilityODTO> abilities,
-        String race,
-        List<AttributeODTO> attributes
+        String race
 ) {
     public Map<String, Object> toMap() {
-        final var map = new java.util.HashMap<>(Map.of(
+        final var map = new HashMap<String, Object>(Map.of(
                 "identifier", identifier,
                 "name", name,
                 "title", title,
                 "description", description,
                 "world", world != null ? world.identifier() : "null",
+                "inGame", inGame,
                 "race", race,
-                "image", image,
-                "stats", stats,
-                "abilities", abilities.isEmpty() ? abilities : List.of()
+                "image", image
         ));
-
-        map.put("attributes", Optional.ofNullable(attributes).orElse(List.of()));
 
         return map;
     }

@@ -4,13 +4,9 @@ import org.gycoding.fallofthegods.application.dto.in.StatIDTO;
 import org.gycoding.fallofthegods.application.dto.in.items.ItemIDTO;
 import org.gycoding.fallofthegods.application.dto.in.items.ItemStatIDTO;
 import org.gycoding.fallofthegods.application.dto.out.StatODTO;
-import org.gycoding.fallofthegods.application.dto.out.characters.AbilityODTO;
-import org.gycoding.fallofthegods.application.dto.out.characters.AttributeODTO;
 import org.gycoding.fallofthegods.application.dto.out.items.ItemODTO;
 import org.gycoding.fallofthegods.application.dto.out.items.ItemStatODTO;
 import org.gycoding.fallofthegods.domain.model.StatMO;
-import org.gycoding.fallofthegods.domain.model.characters.AbilityMO;
-import org.gycoding.fallofthegods.domain.model.characters.AttributeMO;
 import org.gycoding.fallofthegods.domain.model.items.ItemMO;
 import org.gycoding.fallofthegods.domain.model.items.ItemStatMO;
 import org.gycoding.fallofthegods.infrastructure.api.dto.in.StatRQDTO;
@@ -22,7 +18,6 @@ import org.gycoding.fallofthegods.infrastructure.api.dto.out.items.ItemStatRSDTO
 import org.gycoding.fallofthegods.shared.util.StringTranslator;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ItemMapperUtils {
     private static ItemStatODTO toItemStatODTO(ItemStatMO stat) {
