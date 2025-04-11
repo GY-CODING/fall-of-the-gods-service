@@ -16,9 +16,6 @@ public record CharacterIDTO(
         WorldIDTO world,
         Boolean inGame,
         String image,
-        StatIDTO<Double> stats,
-        List<AbilityIDTO> abilities,
-        TranslatedString race,
-        List<AttributeIDTO> attributes
+        TranslatedString race
 ) {}
 

@@ -10,10 +10,8 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface CharacterDatabaseMapper {
-    @Mapping(target = "stats", expression = "java(toMO(character.stats()))")
     CharacterMO toMO(CharacterEntity character);
 
-    @Mapping(target = "stats", expression = "java(toEntity(character.stats()))")
     CharacterEntity toEntity(CharacterMO character);
 
     default StatMO<Double> toMO(StatEntity<Double> stats) {
