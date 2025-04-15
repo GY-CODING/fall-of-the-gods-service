@@ -1,9 +1,9 @@
-package org.gycoding.fallofthegods.infrastructure.api.controller;
+package org.gycoding.fallofthegods.infrastructure.api.controller.data;
 
 import lombok.AllArgsConstructor;
+import org.gycoding.exceptions.model.APIException;
 import org.gycoding.fallofthegods.application.service.PlaceService;
 import org.gycoding.fallofthegods.application.service.WorldService;
-import org.gycoding.exceptions.model.APIException;
 import org.gycoding.fallofthegods.infrastructure.api.mapper.PlaceControllerMapper;
 import org.gycoding.fallofthegods.infrastructure.api.mapper.WorldControllerMapper;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/worlds")
 @AllArgsConstructor
-public class WorldController {
+public class WorldDataController {
     private final WorldService worldService;
 
     private final PlaceService placeService;

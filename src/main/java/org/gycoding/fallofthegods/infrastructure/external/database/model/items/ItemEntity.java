@@ -1,8 +1,8 @@
 package org.gycoding.fallofthegods.infrastructure.external.database.model.items;
 
 import lombok.Builder;
+import org.gycoding.fallofthegods.domain.model.TranslatedString;
 import org.gycoding.fallofthegods.domain.model.items.ItemType;
-import org.gycoding.fallofthegods.infrastructure.external.database.model.TranslatedString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

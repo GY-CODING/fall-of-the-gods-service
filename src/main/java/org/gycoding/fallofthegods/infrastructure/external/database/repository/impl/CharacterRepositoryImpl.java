@@ -8,6 +8,7 @@ import org.gycoding.fallofthegods.domain.repository.CharacterRepository;
 import org.gycoding.fallofthegods.infrastructure.external.database.mapper.CharacterDatabaseMapper;
 import org.gycoding.fallofthegods.infrastructure.external.database.model.characters.CharacterEntity;
 import org.gycoding.fallofthegods.infrastructure.external.database.repository.CharacterMongoRepository;
+import org.gycoding.fallofthegods.infrastructure.external.database.repository.WorldMongoRepository;
 import org.gycoding.fallofthegods.shared.PagingConverter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,22 +24,11 @@ public class CharacterRepositoryImpl implements CharacterRepository {
 
     private final CharacterDatabaseMapper mapper;
 
-    @Override
-    public CharacterMO save(CharacterMO character) throws APIException {
-        try {
-            return mapper.toMO(repository.save(mapper.toEntity(character)));
-        } catch (Exception e) {
-            throw new APIException(
-                    FOTGAPIError.CONFLICT.code,
-                    FOTGAPIError.CONFLICT.message,
-                    FOTGAPIError.CONFLICT.status
-            );
-        }
-    }
+    private final WorldMongoRepository worldRepository;
 
     @Override
-    public Optional<CharacterMO> get(String identifier) throws APIException {
-        final var characterEntity = repository.findByIdentifier(identifier).orElseThrow(() ->
+    public CharacterMO save(CharacterMO character) throws APIException {
+        final var persistedWorld = worldRepository.findByIdentifier(character.world()).orElseThrow(() ->
                 new APIException(
                         FOTGAPIError.RESOURCE_NOT_FOUND.code,
                         FOTGAPIError.RESOURCE_NOT_FOUND.message,
@@ -46,10 +36,16 @@ public class CharacterRepositoryImpl implements CharacterRepository {
                 )
         );
 
-        return Optional.of(mapper.toMO(characterEntity));
+        return mapper.toMO(repository.save(mapper.toEntity(character, persistedWorld)));
     }
 
-    public Optional<CharacterMO> get(String identifier, Boolean inGame) throws APIException {
+    @Override
+    public Optional<CharacterMO> get(String identifier) {
+        return repository.findByIdentifier(identifier)
+                .map(mapper::toMO);
+    }
+
+    public Optional<CharacterMO> get(String identifier, Boolean inGame) {
         Optional<CharacterEntity> characterEntity;
 
         if(inGame) {
@@ -58,99 +54,57 @@ public class CharacterRepositoryImpl implements CharacterRepository {
             characterEntity = repository.findByIdentifier(identifier);
         }
 
-        characterEntity.orElseThrow(() ->
-                new APIException(
-                        FOTGAPIError.RESOURCE_NOT_FOUND.code,
-                        FOTGAPIError.RESOURCE_NOT_FOUND.message,
-                        FOTGAPIError.RESOURCE_NOT_FOUND.status
-                )
-        );
-
-        return Optional.of(mapper.toMO(characterEntity.get()));
+        return characterEntity.map(mapper::toMO);
     }
 
-    public List<CharacterMO> list() throws APIException {
+    public List<CharacterMO> list() {
+        return repository.findAll().stream()
+                .map(mapper::toMO)
+                .toList();
+    }
+
+    public List<CharacterMO> list(Boolean inGame) {
         List<CharacterEntity> characterEntities;
 
-        try {
+        if(inGame) {
+            characterEntities = repository.findByInGame(inGame);
+        } else {
             characterEntities = repository.findAll();
-        } catch(NullPointerException e) {
-            throw new APIException(
-                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.status
-            );
         }
 
-        return characterEntities.stream().map(mapper::toMO).toList();
+        return characterEntities.stream()
+                .map(mapper::toMO)
+                .toList();
     }
 
-    public List<CharacterMO> list(Boolean inGame) throws APIException {
-        List<CharacterEntity> characterEntities;
-
-        try {
-            if(inGame) {
-                characterEntities = repository.findByInGame(inGame);
-            } else {
-                characterEntities = repository.findAll();
-            }
-        } catch(NullPointerException e) {
-            throw new APIException(
-                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.status
-            );
-        }
-
-        return characterEntities.stream().map(mapper::toMO).toList();
+    public Page<CharacterMO> page(Pageable pageable) {
+        return PagingConverter.listToPage(
+                repository.findAll(pageable).stream()
+                    .map(mapper::toMO)
+                    .toList(),
+                pageable
+        );
     }
 
-    public Page<CharacterMO> page(Pageable pageable) throws APIException {
+    public Page<CharacterMO> page(Pageable pageable, Boolean inGame) {
         Page<CharacterEntity> characterEntities;
 
-        try {
+        if(inGame) {
+            characterEntities = repository.findByInGame(inGame, pageable);
+        } else {
             characterEntities = repository.findAll(pageable);
-        } catch(NullPointerException e) {
-            throw new APIException(
-                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.status
-            );
         }
 
-        return PagingConverter.listToPage(characterEntities.stream().map(mapper::toMO).toList(), pageable);
-    }
-
-    public Page<CharacterMO> page(Pageable pageable, Boolean inGame) throws APIException {
-        Page<CharacterEntity> characterEntities;
-
-        try {
-            if(inGame) {
-                characterEntities = repository.findByInGame(inGame, pageable);
-            } else {
-                characterEntities = repository.findAll(pageable);
-            }
-        } catch(NullPointerException e) {
-            throw new APIException(
-                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.status
-            );
-        }
-
-        return PagingConverter.listToPage(characterEntities.stream().map(mapper::toMO).toList(), pageable);
+        return PagingConverter.listToPage(
+                characterEntities.stream()
+                        .map(mapper::toMO)
+                        .toList(),
+                pageable
+        );
     }
 
     @Override
-    public void delete(String identifier) throws APIException {
-        try {
-            repository.removeByIdentifier(identifier);
-        } catch (Exception e) {
-            throw new APIException(
-                    FOTGAPIError.CONFLICT.code,
-                    FOTGAPIError.CONFLICT.message,
-                    FOTGAPIError.CONFLICT.status
-            );
-        }
+    public void delete(String identifier) {
+        repository.removeByIdentifier(identifier);
     }
 }

@@ -1,8 +1,7 @@
 package org.gycoding.fallofthegods.domain.model.characters;
 
 import lombok.Builder;
-import org.gycoding.fallofthegods.domain.model.worlds.WorldMO;
-import org.gycoding.fallofthegods.infrastructure.external.database.model.TranslatedString;
+import org.gycoding.fallofthegods.domain.model.TranslatedString;
 
 @Builder
 public record CharacterMO(
@@ -10,7 +9,7 @@ public record CharacterMO(
         TranslatedString name,
         TranslatedString title,
         TranslatedString description,
-        WorldMO world,
+        String world,
         Boolean inGame,
         String image,
         TranslatedString race

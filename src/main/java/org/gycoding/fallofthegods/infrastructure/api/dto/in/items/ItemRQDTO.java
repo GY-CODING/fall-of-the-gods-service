@@ -1,9 +1,8 @@
 package org.gycoding.fallofthegods.infrastructure.api.dto.in.items;
 
 import lombok.Builder;
+import org.gycoding.fallofthegods.domain.model.TranslatedString;
 import org.gycoding.fallofthegods.domain.model.items.ItemType;
-import org.gycoding.fallofthegods.infrastructure.api.dto.in.StatRQDTO;
-import org.gycoding.fallofthegods.infrastructure.external.database.model.TranslatedString;
 
 import java.util.List;
 import java.util.Map;

@@ -12,11 +12,12 @@ import java.util.Optional;
 @Repository
 public interface CharacterRepository {
     CharacterMO save(CharacterMO entity) throws APIException;
-    Optional<CharacterMO> get(String identifier) throws APIException;
-    Optional<CharacterMO> get(String identifier, Boolean inGame) throws APIException;
-    List<CharacterMO> list() throws APIException;
-    List<CharacterMO> list(Boolean inGame) throws APIException;
-    Page<CharacterMO> page(Pageable pageable) throws APIException;
-    Page<CharacterMO> page(Pageable pageable, Boolean inGame) throws APIException;
-    void delete(String identifier) throws APIException;
+    void delete(String identifier);
+
+    Optional<CharacterMO> get(String identifier);
+    Optional<CharacterMO> get(String identifier, Boolean inGame);
+    List<CharacterMO> list();
+    List<CharacterMO> list(Boolean inGame);
+    Page<CharacterMO> page(Pageable pageable);
+    Page<CharacterMO> page(Pageable pageable, Boolean inGame);
 }
