@@ -22,7 +22,7 @@ public class CharacterManagementController {
     }
 
     @DeleteMapping("")
-    public ResponseEntity<?> removeCharacters(@RequestParam String id) throws APIException {
+    public ResponseEntity<?> removeCharacter(@RequestParam String id) throws APIException {
         service.delete(id);
 
         return ResponseEntity.noContent().build();

@@ -5,7 +5,6 @@ import org.gycoding.fallofthegods.domain.model.TranslatedString;
 
 @Builder
 public record CharacterRQDTO(
-        String identifier,
         TranslatedString name,
         TranslatedString title,
         TranslatedString description,

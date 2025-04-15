@@ -40,6 +40,11 @@ public class CharacterRepositoryImpl implements CharacterRepository {
     }
 
     @Override
+    public void delete(String identifier) {
+        repository.removeByIdentifier(identifier);
+    }
+
+    @Override
     public Optional<CharacterMO> get(String identifier) {
         return repository.findByIdentifier(identifier)
                 .map(mapper::toMO);
@@ -101,10 +106,5 @@ public class CharacterRepositoryImpl implements CharacterRepository {
                         .toList(),
                 pageable
         );
-    }
-
-    @Override
-    public void delete(String identifier) {
-        repository.removeByIdentifier(identifier);
     }
 }

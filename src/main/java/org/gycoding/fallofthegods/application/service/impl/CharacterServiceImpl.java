@@ -11,7 +11,6 @@ import org.gycoding.fallofthegods.domain.exceptions.FOTGAPIError;
 import org.gycoding.fallofthegods.domain.model.TranslatedString;
 import org.gycoding.fallofthegods.domain.model.characters.CharacterMO;
 import org.gycoding.fallofthegods.domain.repository.CharacterRepository;
-import org.gycoding.fallofthegods.domain.repository.WorldRepository;
 import org.gycoding.fallofthegods.shared.PagingConverter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,8 +26,6 @@ public class CharacterServiceImpl implements CharacterService {
     private final CharacterRepository repository;
 
     private final CharacterServiceMapper mapper;
-
-    private final WorldRepository worldRepository;
 
     @Override
     public CharacterODTO save(CharacterIDTO character) throws APIException {
