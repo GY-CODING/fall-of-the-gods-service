@@ -1,4 +1,4 @@
-package org.gycoding.fallofthegods.shared.util;
+package org.gycoding.fallofthegods.shared;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

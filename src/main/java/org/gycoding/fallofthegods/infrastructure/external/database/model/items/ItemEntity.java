@@ -2,7 +2,6 @@ package org.gycoding.fallofthegods.infrastructure.external.database.model.items;
 
 import lombok.Builder;
 import org.gycoding.fallofthegods.domain.model.items.ItemType;
-import org.gycoding.fallofthegods.infrastructure.external.database.model.StatEntity;
 import org.gycoding.fallofthegods.infrastructure.external.database.model.TranslatedString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -20,6 +19,5 @@ public record ItemEntity(
     String image,
     Boolean inGame,
     ItemType type,
-    List<ItemEntity> fragments,
-    StatEntity<ItemStatEntity> stats
+    List<ItemEntity> fragments
 ) {}

@@ -14,40 +14,4 @@ public record WorldMO(
         String detailedIcon,
         String mainColor,
         List<PlaceMO> places
-) {
-    public List<PlaceMO> listPlaces() {
-        return places;
-    }
-
-    public PlaceMO getPlace(String id) {
-        PlaceMO placeFound = null;
-
-        for(PlaceMO place : places) {
-            if(place.identifier().equals(id)) {
-                placeFound = place;
-                break;
-            }
-        }
-
-        return placeFound;
-    }
-
-    public void addPlace(PlaceMO place) {
-        this.places.add(place);
-    }
-
-    public void removePlace(String id) {
-        PlaceMO placeFound = null;
-
-        for(PlaceMO place : places) {
-            if(place.identifier().equals(id)) {
-                placeFound = place;
-                break;
-            }
-        }
-
-        if(placeFound != null) {
-            this.places.remove(placeFound);
-        }
-    }
-}
+) { }

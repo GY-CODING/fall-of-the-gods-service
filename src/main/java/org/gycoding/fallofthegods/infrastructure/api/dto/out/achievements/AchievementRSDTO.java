@@ -14,27 +14,4 @@ public record AchievementRSDTO(
     String image,
     AchievementTier tier,
     AchievementOrigin origin
-) {
-    @Override
-    public String toString() {
-        return "{" +
-                "\"identifier\": \"" + identifier + "\"," +
-                "\"name\": \"" + name + "\"," +
-                "\"description\": \"" + description + "\"," +
-                "\"image\": \"" + image + "\"," +
-                "\"tier\": \"" + tier + "\"" +
-                "origin\": \"" + origin + "\"" +
-                "}";
-    }
-
-    public Map<String, Object> toMap() {
-        return Map.of(
-            "identifier", identifier,
-            "name", name,
-            "description", description,
-            "image", image,
-            "tier", tier,
-            "origin", origin
-        );
-    }
-}
+) { }

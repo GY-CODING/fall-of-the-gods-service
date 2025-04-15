@@ -1,7 +1,6 @@
 package org.gycoding.fallofthegods.application.dto.in.items;
 
 import lombok.Builder;
-import org.gycoding.fallofthegods.application.dto.in.StatIDTO;
 import org.gycoding.fallofthegods.domain.model.items.ItemType;
 import org.gycoding.fallofthegods.infrastructure.external.database.model.TranslatedString;
 
@@ -15,6 +14,5 @@ public record ItemIDTO(
         String image,
         Boolean inGame,
         ItemType type,
-        List<ItemIDTO> fragments,
-        StatIDTO<ItemStatIDTO> stats
+        List<ItemIDTO> fragments
 ) {}

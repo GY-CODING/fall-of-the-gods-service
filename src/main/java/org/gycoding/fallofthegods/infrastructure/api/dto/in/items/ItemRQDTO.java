@@ -1,8 +1,6 @@
 package org.gycoding.fallofthegods.infrastructure.api.dto.in.items;
 
 import lombok.Builder;
-import org.gycoding.fallofthegods.domain.model.StatMO;
-import org.gycoding.fallofthegods.domain.model.items.ItemStatMO;
 import org.gycoding.fallofthegods.domain.model.items.ItemType;
 import org.gycoding.fallofthegods.infrastructure.api.dto.in.StatRQDTO;
 import org.gycoding.fallofthegods.infrastructure.external.database.model.TranslatedString;
@@ -18,8 +16,7 @@ public record ItemRQDTO(
         String image,
         Boolean inGame,
         ItemType type,
-        List<ItemRQDTO> fragments,
-        StatRQDTO<ItemStatRQDTO> stats
+        List<ItemRQDTO> fragments
 ) {
     @Override
     public String toString() {
@@ -28,7 +25,6 @@ public record ItemRQDTO(
                 "\"name\": \"" + name + "\"," +
                 "\"description\": \"" + description + "\"," +
                 "\"image\": \"" + image + "\"," +
-                "\"stats\": " + stats + "," +
                 "\"type\": \"" + type + "\"," +
                 "\"fragments\": \"" + fragments +
                 "}";
@@ -40,7 +36,6 @@ public record ItemRQDTO(
                 "name", name,
                 "description", description,
                 "image", image,
-                "stats", stats,
                 "type", type,
                 "fragments", fragments
         );

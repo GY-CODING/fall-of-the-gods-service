@@ -3,43 +3,29 @@ package org.gycoding.fallofthegods.application.mapper;
 import org.gycoding.fallofthegods.application.dto.in.items.ItemIDTO;
 import org.gycoding.fallofthegods.application.dto.out.items.ItemODTO;
 import org.gycoding.fallofthegods.domain.model.items.ItemMO;
-import org.gycoding.fallofthegods.shared.mapper.ItemMapperUtils;
-import org.gycoding.fallofthegods.shared.util.StringTranslator;
+import org.gycoding.fallofthegods.shared.StringTranslator;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+import java.util.List;
+
+@Mapper(componentModel = "spring", imports = { StringTranslator.class })
 public interface ItemServiceMapper {
-    default ItemMO toMO(ItemIDTO item) {
-        if (item == null) {
-            return null;
-        }
+    ItemMO toMO(ItemIDTO item);
 
-        return ItemMO.builder()
-                .identifier(item.identifier())
-                .name(item.name())
-                .description(item.description())
-                .inGame(item.inGame())
-                .image(item.image())
-                .type(item.type())
-                .stats(ItemMapperUtils.toStatMO(item.stats()))
-                .fragments(ItemMapperUtils.toItemMOList(item.fragments()))
-                .build();
+    @Mapping(target = "fragments", expression = "java(toItemODTOList(item.fragments(), language))")
+    @Mapping(target = "name", expression = "java(StringTranslator.translate(item.name(), language))")
+    @Mapping(target = "description", expression = "java(StringTranslator.translate(item.description(), language))")
+    ItemODTO toODTO(ItemMO item, String language);
+
+    default List<ItemODTO> toItemODTOList(List<ItemMO> items, String language) {
+        return items.stream()
+                .map(item -> toItemODTO(item, language))
+                .toList();
     }
 
-    default ItemODTO toODTO(ItemMO item, String language) {
-        if (item == null) {
-            return null;
-        }
-
-        return ItemODTO.builder()
-                .identifier(item.identifier())
-                .name(StringTranslator.translate(item.name(), language))
-                .description(StringTranslator.translate(item.description(), language))
-                .inGame(item.inGame())
-                .image(item.image())
-                .type(item.type())
-                .stats(ItemMapperUtils.toStatODTO(item.stats()))
-                .fragments(ItemMapperUtils.toItemODTOList(item.fragments(), language))
-                .build();
-    }
+    @Mapping(target = "fragments", expression = "java(null)")
+    @Mapping(target = "name", expression = "java(StringTranslator.translate(item.name(), language))")
+    @Mapping(target = "description", expression = "java(StringTranslator.translate(item.description(), language))")
+    ItemODTO toItemODTO(ItemMO item, String language);
 }

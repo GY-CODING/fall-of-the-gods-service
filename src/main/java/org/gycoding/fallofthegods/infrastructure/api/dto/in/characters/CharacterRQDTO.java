@@ -1,15 +1,11 @@
 package org.gycoding.fallofthegods.infrastructure.api.dto.in.characters;
 
 import lombok.Builder;
-import org.gycoding.fallofthegods.domain.model.StatMO;
-import org.gycoding.fallofthegods.infrastructure.api.dto.in.StatRQDTO;
 import org.gycoding.fallofthegods.infrastructure.api.dto.in.worlds.WorldRQDTO;
 import org.gycoding.fallofthegods.infrastructure.external.database.model.TranslatedString;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Builder
 public record CharacterRQDTO(

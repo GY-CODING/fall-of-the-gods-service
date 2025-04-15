@@ -11,6 +11,5 @@ import org.mapstruct.Mapping;
 public interface CharacterControllerMapper {
     CharacterIDTO toIDTO(CharacterRQDTO character);
 
-    @Mapping(target = "world", source = "world.identifier")
     CharacterRSDTO toRSDTO(CharacterODTO character);
 }

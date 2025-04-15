@@ -1,14 +1,10 @@
 package org.gycoding.fallofthegods.application.dto.out.characters;
 
 import lombok.Builder;
-import org.gycoding.fallofthegods.application.dto.out.StatODTO;
 import org.gycoding.fallofthegods.application.dto.out.worlds.WorldODTO;
-import org.gycoding.fallofthegods.domain.model.StatMO;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Builder
 public record CharacterODTO(
@@ -16,7 +12,7 @@ public record CharacterODTO(
         String name,
         String title,
         String description,
-        WorldODTO world,
+        String world,
         Boolean inGame,
         String image,
         String race
@@ -27,7 +23,7 @@ public record CharacterODTO(
                 "name", name,
                 "title", title,
                 "description", description,
-                "world", world != null ? world.identifier() : "null",
+                "world", world,
                 "inGame", inGame,
                 "race", race,
                 "image", image

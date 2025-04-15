@@ -15,42 +15,6 @@ public record WorldODTO(
         String mainColor,
         List<PlaceODTO> places
 ) {
-    public List<PlaceODTO> listPlaces() {
-        return places;
-    }
-
-    public PlaceODTO getPlace(String id) {
-        PlaceODTO placeFound = null;
-
-        for(PlaceODTO place : places) {
-            if(place.identifier().equals(id)) {
-                placeFound = place;
-                break;
-            }
-        }
-
-        return placeFound;
-    }
-
-    public void addPlace(PlaceODTO place) {
-        this.places.add(place);
-    }
-
-    public void removePlace(String id) {
-        PlaceODTO placeFound = null;
-
-        for(PlaceODTO place : places) {
-            if(place.identifier().equals(id)) {
-                placeFound = place;
-                break;
-            }
-        }
-
-        if(placeFound != null) {
-            this.places.remove(placeFound);
-        }
-    }
-
     public Map<String, Object> toMap() {
         return Map.of(
                 "identifier", identifier,

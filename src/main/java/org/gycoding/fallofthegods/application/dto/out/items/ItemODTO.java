@@ -1,9 +1,6 @@
 package org.gycoding.fallofthegods.application.dto.out.items;
 
 import lombok.Builder;
-import org.gycoding.fallofthegods.application.dto.out.StatODTO;
-import org.gycoding.fallofthegods.domain.model.StatMO;
-import org.gycoding.fallofthegods.domain.model.items.ItemStatMO;
 import org.gycoding.fallofthegods.domain.model.items.ItemType;
 
 import java.util.List;
@@ -17,8 +14,7 @@ public record ItemODTO(
         String image,
         Boolean inGame,
         ItemType type,
-        List<ItemODTO> fragments,
-        StatODTO<ItemStatODTO> stats
+        List<ItemODTO> fragments
 ) {
     public Map<String, Object> toMap() {
         return Map.of(
@@ -26,7 +22,6 @@ public record ItemODTO(
                 "name", name,
                 "description", description,
                 "image", image,
-                "stats", stats,
                 "type", type,
                 "fragments", fragments
         );
