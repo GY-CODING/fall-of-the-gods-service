@@ -1,8 +1,6 @@
 package org.gycoding.fallofthegods.infrastructure.external.database.repository.impl;
 
 import lombok.AllArgsConstructor;
-import org.gycoding.exceptions.model.APIException;
-import org.gycoding.fallofthegods.domain.exceptions.FOTGAPIError;
 import org.gycoding.fallofthegods.domain.model.creatures.CreatureMO;
 import org.gycoding.fallofthegods.domain.repository.CreatureRepository;
 import org.gycoding.fallofthegods.infrastructure.external.database.mapper.CreatureDatabaseMapper;
@@ -24,133 +22,81 @@ public class CreatureRepositoryImpl implements CreatureRepository {
     private final CreatureDatabaseMapper mapper;
 
     @Override
-    public CreatureMO save(CreatureMO creature) throws APIException {
-        try {
-            return mapper.toMO(repository.save(mapper.toEntity(creature)));
-        } catch (Exception e) {
-            throw new APIException(
-                    FOTGAPIError.CONFLICT.code,
-                    FOTGAPIError.CONFLICT.message,
-                    FOTGAPIError.CONFLICT.status
-            );
-        }
+    public CreatureMO save(CreatureMO creature) {
+        return mapper.toMO(repository.save(mapper.toEntity(creature)));
     }
 
     @Override
-    public Optional<CreatureMO> get(String identifier) throws APIException {
-        final var creatureEntity = repository.findByIdentifier(identifier).orElseThrow(() ->
-                new APIException(
-                        FOTGAPIError.RESOURCE_NOT_FOUND.code,
-                        FOTGAPIError.RESOURCE_NOT_FOUND.message,
-                        FOTGAPIError.RESOURCE_NOT_FOUND.status
-                )
-        );
-
-        return Optional.of(mapper.toMO(creatureEntity));
+    public void delete(String identifier) {
+        repository.removeByIdentifier(identifier);
     }
 
-    public Optional<CreatureMO> get(String identifier, Boolean inGame) throws APIException {
+    @Override
+    public Optional<CreatureMO> get(String identifier) {
+        return repository.findByIdentifier(identifier)
+                .map(mapper::toMO);
+    }
+
+    @Override
+    public Optional<CreatureMO> get(String identifier, Boolean inGame) {
         Optional<CreatureEntity> creatureEntity;
 
-        if (inGame) {
+        if(inGame) {
             creatureEntity = repository.findByIdentifierAndInGame(identifier, inGame);
         } else {
             creatureEntity = repository.findByIdentifier(identifier);
         }
 
-        creatureEntity.orElseThrow(() ->
-                new APIException(
-                        FOTGAPIError.RESOURCE_NOT_FOUND.code,
-                        FOTGAPIError.RESOURCE_NOT_FOUND.message,
-                        FOTGAPIError.RESOURCE_NOT_FOUND.status
-                )
-        );
-
-        return Optional.of(mapper.toMO(creatureEntity.get()));
-    }
-
-    public List<CreatureMO> list() throws APIException {
-        List<CreatureEntity> creatureEntities;
-
-        try {
-            creatureEntities = repository.findAll();
-        } catch (NullPointerException e) {
-            throw new APIException(
-                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.status
-            );
-        }
-
-        return creatureEntities.stream().map(mapper::toMO).toList();
-    }
-
-    public List<CreatureMO> list(Boolean inGame) throws APIException {
-        List<CreatureEntity> creatureEntities;
-
-        try {
-            if (inGame) {
-                creatureEntities = repository.findByInGame(inGame);
-            } else {
-                creatureEntities = repository.findAll();
-            }
-        } catch (NullPointerException e) {
-            throw new APIException(
-                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.status
-            );
-        }
-
-        return creatureEntities.stream().map(mapper::toMO).toList();
-    }
-
-    public Page<CreatureMO> page(Pageable pageable) throws APIException {
-        Page<CreatureEntity> creatureEntities;
-
-        try {
-            creatureEntities = repository.findAll(pageable);
-        } catch (NullPointerException e) {
-            throw new APIException(
-                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.status
-            );
-        }
-
-        return PagingConverter.listToPage(creatureEntities.stream().map(mapper::toMO).toList(), pageable);
-    }
-
-    public Page<CreatureMO> page(Pageable pageable, Boolean inGame) throws APIException {
-        Page<CreatureEntity> creatureEntities;
-
-        try {
-            if (inGame) {
-                creatureEntities = repository.findByInGame(inGame, pageable);
-            } else {
-                creatureEntities = repository.findAll(pageable);
-            }
-        } catch (NullPointerException e) {
-            throw new APIException(
-                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.status
-            );
-        }
-
-        return PagingConverter.listToPage(creatureEntities.stream().map(mapper::toMO).toList(), pageable);
+        return creatureEntity.map(mapper::toMO);
     }
 
     @Override
-    public void delete(String identifier) throws APIException {
-        try {
-            repository.removeByIdentifier(identifier);
-        } catch (Exception e) {
-            throw new APIException(
-                    FOTGAPIError.CONFLICT.code,
-                    FOTGAPIError.CONFLICT.message,
-                    FOTGAPIError.CONFLICT.status
-            );
+    public List<CreatureMO> list() {
+        return repository.findAll().stream()
+                .map(mapper::toMO)
+                .toList();
+    }
+
+    @Override
+    public List<CreatureMO> list(Boolean inGame) {
+        List<CreatureEntity> creatureEntities;
+
+        if(inGame) {
+            creatureEntities = repository.findByInGame(inGame);
+        } else {
+            creatureEntities = repository.findAll();
         }
+
+        return creatureEntities.stream()
+                .map(mapper::toMO)
+                .toList();
+    }
+
+    @Override
+    public Page<CreatureMO> page(Pageable pageable) {
+        return PagingConverter.listToPage(
+                repository.findAll(pageable).stream()
+                        .map(mapper::toMO)
+                        .toList(),
+                pageable
+        );
+    }
+
+    @Override
+    public Page<CreatureMO> page(Pageable pageable, Boolean inGame) {
+        Page<CreatureEntity> creatureEntities;
+
+        if(inGame) {
+            creatureEntities = repository.findByInGame(inGame, pageable);
+        } else {
+            creatureEntities = repository.findAll(pageable);
+        }
+
+        return PagingConverter.listToPage(
+                creatureEntities.stream()
+                        .map(mapper::toMO)
+                        .toList(),
+                pageable
+        );
     }
 }

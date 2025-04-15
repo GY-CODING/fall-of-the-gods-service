@@ -3,10 +3,13 @@ package org.gycoding.fallofthegods.application.service.impl;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.gycoding.exceptions.model.APIException;
+import org.gycoding.fallofthegods.application.dto.in.items.ItemIDTO;
 import org.gycoding.fallofthegods.application.dto.out.items.ItemODTO;
 import org.gycoding.fallofthegods.application.mapper.ItemServiceMapper;
 import org.gycoding.fallofthegods.application.service.ItemService;
 import org.gycoding.fallofthegods.domain.exceptions.FOTGAPIError;
+import org.gycoding.fallofthegods.domain.model.TranslatedString;
+import org.gycoding.fallofthegods.domain.model.items.ItemMO;
 import org.gycoding.fallofthegods.domain.repository.ItemRepository;
 import org.gycoding.fallofthegods.shared.PagingConverter;
 import org.springframework.data.domain.Page;
@@ -23,6 +26,36 @@ public class ItemServiceImpl implements ItemService {
     private final ItemRepository repository;
 
     private final ItemServiceMapper mapper;
+
+    @Override
+    public ItemODTO save(ItemIDTO item) throws APIException {
+        final ItemMO savedItem;
+
+        try {
+            savedItem = repository.save(mapper.toMO(item));
+        } catch(Exception e) {
+            throw new APIException(
+                    FOTGAPIError.CONFLICT.code,
+                    FOTGAPIError.CONFLICT.message,
+                    FOTGAPIError.CONFLICT.status
+            );
+        }
+
+        return mapper.toODTO(savedItem, TranslatedString.EN);
+    }
+
+    @Override
+    public void delete(String identifier) throws APIException {
+        try {
+            repository.delete(identifier);
+        } catch (Exception e) {
+            throw new APIException(
+                    FOTGAPIError.CONFLICT.code,
+                    FOTGAPIError.CONFLICT.message,
+                    FOTGAPIError.CONFLICT.status
+            );
+        }
+    }
 
     @Override
     public ItemODTO get(String identifier, Boolean inGame, String language) throws APIException {

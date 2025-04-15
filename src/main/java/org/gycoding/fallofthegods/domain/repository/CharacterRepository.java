@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface CharacterRepository {
-    CharacterMO save(CharacterMO entity) throws APIException;
+    CharacterMO save(CharacterMO character) throws APIException;
     void delete(String identifier);
 
     Optional<CharacterMO> get(String identifier);

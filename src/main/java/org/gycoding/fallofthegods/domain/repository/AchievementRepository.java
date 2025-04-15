@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface AchievementRepository {
-    AchievementMO save(AchievementMO entity);
+    AchievementMO save(AchievementMO achievement);
     void delete(String identifier);
 
     Optional<AchievementMO> get(String identifier);

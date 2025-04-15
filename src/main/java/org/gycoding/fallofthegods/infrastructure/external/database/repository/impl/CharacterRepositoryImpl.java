@@ -50,6 +50,7 @@ public class CharacterRepositoryImpl implements CharacterRepository {
                 .map(mapper::toMO);
     }
 
+    @Override
     public Optional<CharacterMO> get(String identifier, Boolean inGame) {
         Optional<CharacterEntity> characterEntity;
 
@@ -62,12 +63,14 @@ public class CharacterRepositoryImpl implements CharacterRepository {
         return characterEntity.map(mapper::toMO);
     }
 
+    @Override
     public List<CharacterMO> list() {
         return repository.findAll().stream()
                 .map(mapper::toMO)
                 .toList();
     }
 
+    @Override
     public List<CharacterMO> list(Boolean inGame) {
         List<CharacterEntity> characterEntities;
 
@@ -82,6 +85,7 @@ public class CharacterRepositoryImpl implements CharacterRepository {
                 .toList();
     }
 
+    @Override
     public Page<CharacterMO> page(Pageable pageable) {
         return PagingConverter.listToPage(
                 repository.findAll(pageable).stream()
@@ -91,6 +95,7 @@ public class CharacterRepositoryImpl implements CharacterRepository {
         );
     }
 
+    @Override
     public Page<CharacterMO> page(Pageable pageable, Boolean inGame) {
         Page<CharacterEntity> characterEntities;
 
