@@ -1,18 +1,31 @@
 package org.gycoding.fallofthegods.infrastructure.external.database.model.worlds;
 
 import lombok.Builder;
-import org.gycoding.fallofthegods.infrastructure.external.database.model.TranslatedString;
+import lombok.Getter;
+import lombok.Setter;
+import org.gycoding.fallofthegods.domain.model.TranslatedString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Builder
+@Getter
+@Setter
 @Document(collection = "Place")
-public record PlaceEntity(
+public class PlaceEntity {
         @Id
-        String mongoId,
-        String identifier,
-        TranslatedString name,
-        TranslatedString description,
-        String image,
-        Boolean inGame
-) {}
+        public String mongoId;
+        public String identifier;
+        public TranslatedString name;
+        public TranslatedString description;
+        public String image;
+        public Boolean inGame;
+
+        @Builder
+        public PlaceEntity(String mongoId, String identifier, TranslatedString name, TranslatedString description, String image, Boolean inGame) {
+            this.mongoId = mongoId;
+            this.identifier = identifier;
+            this.name = name;
+            this.description = description;
+            this.image = image;
+            this.inGame = inGame;
+        }
+}

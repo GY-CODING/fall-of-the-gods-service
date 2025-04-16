@@ -11,12 +11,15 @@ import java.util.Optional;
 
 @Repository
 public interface ItemRepository {
-    ItemMO save(ItemMO entity) throws APIException;
-    Optional<ItemMO> get(String identifier) throws APIException;
-    Optional<ItemMO> get(String identifier, Boolean inGame) throws APIException;
-    List<ItemMO> list() throws APIException;
-    List<ItemMO> list(Boolean inGame) throws APIException;
-    Page<ItemMO> page(Pageable pageable) throws APIException;
-    Page<ItemMO> page(Pageable pageable, Boolean inGame) throws APIException;
-    void delete(String identifier) throws APIException;
+    ItemMO save(ItemMO item);
+    ItemMO update(ItemMO item) throws APIException;
+    void delete(String identifier);
+
+    Optional<ItemMO> get(String identifier);
+    Optional<ItemMO> get(String identifier, Boolean inGame);
+    List<ItemMO> list();
+    List<ItemMO> list(Boolean inGame);
+    Page<ItemMO> page(Pageable pageable);
+    Page<ItemMO> page(Pageable pageable, Boolean inGame);
+
 }

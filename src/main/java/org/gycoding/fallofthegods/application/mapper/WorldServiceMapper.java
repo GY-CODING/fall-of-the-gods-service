@@ -14,12 +14,14 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", imports = { StringTranslator.class })
 public interface WorldServiceMapper {
+    @Mapping(target = "places", ignore = true)
     WorldMO toMO(WorldIDTO world);
 
     @Mapping(target = "name", expression = "java(StringTranslator.translate(world.name(), language))")
     @Mapping(target = "description", expression = "java(StringTranslator.translate(world.description(), language))")
     @Mapping(target = "places", expression = "java(toPlaceODTOList(world.places(), language))")
     WorldODTO toODTO(WorldMO world, String language);
+
     default List<PlaceODTO> toPlaceODTOList(List<PlaceMO> places, String language) {
         return places.stream()
                 .map(place -> toPlaceODTO(place, language))

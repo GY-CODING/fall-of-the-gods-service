@@ -3,10 +3,13 @@ package org.gycoding.fallofthegods.application.service.impl;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.gycoding.exceptions.model.APIException;
+import org.gycoding.fallofthegods.application.dto.in.worlds.PlaceIDTO;
 import org.gycoding.fallofthegods.application.dto.out.worlds.PlaceODTO;
 import org.gycoding.fallofthegods.application.mapper.PlaceServiceMapper;
 import org.gycoding.fallofthegods.application.service.PlaceService;
 import org.gycoding.fallofthegods.domain.exceptions.FOTGAPIError;
+import org.gycoding.fallofthegods.domain.model.TranslatedString;
+import org.gycoding.fallofthegods.domain.model.worlds.PlaceMO;
 import org.gycoding.fallofthegods.domain.repository.PlaceRepository;
 import org.gycoding.fallofthegods.shared.PagingConverter;
 import org.springframework.data.domain.Page;
@@ -23,6 +26,53 @@ public class PlaceServiceImpl implements PlaceService {
     private final PlaceRepository repository;
 
     private final PlaceServiceMapper mapper;
+
+    @Override
+    public PlaceODTO save(PlaceIDTO place) throws APIException {
+        final PlaceMO savedPlace;
+
+        try {
+            savedPlace = repository.save(mapper.toMO(place));
+        } catch(Exception e) {
+            throw new APIException(
+                    FOTGAPIError.CONFLICT.code,
+                    FOTGAPIError.CONFLICT.message,
+                    FOTGAPIError.CONFLICT.status
+            );
+        }
+
+        return mapper.toODTO(savedPlace, TranslatedString.EN);
+    }
+
+    @Override
+    public PlaceODTO update(PlaceIDTO place) throws APIException {
+        final PlaceMO updatedPlace;
+
+        try {
+            updatedPlace = repository.update(mapper.toMO(place));
+        } catch(Exception e) {
+            throw new APIException(
+                    FOTGAPIError.CONFLICT.code,
+                    FOTGAPIError.CONFLICT.message,
+                    FOTGAPIError.CONFLICT.status
+            );
+        }
+
+        return mapper.toODTO(updatedPlace, TranslatedString.EN);
+    }
+
+    @Override
+    public void delete(String identifier) throws APIException {
+        try {
+            repository.delete(identifier);
+        } catch (Exception e) {
+            throw new APIException(
+                    FOTGAPIError.CONFLICT.code,
+                    FOTGAPIError.CONFLICT.message,
+                    FOTGAPIError.CONFLICT.status
+            );
+        }
+    }
 
     @Override
     public PlaceODTO get(String identifier, String language) throws APIException {

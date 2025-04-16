@@ -1,6 +1,6 @@
 package org.gycoding.fallofthegods.shared;
 
-import org.gycoding.fallofthegods.infrastructure.external.database.model.TranslatedString;
+import org.gycoding.fallofthegods.domain.model.TranslatedString;
 import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Qualifier;
 

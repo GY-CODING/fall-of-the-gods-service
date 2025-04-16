@@ -4,11 +4,17 @@ import org.gycoding.fallofthegods.application.dto.in.worlds.WorldIDTO;
 import org.gycoding.fallofthegods.application.dto.out.worlds.WorldODTO;
 import org.gycoding.fallofthegods.infrastructure.api.dto.in.worlds.WorldRQDTO;
 import org.gycoding.fallofthegods.infrastructure.api.dto.out.worlds.WorldRSDTO;
+import org.gycoding.fallofthegods.shared.IdentifierGenerator;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", imports = { IdentifierGenerator.class })
 public interface WorldControllerMapper {
-    WorldIDTO toIDTO(WorldRQDTO place);
+    @Mapping(target = "identifier", expression = "java(IdentifierGenerator.generate(world.name().en()))")
+    WorldIDTO toIDTO(WorldRQDTO world);
 
-    WorldRSDTO toRSDTO(WorldODTO place);
+    @Mapping(target = "identifier", source = "identifier")
+    WorldIDTO toIDTO(WorldRQDTO world, String identifier);
+
+    WorldRSDTO toRSDTO(WorldODTO world);
 }

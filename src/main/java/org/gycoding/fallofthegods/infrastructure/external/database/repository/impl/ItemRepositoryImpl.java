@@ -24,21 +24,13 @@ public class ItemRepositoryImpl implements ItemRepository {
     private final ItemDatabaseMapper mapper;
 
     @Override
-    public ItemMO save(ItemMO item) throws APIException {
-        try {
-            return mapper.toMO(repository.save(mapper.toEntity(item)));
-        } catch (Exception e) {
-            throw new APIException(
-                    FOTGAPIError.CONFLICT.code,
-                    FOTGAPIError.CONFLICT.message,
-                    FOTGAPIError.CONFLICT.status
-            );
-        }
+    public ItemMO save(ItemMO item) {
+        return mapper.toMO(repository.save(mapper.toEntity(item)));
     }
 
     @Override
-    public Optional<ItemMO> get(String identifier) throws APIException {
-        final var itemEntity = repository.findByIdentifier(identifier).orElseThrow(() ->
+    public ItemMO update(ItemMO item) throws APIException {
+        final var persistedItem = repository.findByIdentifier(item.identifier()).orElseThrow(() ->
                 new APIException(
                         FOTGAPIError.RESOURCE_NOT_FOUND.code,
                         FOTGAPIError.RESOURCE_NOT_FOUND.message,
@@ -46,111 +38,80 @@ public class ItemRepositoryImpl implements ItemRepository {
                 )
         );
 
-        return Optional.of(mapper.toMO(itemEntity));
+        return mapper.toMO(repository.save(mapper.toUpdatedEntity(persistedItem, item)));
     }
 
-    public Optional<ItemMO> get(String identifier, Boolean inGame) throws APIException {
+    @Override
+    public void delete(String identifier) {
+        repository.removeByIdentifier(identifier);
+    }
+
+    @Override
+    public Optional<ItemMO> get(String identifier) {
+        return repository.findByIdentifier(identifier)
+                .map(mapper::toMO);
+    }
+
+    @Override
+    public Optional<ItemMO> get(String identifier, Boolean inGame) {
         Optional<ItemEntity> itemEntity;
 
-        if (inGame) {
+        if(inGame) {
             itemEntity = repository.findByIdentifierAndInGame(identifier, inGame);
         } else {
             itemEntity = repository.findByIdentifier(identifier);
         }
 
-        itemEntity.orElseThrow(() ->
-                new APIException(
-                        FOTGAPIError.RESOURCE_NOT_FOUND.code,
-                        FOTGAPIError.RESOURCE_NOT_FOUND.message,
-                        FOTGAPIError.RESOURCE_NOT_FOUND.status
-                )
-        );
-
-        return Optional.of(mapper.toMO(itemEntity.get()));
-    }
-
-    public List<ItemMO> list() throws APIException {
-        List<ItemEntity> itemEntities;
-
-        try {
-            itemEntities = repository.findAll();
-        } catch (NullPointerException e) {
-            throw new APIException(
-                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.status
-            );
-        }
-
-        return itemEntities.stream().map(mapper::toMO).toList();
-    }
-
-    public List<ItemMO> list(Boolean inGame) throws APIException {
-        List<ItemEntity> itemEntities;
-
-        try {
-            if (inGame) {
-                itemEntities = repository.findByInGame(inGame);
-            } else {
-                itemEntities = repository.findAll();
-            }
-        } catch (NullPointerException e) {
-            throw new APIException(
-                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.status
-            );
-        }
-
-        return itemEntities.stream().map(mapper::toMO).toList();
-    }
-
-    public Page<ItemMO> page(Pageable pageable) throws APIException {
-        Page<ItemEntity> itemEntities;
-
-        try {
-            itemEntities = repository.findAll(pageable);
-        } catch (NullPointerException e) {
-            throw new APIException(
-                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.status
-            );
-        }
-
-        return PagingConverter.listToPage(itemEntities.stream().map(mapper::toMO).toList(), pageable);
-    }
-
-    public Page<ItemMO> page(Pageable pageable, Boolean inGame) throws APIException {
-        Page<ItemEntity> itemEntities;
-
-        try {
-            if (inGame) {
-                itemEntities = repository.findByInGame(inGame, pageable);
-            } else {
-                itemEntities = repository.findAll(pageable);
-            }
-        } catch (NullPointerException e) {
-            throw new APIException(
-                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.status
-            );
-        }
-
-        return PagingConverter.listToPage(itemEntities.stream().map(mapper::toMO).toList(), pageable);
+        return itemEntity.map(mapper::toMO);
     }
 
     @Override
-    public void delete(String identifier) throws APIException {
-        try {
-            repository.removeByIdentifier(identifier);
-        } catch (Exception e) {
-            throw new APIException(
-                    FOTGAPIError.CONFLICT.code,
-                    FOTGAPIError.CONFLICT.message,
-                    FOTGAPIError.CONFLICT.status
-            );
+    public List<ItemMO> list() {
+        return repository.findAll().stream()
+                .map(mapper::toMO)
+                .toList();
+    }
+
+    @Override
+    public List<ItemMO> list(Boolean inGame) {
+        List<ItemEntity> itemEntities;
+
+        if(inGame) {
+            itemEntities = repository.findByInGame(inGame);
+        } else {
+            itemEntities = repository.findAll();
         }
+
+        return itemEntities.stream()
+                .map(mapper::toMO)
+                .toList();
+    }
+
+    @Override
+    public Page<ItemMO> page(Pageable pageable) {
+        return PagingConverter.listToPage(
+                repository.findAll(pageable).stream()
+                        .map(mapper::toMO)
+                        .toList(),
+                pageable
+        );
+    }
+
+    @Override
+    public Page<ItemMO> page(Pageable pageable, Boolean inGame) {
+        Page<ItemEntity> itemEntities;
+
+        if(inGame) {
+            itemEntities = repository.findByInGame(inGame, pageable);
+        } else {
+            itemEntities = repository.findAll(pageable);
+        }
+
+        return PagingConverter.listToPage(
+                itemEntities.stream()
+                        .map(mapper::toMO)
+                        .toList(),
+                pageable
+        );
     }
 }

@@ -1,8 +1,8 @@
-package org.gycoding.fallofthegods.infrastructure.api.controller;
+package org.gycoding.fallofthegods.infrastructure.api.controller.data;
 
 import lombok.AllArgsConstructor;
-import org.gycoding.fallofthegods.application.service.AchievementService;
 import org.gycoding.exceptions.model.APIException;
+import org.gycoding.fallofthegods.application.service.AchievementService;
 import org.gycoding.fallofthegods.infrastructure.api.mapper.AchievementControllerMapper;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/achievements")
 @AllArgsConstructor
-public class AchievementController {
+public class AchievementDataController {
     private final AchievementService service;
 
     private final AchievementControllerMapper mapper;

@@ -1,4 +1,4 @@
-package org.gycoding.fallofthegods.infrastructure.external.database.model;
+package org.gycoding.fallofthegods.domain.model;
 
 import lombok.Builder;
 
@@ -7,6 +7,9 @@ public record TranslatedString (
         String es,
         String en
 ) {
+    public static String EN = "en";
+    public static String ES = "es";
+
     public String get(String language) {
         return switch (language) {
             case "en" -> en;

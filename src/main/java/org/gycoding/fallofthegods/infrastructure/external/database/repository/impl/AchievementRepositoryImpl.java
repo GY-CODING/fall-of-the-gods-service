@@ -6,7 +6,6 @@ import org.gycoding.fallofthegods.domain.exceptions.FOTGAPIError;
 import org.gycoding.fallofthegods.domain.model.achievements.AchievementMO;
 import org.gycoding.fallofthegods.domain.repository.AchievementRepository;
 import org.gycoding.fallofthegods.infrastructure.external.database.mapper.AchievementDatabaseMapper;
-import org.gycoding.fallofthegods.infrastructure.external.database.model.achievements.AchievementEntity;
 import org.gycoding.fallofthegods.infrastructure.external.database.repository.AchievementMongoRepository;
 import org.gycoding.fallofthegods.shared.PagingConverter;
 import org.springframework.data.domain.Page;
@@ -24,21 +23,13 @@ public class AchievementRepositoryImpl implements AchievementRepository {
     private final AchievementDatabaseMapper mapper;
 
     @Override
-    public AchievementMO save(AchievementMO achievement) throws APIException {
-        try {
-            return mapper.toMO(repository.save(mapper.toEntity(achievement)));
-        } catch (Exception e) {
-            throw new APIException(
-                    FOTGAPIError.CONFLICT.code,
-                    FOTGAPIError.CONFLICT.message,
-                    FOTGAPIError.CONFLICT.status
-            );
-        }
+    public AchievementMO save(AchievementMO achievement) {
+        return mapper.toMO(repository.save(mapper.toEntity(achievement)));
     }
 
     @Override
-    public Optional<AchievementMO> get(String identifier) throws APIException {
-        final var achievementEntity = repository.findByIdentifier(identifier).orElseThrow(() ->
+    public AchievementMO update(AchievementMO achievement) throws APIException {
+        final var persistedAchievement = repository.findByIdentifier(achievement.identifier()).orElseThrow(() ->
                 new APIException(
                         FOTGAPIError.RESOURCE_NOT_FOUND.code,
                         FOTGAPIError.RESOURCE_NOT_FOUND.message,
@@ -46,53 +37,34 @@ public class AchievementRepositoryImpl implements AchievementRepository {
                 )
         );
 
-        return Optional.of(mapper.toMO(achievementEntity));
+        return mapper.toMO(repository.save(mapper.toUpdatedEntity(persistedAchievement, achievement)));
     }
 
     @Override
-    public List<AchievementMO> list() throws APIException {
-        List<AchievementEntity> achievementEntities;
-
-        try {
-            achievementEntities = repository.findAll();
-        } catch (NullPointerException e) {
-            throw new APIException(
-                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.status
-            );
-        }
-
-        return achievementEntities.stream().map(mapper::toMO).toList();
+    public void delete(String identifier) {
+        repository.removeByIdentifier(identifier);
     }
 
     @Override
-    public Page<AchievementMO> page(Pageable pageable) throws APIException {
-        Page<AchievementEntity> achievementEntities;
-
-        try {
-            achievementEntities = repository.findAll(pageable);
-        } catch (NullPointerException e) {
-            throw new APIException(
-                    FOTGAPIError.RESOURCE_NOT_FOUND.code,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.message,
-                    FOTGAPIError.RESOURCE_NOT_FOUND.status
-            );
-        }
-
-        return PagingConverter.listToPage(achievementEntities.stream().map(mapper::toMO).toList(), pageable);
+    public Optional<AchievementMO> get(String identifier) {
+        return repository.findByIdentifier(identifier)
+                .map(mapper::toMO);
     }
 
     @Override
-    public void delete(String identifier) throws APIException {
-        try {
-            repository.removeByIdentifier(identifier);
-        } catch (Exception e) {
-            throw new APIException(
-                    FOTGAPIError.CONFLICT.code,
-                    FOTGAPIError.CONFLICT.message,
-                    FOTGAPIError.CONFLICT.status
-            );
-        }
+    public List<AchievementMO> list() {
+        return repository.findAll().stream()
+                .map(mapper::toMO)
+                .toList();
+    }
+
+    @Override
+    public Page<AchievementMO> page(Pageable pageable) {
+        return PagingConverter.listToPage(
+                repository.findAll(pageable).stream()
+                        .map(mapper::toMO)
+                        .toList(),
+                pageable
+        );
     }
 }

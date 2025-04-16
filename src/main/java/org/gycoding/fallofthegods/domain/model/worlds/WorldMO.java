@@ -1,7 +1,7 @@
 package org.gycoding.fallofthegods.domain.model.worlds;
 
 import lombok.Builder;
-import org.gycoding.fallofthegods.infrastructure.external.database.model.TranslatedString;
+import org.gycoding.fallofthegods.domain.model.TranslatedString;
 
 import java.util.List;
 

@@ -15,6 +15,5 @@ public interface CharacterServiceMapper {
     @Mapping(target = "title", expression = "java(StringTranslator.translate(character.title(), language))")
     @Mapping(target = "description", expression = "java(StringTranslator.translate(character.description(), language))")
     @Mapping(target = "race", expression = "java(StringTranslator.translate(character.race(), language))")
-    @Mapping(target = "world", source = "character.world.identifier")
     CharacterODTO toODTO(CharacterMO character, String language);
 }

@@ -3,10 +3,13 @@ package org.gycoding.fallofthegods.application.service.impl;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.gycoding.exceptions.model.APIException;
+import org.gycoding.fallofthegods.application.dto.in.creatures.CreatureIDTO;
 import org.gycoding.fallofthegods.application.dto.out.creatures.CreatureODTO;
 import org.gycoding.fallofthegods.application.mapper.CreatureServiceMapper;
 import org.gycoding.fallofthegods.application.service.CreatureService;
 import org.gycoding.fallofthegods.domain.exceptions.FOTGAPIError;
+import org.gycoding.fallofthegods.domain.model.TranslatedString;
+import org.gycoding.fallofthegods.domain.model.creatures.CreatureMO;
 import org.gycoding.fallofthegods.domain.repository.CreatureRepository;
 import org.gycoding.fallofthegods.shared.PagingConverter;
 import org.springframework.data.domain.Page;
@@ -23,6 +26,53 @@ public class CreatureServiceImpl implements CreatureService {
     private final CreatureRepository repository;
 
     private final CreatureServiceMapper mapper;
+
+    @Override
+    public CreatureODTO save(CreatureIDTO creature) throws APIException {
+        final CreatureMO savedCreature;
+
+        try {
+            savedCreature = repository.save(mapper.toMO(creature));
+        } catch(Exception e) {
+            throw new APIException(
+                    FOTGAPIError.CONFLICT.code,
+                    FOTGAPIError.CONFLICT.message,
+                    FOTGAPIError.CONFLICT.status
+            );
+        }
+
+        return mapper.toODTO(savedCreature, TranslatedString.EN);
+    }
+
+    @Override
+    public CreatureODTO update(CreatureIDTO creature) throws APIException {
+        final CreatureMO updatedCreature;
+
+        try {
+            updatedCreature = repository.update(mapper.toMO(creature));
+        } catch(Exception e) {
+            throw new APIException(
+                    FOTGAPIError.CONFLICT.code,
+                    FOTGAPIError.CONFLICT.message,
+                    FOTGAPIError.CONFLICT.status
+            );
+        }
+
+        return mapper.toODTO(updatedCreature, TranslatedString.EN);
+    }
+
+    @Override
+    public void delete(String identifier) throws APIException {
+        try {
+            repository.delete(identifier);
+        } catch (Exception e) {
+            throw new APIException(
+                    FOTGAPIError.CONFLICT.code,
+                    FOTGAPIError.CONFLICT.message,
+                    FOTGAPIError.CONFLICT.status
+            );
+        }
+    }
 
     @Override
     public CreatureODTO get(String identifier, Boolean inGame, String language) throws APIException {
