@@ -45,6 +45,23 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
+    public CharacterODTO update(CharacterIDTO character) throws APIException {
+        final CharacterMO updatedCharacter;
+
+        try {
+            updatedCharacter = repository.update(mapper.toMO(character));
+        } catch(Exception e) {
+            throw new APIException(
+                    FOTGAPIError.CONFLICT.code,
+                    FOTGAPIError.CONFLICT.message,
+                    FOTGAPIError.CONFLICT.status
+            );
+        }
+
+        return mapper.toODTO(updatedCharacter, TranslatedString.EN);
+    }
+
+    @Override
     public void delete(String identifier) throws APIException {
         try {
             repository.delete(identifier);

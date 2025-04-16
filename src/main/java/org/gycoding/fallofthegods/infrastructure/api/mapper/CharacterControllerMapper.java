@@ -13,5 +13,8 @@ public interface CharacterControllerMapper {
     @Mapping(target = "identifier", expression = "java(IdentifierGenerator.generate(character.name().en()))")
     CharacterIDTO toIDTO(CharacterRQDTO character);
 
+    @Mapping(target = "identifier", source = "identifier")
+    CharacterIDTO toIDTO(CharacterRQDTO character, String identifier);
+
     CharacterRSDTO toRSDTO(CharacterODTO character);
 }

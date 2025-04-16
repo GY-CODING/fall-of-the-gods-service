@@ -40,6 +40,21 @@ public class CharacterRepositoryImpl implements CharacterRepository {
     }
 
     @Override
+    public CharacterMO update(CharacterMO character) throws APIException {
+        final var persistedCharacter = repository.findByIdentifier(character.identifier()).orElseThrow(() ->
+                new APIException(
+                        FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.status
+                )
+        );
+
+        final var persistedWorld = worldRepository.findByIdentifier(character.world()).orElse(null);
+
+        return mapper.toMO(repository.save(mapper.toUpdatedEntity(persistedCharacter, character, persistedWorld)));
+    }
+
+    @Override
     public void delete(String identifier) {
         repository.removeByIdentifier(identifier);
     }

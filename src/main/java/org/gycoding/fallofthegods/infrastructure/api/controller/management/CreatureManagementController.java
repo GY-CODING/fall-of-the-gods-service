@@ -17,7 +17,7 @@ public class CreatureManagementController {
     private final CreatureControllerMapper mapper;
 
     @PostMapping("")
-    public ResponseEntity<?> saveCreature(@RequestBody CreatureRQDTO creature) throws APIException {
+    public ResponseEntity<?> save(@RequestBody CreatureRQDTO creature) throws APIException {
         return ResponseEntity.ok(mapper.toRSDTO(service.save(mapper.toIDTO(creature))));
     }
 

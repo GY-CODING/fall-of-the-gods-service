@@ -17,7 +17,7 @@ public class AchievementManagementController {
     private final AchievementControllerMapper mapper;
 
     @PostMapping("")
-    public ResponseEntity<?> saveAchievement(@RequestBody AchievementRQDTO achievement) throws APIException {
+    public ResponseEntity<?> save(@RequestBody AchievementRQDTO achievement) throws APIException {
         return ResponseEntity.ok(mapper.toRSDTO(service.save(mapper.toIDTO(achievement))));
     }
 

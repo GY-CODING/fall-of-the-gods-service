@@ -3,8 +3,7 @@ package org.gycoding.fallofthegods.infrastructure.external.database.mapper;
 import org.gycoding.fallofthegods.domain.model.characters.CharacterMO;
 import org.gycoding.fallofthegods.infrastructure.external.database.model.characters.CharacterEntity;
 import org.gycoding.fallofthegods.infrastructure.external.database.model.worlds.WorldEntity;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface CharacterDatabaseMapper {
@@ -17,4 +16,12 @@ public interface CharacterDatabaseMapper {
     @Mapping(target = "description", source = "character.description")
     @Mapping(target = "image", source = "character.image")
     CharacterEntity toEntity(CharacterMO character, WorldEntity persistedWorld);
+
+    @Mapping(target = "world", source = "persistedWorld")
+    @Mapping(target = "identifier", source = "character.identifier")
+    @Mapping(target = "name", source = "character.name")
+    @Mapping(target = "description", source = "character.description")
+    @Mapping(target = "image", source = "character.image")
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    CharacterEntity toUpdatedEntity(@MappingTarget CharacterEntity persistedCharacter, CharacterMO character, WorldEntity persistedWorld);
 }

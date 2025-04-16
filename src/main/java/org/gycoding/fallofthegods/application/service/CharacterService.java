@@ -11,6 +11,7 @@ import java.util.Map;
 
 public interface CharacterService {
     CharacterODTO save(CharacterIDTO character) throws APIException;
+    CharacterODTO update(CharacterIDTO character) throws APIException;
     void delete(String identifier) throws APIException;
 
     CharacterODTO get(String identifier, Boolean inGame, String language) throws APIException;

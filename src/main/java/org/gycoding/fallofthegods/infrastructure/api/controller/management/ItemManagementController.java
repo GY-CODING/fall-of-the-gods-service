@@ -17,7 +17,7 @@ public class ItemManagementController {
     private final ItemControllerMapper mapper;
 
     @PostMapping("")
-    public ResponseEntity<?> saveItem(@RequestBody ItemRQDTO item) throws APIException {
+    public ResponseEntity<?> save(@RequestBody ItemRQDTO item) throws APIException {
         return ResponseEntity.ok(mapper.toRSDTO(service.save(mapper.toIDTO(item))));
     }
 
