@@ -1,5 +1,6 @@
 package org.gycoding.fallofthegods.domain.repository;
 
+import org.gycoding.exceptions.model.APIException;
 import org.gycoding.fallofthegods.domain.model.worlds.PlaceMO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +12,7 @@ import java.util.Optional;
 @Repository
 public interface PlaceRepository {
     PlaceMO save(PlaceMO entity);
+    PlaceMO update(PlaceMO entity) throws APIException;
     void delete(String identifier);
 
     Optional<PlaceMO> get(String identifier);

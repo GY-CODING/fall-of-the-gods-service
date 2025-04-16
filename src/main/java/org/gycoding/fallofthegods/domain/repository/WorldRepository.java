@@ -11,7 +11,8 @@ import java.util.Optional;
 
 @Repository
 public interface WorldRepository {
-    WorldMO save(WorldMO world, List<String> places) throws APIException;
+    WorldMO save(WorldMO world, List<String> places);
+    WorldMO update(WorldMO world, List<String> places) throws APIException;
     void delete(String identifier);
 
     Optional<WorldMO> get(String identifier);

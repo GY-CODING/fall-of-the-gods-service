@@ -45,6 +45,23 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
+    public PlaceODTO update(PlaceIDTO place) throws APIException {
+        final PlaceMO updatedPlace;
+
+        try {
+            updatedPlace = repository.update(mapper.toMO(place));
+        } catch(Exception e) {
+            throw new APIException(
+                    FOTGAPIError.CONFLICT.code,
+                    FOTGAPIError.CONFLICT.message,
+                    FOTGAPIError.CONFLICT.status
+            );
+        }
+
+        return mapper.toODTO(updatedPlace, TranslatedString.EN);
+    }
+
+    @Override
     public void delete(String identifier) throws APIException {
         try {
             repository.delete(identifier);

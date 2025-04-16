@@ -11,6 +11,7 @@ import java.util.Map;
 
 public interface PlaceService {
     PlaceODTO save(PlaceIDTO place) throws APIException;
+    PlaceODTO update(PlaceIDTO place) throws APIException;
     void delete(String identifier) throws APIException;
 
     PlaceODTO get(String identifier, String language) throws APIException;

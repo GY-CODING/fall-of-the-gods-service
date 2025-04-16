@@ -45,6 +45,23 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public ItemODTO update(ItemIDTO item) throws APIException {
+        final ItemMO updatedItem;
+
+        try {
+            updatedItem = repository.update(mapper.toMO(item));
+        } catch(Exception e) {
+            throw new APIException(
+                    FOTGAPIError.CONFLICT.code,
+                    FOTGAPIError.CONFLICT.message,
+                    FOTGAPIError.CONFLICT.status
+            );
+        }
+
+        return mapper.toODTO(updatedItem, TranslatedString.EN);
+    }
+
+    @Override
     public void delete(String identifier) throws APIException {
         try {
             repository.delete(identifier);

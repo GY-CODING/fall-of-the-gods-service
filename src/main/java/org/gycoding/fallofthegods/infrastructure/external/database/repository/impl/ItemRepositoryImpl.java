@@ -1,6 +1,8 @@
 package org.gycoding.fallofthegods.infrastructure.external.database.repository.impl;
 
 import lombok.AllArgsConstructor;
+import org.gycoding.exceptions.model.APIException;
+import org.gycoding.fallofthegods.domain.exceptions.FOTGAPIError;
 import org.gycoding.fallofthegods.domain.model.items.ItemMO;
 import org.gycoding.fallofthegods.domain.repository.ItemRepository;
 import org.gycoding.fallofthegods.infrastructure.external.database.mapper.ItemDatabaseMapper;
@@ -24,6 +26,19 @@ public class ItemRepositoryImpl implements ItemRepository {
     @Override
     public ItemMO save(ItemMO item) {
         return mapper.toMO(repository.save(mapper.toEntity(item)));
+    }
+
+    @Override
+    public ItemMO update(ItemMO item) throws APIException {
+        final var persistedItem = repository.findByIdentifier(item.identifier()).orElseThrow(() ->
+                new APIException(
+                        FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.status
+                )
+        );
+
+        return mapper.toMO(repository.save(mapper.toUpdatedEntity(persistedItem, item)));
     }
 
     @Override

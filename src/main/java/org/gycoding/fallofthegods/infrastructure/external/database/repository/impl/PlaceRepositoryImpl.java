@@ -1,6 +1,8 @@
 package org.gycoding.fallofthegods.infrastructure.external.database.repository.impl;
 
 import lombok.AllArgsConstructor;
+import org.gycoding.exceptions.model.APIException;
+import org.gycoding.fallofthegods.domain.exceptions.FOTGAPIError;
 import org.gycoding.fallofthegods.domain.model.worlds.PlaceMO;
 import org.gycoding.fallofthegods.domain.repository.PlaceRepository;
 import org.gycoding.fallofthegods.infrastructure.external.database.mapper.PlaceDatabaseMapper;
@@ -24,6 +26,18 @@ public class PlaceRepositoryImpl implements PlaceRepository {
     @Override
     public PlaceMO save(PlaceMO place) {
         return mapper.toMO(repository.save(mapper.toEntity(place)));
+    }
+
+    @Override
+    public PlaceMO update(PlaceMO place) throws APIException {
+        final var persistedPlace = repository.findByIdentifier(place.identifier()).orElseThrow(() ->
+                new APIException(
+                        FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.status
+                ));
+
+        return mapper.toMO(repository.save(mapper.toUpdatedEntity(persistedPlace, place)));
     }
 
     @Override

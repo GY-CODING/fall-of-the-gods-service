@@ -28,6 +28,11 @@ public class WorldManagementController {
         return ResponseEntity.ok(worldMapper.toRSDTO(worldService.save(worldMapper.toIDTO(world))));
     }
 
+    @PatchMapping("")
+    public ResponseEntity<?> update(@RequestBody WorldRQDTO world, @RequestParam String id) throws APIException {
+        return ResponseEntity.ok(worldMapper.toRSDTO(worldService.update(worldMapper.toIDTO(world, id))));
+    }
+
     @DeleteMapping("")
     public ResponseEntity<?> removeWorld(@RequestParam String id) throws APIException {
         worldService.delete(id);
@@ -38,6 +43,11 @@ public class WorldManagementController {
     @PostMapping("/places")
     public ResponseEntity<?> save(@RequestBody PlaceRQDTO place) throws APIException {
         return ResponseEntity.ok(placeMapper.toRSDTO(placeService.save(placeMapper.toIDTO(place))));
+    }
+
+    @PatchMapping("/places")
+    public ResponseEntity<?> update(@RequestBody PlaceRQDTO place, @RequestParam String id) throws APIException {
+        return ResponseEntity.ok(placeMapper.toRSDTO(placeService.update(placeMapper.toIDTO(place, id))));
     }
 
     @DeleteMapping("/places")

@@ -21,6 +21,11 @@ public class ItemManagementController {
         return ResponseEntity.ok(mapper.toRSDTO(service.save(mapper.toIDTO(item))));
     }
 
+    @PatchMapping("")
+    public ResponseEntity<?> update(@RequestBody ItemRQDTO item, @RequestParam String id) throws APIException {
+        return ResponseEntity.ok(mapper.toRSDTO(service.update(mapper.toIDTO(item, id))));
+    }
+
     @DeleteMapping("")
     public ResponseEntity<?> removeItem(@RequestParam String id) throws APIException {
         service.delete(id);

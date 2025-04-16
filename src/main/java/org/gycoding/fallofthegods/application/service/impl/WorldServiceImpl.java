@@ -46,6 +46,23 @@ public class WorldServiceImpl implements WorldService {
     }
 
     @Override
+    public WorldODTO update(WorldIDTO world) throws APIException {
+        final WorldMO updatedWorld;
+
+        try {
+            updatedWorld = repository.update(mapper.toMO(world), world.places());
+        } catch(Exception e) {
+            throw new APIException(
+                    FOTGAPIError.CONFLICT.code,
+                    FOTGAPIError.CONFLICT.message,
+                    FOTGAPIError.CONFLICT.status
+            );
+        }
+
+        return mapper.toODTO(updatedWorld, TranslatedString.EN);
+    }
+
+    @Override
     public void delete(String identifier) throws APIException {
         try {
             repository.delete(identifier);

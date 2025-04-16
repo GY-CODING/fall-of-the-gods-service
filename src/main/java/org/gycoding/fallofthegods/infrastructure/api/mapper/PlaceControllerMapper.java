@@ -13,5 +13,8 @@ public interface PlaceControllerMapper {
     @Mapping(target = "identifier", expression = "java(IdentifierGenerator.generate(place.name().en()))")
     PlaceIDTO toIDTO(PlaceRQDTO place);
 
+    @Mapping(target = "identifier", source = "identifier")
+    PlaceIDTO toIDTO(PlaceRQDTO place, String identifier);
+
     PlaceRSDTO toRSDTO(PlaceODTO place);
 }

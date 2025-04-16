@@ -12,6 +12,7 @@ import java.util.Map;
 
 public interface WorldService {
     WorldODTO save(WorldIDTO world) throws APIException;
+    WorldODTO update(WorldIDTO world) throws APIException;
     void delete(String identifier) throws APIException;
 
     WorldODTO get(String identifier, String language) throws APIException;

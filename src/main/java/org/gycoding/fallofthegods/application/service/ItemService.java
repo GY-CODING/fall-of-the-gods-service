@@ -11,6 +11,7 @@ import java.util.Map;
 
 public interface ItemService {
     ItemODTO save(ItemIDTO item) throws APIException;
+    ItemODTO update(ItemIDTO item) throws APIException;
     void delete(String identifier) throws APIException;
 
     ItemODTO get(String identifier, Boolean inGame, String language) throws APIException;

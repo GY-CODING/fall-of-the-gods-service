@@ -13,5 +13,8 @@ public interface ItemControllerMapper {
     @Mapping(target = "identifier", expression = "java(IdentifierGenerator.generate(item.name().en()))")
     ItemIDTO toIDTO(ItemRQDTO item);
 
+    @Mapping(target = "identifier", source = "identifier")
+    ItemIDTO toIDTO(ItemRQDTO item, String identifier);
+
     ItemRSDTO toRSDTO(ItemODTO item);
 }

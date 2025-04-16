@@ -13,5 +13,8 @@ public interface WorldControllerMapper {
     @Mapping(target = "identifier", expression = "java(IdentifierGenerator.generate(world.name().en()))")
     WorldIDTO toIDTO(WorldRQDTO world);
 
+    @Mapping(target = "identifier", source = "identifier")
+    WorldIDTO toIDTO(WorldRQDTO world, String identifier);
+
     WorldRSDTO toRSDTO(WorldODTO world);
 }
