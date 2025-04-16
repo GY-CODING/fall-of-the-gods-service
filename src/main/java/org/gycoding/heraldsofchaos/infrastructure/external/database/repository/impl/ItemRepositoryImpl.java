@@ -7,6 +7,7 @@ import org.gycoding.heraldsofchaos.domain.model.items.ItemMO;
 import org.gycoding.heraldsofchaos.domain.repository.ItemRepository;
 import org.gycoding.heraldsofchaos.infrastructure.external.database.mapper.ItemDatabaseMapper;
 import org.gycoding.heraldsofchaos.infrastructure.external.database.repository.ItemMongoRepository;
+import org.gycoding.logs.logger.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,8 @@ public class ItemRepositoryImpl implements ItemRepository {
                         FOTGAPIError.RESOURCE_NOT_FOUND.status
                 )
         );
+
+        Logger.debug("Item to be updated found", item.identifier());
 
         return mapper.toMO(repository.save(mapper.toUpdatedEntity(persistedItem, item)));
     }

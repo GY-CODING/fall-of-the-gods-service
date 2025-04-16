@@ -7,6 +7,7 @@ import org.gycoding.heraldsofchaos.domain.model.worlds.PlaceMO;
 import org.gycoding.heraldsofchaos.domain.repository.PlaceRepository;
 import org.gycoding.heraldsofchaos.infrastructure.external.database.mapper.PlaceDatabaseMapper;
 import org.gycoding.heraldsofchaos.infrastructure.external.database.repository.PlaceMongoRepository;
+import org.gycoding.logs.logger.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,10 @@ public class PlaceRepositoryImpl implements PlaceRepository {
                         FOTGAPIError.RESOURCE_NOT_FOUND.code,
                         FOTGAPIError.RESOURCE_NOT_FOUND.message,
                         FOTGAPIError.RESOURCE_NOT_FOUND.status
-                ));
+                )
+        );
+
+        Logger.debug("Place to be updated found", place.identifier());
 
         return mapper.toMO(repository.save(mapper.toUpdatedEntity(persistedPlace, place)));
     }

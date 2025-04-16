@@ -8,6 +8,7 @@ import org.gycoding.heraldsofchaos.domain.repository.CharacterRepository;
 import org.gycoding.heraldsofchaos.infrastructure.external.database.mapper.CharacterDatabaseMapper;
 import org.gycoding.heraldsofchaos.infrastructure.external.database.repository.CharacterMongoRepository;
 import org.gycoding.heraldsofchaos.infrastructure.external.database.repository.WorldMongoRepository;
+import org.gycoding.logs.logger.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,8 @@ public class CharacterRepositoryImpl implements CharacterRepository {
                 )
         );
 
+        Logger.debug(String.format("World found for character: %s", character.identifier()), character.world());
+
         return mapper.toMO(repository.save(mapper.toEntity(character, persistedWorld)));
     }
 
@@ -47,7 +50,11 @@ public class CharacterRepositoryImpl implements CharacterRepository {
                 )
         );
 
+        Logger.debug("Character to be updated found", character.identifier());
+
         final var persistedWorld = worldRepository.findByIdentifier(character.world()).orElse(null);
+
+        Logger.debug(String.format("World searched (not specifically found) for character: %s", character.identifier()), character.world());
 
         return mapper.toMO(repository.save(mapper.toUpdatedEntity(persistedCharacter, character, persistedWorld)));
     }

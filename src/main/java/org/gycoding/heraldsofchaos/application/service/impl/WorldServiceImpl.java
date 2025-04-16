@@ -12,6 +12,7 @@ import org.gycoding.heraldsofchaos.domain.exceptions.FOTGAPIError;
 import org.gycoding.heraldsofchaos.domain.model.TranslatedString;
 import org.gycoding.heraldsofchaos.domain.model.worlds.WorldMO;
 import org.gycoding.heraldsofchaos.domain.repository.WorldRepository;
+import org.gycoding.logs.logger.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -34,12 +35,16 @@ public class WorldServiceImpl implements WorldService {
         try {
             savedWorld = repository.save(mapper.toMO(world), world.places());
         } catch(Exception e) {
+            Logger.error(String.format("An error has occurred while saving a world: %s.", world.identifier()), e.getMessage());
+
             throw new APIException(
                     FOTGAPIError.CONFLICT.code,
                     FOTGAPIError.CONFLICT.message,
                     FOTGAPIError.CONFLICT.status
             );
         }
+
+        Logger.info("World saved successfully.", savedWorld.identifier());
 
         return mapper.toODTO(savedWorld, TranslatedString.EN);
     }
@@ -51,12 +56,16 @@ public class WorldServiceImpl implements WorldService {
         try {
             updatedWorld = repository.update(mapper.toMO(world), world.places());
         } catch(Exception e) {
+            Logger.error(String.format("An error has occurred while updating a world: %s.", world.identifier()), e.getMessage());
+
             throw new APIException(
                     FOTGAPIError.CONFLICT.code,
                     FOTGAPIError.CONFLICT.message,
                     FOTGAPIError.CONFLICT.status
             );
         }
+
+        Logger.info("World updated successfully.", updatedWorld.identifier());
 
         return mapper.toODTO(updatedWorld, TranslatedString.EN);
     }
@@ -66,12 +75,16 @@ public class WorldServiceImpl implements WorldService {
         try {
             repository.delete(identifier);
         } catch (Exception e) {
+            Logger.error(String.format("An error has occurred while removing a world: %s.", identifier), e.getMessage());
+
             throw new APIException(
                     FOTGAPIError.CONFLICT.code,
                     FOTGAPIError.CONFLICT.message,
                     FOTGAPIError.CONFLICT.status
             );
         }
+
+        Logger.info("World removed successfully.", identifier);
     }
 
     @Override

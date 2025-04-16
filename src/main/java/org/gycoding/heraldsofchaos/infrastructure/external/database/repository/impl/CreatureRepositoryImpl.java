@@ -7,6 +7,7 @@ import org.gycoding.heraldsofchaos.domain.model.creatures.CreatureMO;
 import org.gycoding.heraldsofchaos.domain.repository.CreatureRepository;
 import org.gycoding.heraldsofchaos.infrastructure.external.database.mapper.CreatureDatabaseMapper;
 import org.gycoding.heraldsofchaos.infrastructure.external.database.repository.CreatureMongoRepository;
+import org.gycoding.logs.logger.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,8 @@ public class CreatureRepositoryImpl implements CreatureRepository {
                         FOTGAPIError.RESOURCE_NOT_FOUND.status
                 )
         );
+
+        Logger.debug("Creature to be updated found", creature.identifier());
 
         return mapper.toMO(repository.save(mapper.toUpdatedEntity(persistedCreature, creature)));
     }

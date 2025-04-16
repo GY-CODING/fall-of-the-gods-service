@@ -11,6 +11,7 @@ import org.gycoding.heraldsofchaos.domain.exceptions.FOTGAPIError;
 import org.gycoding.heraldsofchaos.domain.model.TranslatedString;
 import org.gycoding.heraldsofchaos.domain.model.creatures.CreatureMO;
 import org.gycoding.heraldsofchaos.domain.repository.CreatureRepository;
+import org.gycoding.logs.logger.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -33,12 +34,16 @@ public class CreatureServiceImpl implements CreatureService {
         try {
             savedCreature = repository.save(mapper.toMO(creature));
         } catch(Exception e) {
+            Logger.error(String.format("An error has occurred while saving a creature: %s.", creature.identifier()), e.getMessage());
+
             throw new APIException(
                     FOTGAPIError.CONFLICT.code,
                     FOTGAPIError.CONFLICT.message,
                     FOTGAPIError.CONFLICT.status
             );
         }
+
+        Logger.info("Creature saved successfully.", savedCreature.identifier());
 
         return mapper.toODTO(savedCreature, TranslatedString.EN);
     }
@@ -50,12 +55,16 @@ public class CreatureServiceImpl implements CreatureService {
         try {
             updatedCreature = repository.update(mapper.toMO(creature));
         } catch(Exception e) {
+            Logger.error(String.format("An error has occurred while updating a creature: %s.", creature.identifier()), e.getMessage());
+
             throw new APIException(
                     FOTGAPIError.CONFLICT.code,
                     FOTGAPIError.CONFLICT.message,
                     FOTGAPIError.CONFLICT.status
             );
         }
+
+        Logger.info("Creature updated successfully.", updatedCreature.identifier());
 
         return mapper.toODTO(updatedCreature, TranslatedString.EN);
     }
@@ -65,12 +74,16 @@ public class CreatureServiceImpl implements CreatureService {
         try {
             repository.delete(identifier);
         } catch (Exception e) {
+            Logger.error(String.format("An error has occurred while removing a creature: %s.", identifier), e.getMessage());
+
             throw new APIException(
                     FOTGAPIError.CONFLICT.code,
                     FOTGAPIError.CONFLICT.message,
                     FOTGAPIError.CONFLICT.status
             );
         }
+
+        Logger.info("Creature removed successfully.", identifier);
     }
 
     @Override

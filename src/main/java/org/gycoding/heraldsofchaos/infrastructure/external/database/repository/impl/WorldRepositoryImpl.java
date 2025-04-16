@@ -8,6 +8,7 @@ import org.gycoding.heraldsofchaos.domain.repository.WorldRepository;
 import org.gycoding.heraldsofchaos.infrastructure.external.database.mapper.WorldDatabaseMapper;
 import org.gycoding.heraldsofchaos.infrastructure.external.database.repository.PlaceMongoRepository;
 import org.gycoding.heraldsofchaos.infrastructure.external.database.repository.WorldMongoRepository;
+import org.gycoding.logs.logger.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,8 @@ public class WorldRepositoryImpl implements WorldRepository {
                         .map(Optional::get)
                         .toList();
 
+        Logger.debug("Places searched (not specifically found) for world.", world.identifier());
+
         return mapper.toMO(repository.save(mapper.toEntity(world, persistedPlaces)));
     }
 
@@ -45,11 +48,15 @@ public class WorldRepositoryImpl implements WorldRepository {
                 )
         );
 
+        Logger.debug("World to be updated found", world.identifier());
+
         final var persistedPlaces = places.stream()
                 .map(placeRepository::findByIdentifier)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .toList();
+
+        Logger.debug("Places searched (not specifically found) for world.", world.identifier());
 
         return mapper.toMO(repository.save(mapper.toUpdatedEntity(persistedWorlds, world, persistedPlaces)));
     }

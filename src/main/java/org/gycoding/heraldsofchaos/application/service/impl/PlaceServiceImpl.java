@@ -11,6 +11,7 @@ import org.gycoding.heraldsofchaos.domain.exceptions.FOTGAPIError;
 import org.gycoding.heraldsofchaos.domain.model.TranslatedString;
 import org.gycoding.heraldsofchaos.domain.model.worlds.PlaceMO;
 import org.gycoding.heraldsofchaos.domain.repository.PlaceRepository;
+import org.gycoding.logs.logger.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -33,12 +34,16 @@ public class PlaceServiceImpl implements PlaceService {
         try {
             savedPlace = repository.save(mapper.toMO(place));
         } catch(Exception e) {
+            Logger.error(String.format("An error has occurred while saving a place: %s.", place.identifier()), e.getMessage());
+
             throw new APIException(
                     FOTGAPIError.CONFLICT.code,
                     FOTGAPIError.CONFLICT.message,
                     FOTGAPIError.CONFLICT.status
             );
         }
+
+        Logger.info("Place saved successfully.", savedPlace.identifier());
 
         return mapper.toODTO(savedPlace, TranslatedString.EN);
     }
@@ -50,12 +55,16 @@ public class PlaceServiceImpl implements PlaceService {
         try {
             updatedPlace = repository.update(mapper.toMO(place));
         } catch(Exception e) {
+            Logger.error(String.format("An error has occurred while updating a place: %s.", place.identifier()), e.getMessage());
+
             throw new APIException(
                     FOTGAPIError.CONFLICT.code,
                     FOTGAPIError.CONFLICT.message,
                     FOTGAPIError.CONFLICT.status
             );
         }
+
+        Logger.info("Place updated successfully.", updatedPlace.identifier());
 
         return mapper.toODTO(updatedPlace, TranslatedString.EN);
     }
@@ -65,12 +74,16 @@ public class PlaceServiceImpl implements PlaceService {
         try {
             repository.delete(identifier);
         } catch (Exception e) {
+            Logger.error(String.format("An error has occurred while removing a place: %s.", identifier), e.getMessage());
+
             throw new APIException(
                     FOTGAPIError.CONFLICT.code,
                     FOTGAPIError.CONFLICT.message,
                     FOTGAPIError.CONFLICT.status
             );
         }
+
+        Logger.info("Place removed successfully.", identifier);
     }
 
     @Override

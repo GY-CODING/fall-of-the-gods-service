@@ -11,6 +11,7 @@ import org.gycoding.heraldsofchaos.domain.exceptions.FOTGAPIError;
 import org.gycoding.heraldsofchaos.domain.model.TranslatedString;
 import org.gycoding.heraldsofchaos.domain.model.characters.CharacterMO;
 import org.gycoding.heraldsofchaos.domain.repository.CharacterRepository;
+import org.gycoding.logs.logger.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -33,12 +34,16 @@ public class CharacterServiceImpl implements CharacterService {
         try {
             savedCharacter = repository.save(mapper.toMO(character));
         } catch(Exception e) {
+            Logger.error(String.format("An error has occurred while saving a character: %s.", character.identifier()), e.getMessage());
+
             throw new APIException(
                     FOTGAPIError.CONFLICT.code,
                     FOTGAPIError.CONFLICT.message,
                     FOTGAPIError.CONFLICT.status
             );
         }
+
+        Logger.info("Character saved successfully.", savedCharacter.identifier());
 
         return mapper.toODTO(savedCharacter, TranslatedString.EN);
     }
@@ -50,12 +55,16 @@ public class CharacterServiceImpl implements CharacterService {
         try {
             updatedCharacter = repository.update(mapper.toMO(character));
         } catch(Exception e) {
+            Logger.error(String.format("An error has occurred while updating a character: %s.", character.identifier()), e.getMessage());
+
             throw new APIException(
                     FOTGAPIError.CONFLICT.code,
                     FOTGAPIError.CONFLICT.message,
                     FOTGAPIError.CONFLICT.status
             );
         }
+
+        Logger.info("Character updated successfully.", updatedCharacter.identifier());
 
         return mapper.toODTO(updatedCharacter, TranslatedString.EN);
     }
@@ -65,12 +74,16 @@ public class CharacterServiceImpl implements CharacterService {
         try {
             repository.delete(identifier);
         } catch (Exception e) {
+            Logger.error(String.format("An error has occurred while removing a character: %s.", identifier), e.getMessage());
+
             throw new APIException(
                     FOTGAPIError.CONFLICT.code,
                     FOTGAPIError.CONFLICT.message,
                     FOTGAPIError.CONFLICT.status
             );
         }
+
+        Logger.info("Character removed successfully.", identifier);
     }
 
     @Override
