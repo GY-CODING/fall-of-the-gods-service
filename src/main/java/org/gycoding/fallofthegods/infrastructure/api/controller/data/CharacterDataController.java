@@ -19,33 +19,18 @@ public class CharacterDataController {
 
     private final CharacterControllerMapper mapper;
 
-    @GetMapping("/story/get")
-    public ResponseEntity<?> getStoryCharacter(@RequestParam String id, @RequestParam String lang) throws APIException {
-        return ResponseEntity.ok(mapper.toRSDTO(service.get(id, false, lang)));
+    @GetMapping("/get")
+    public ResponseEntity<?> getCharacter(@RequestParam String id, @RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(mapper.toRSDTO(service.get(id, lang)));
     }
 
-    @GetMapping("/story/list")
-    public ResponseEntity<?> listStoryCharacters(@RequestParam String lang) throws APIException {
-        return ResponseEntity.ok(service.list(false, lang).stream().map(mapper::toRSDTO).toList());
+    @GetMapping("/list")
+    public ResponseEntity<?> listCharacters(@RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(service.list(lang).stream().map(mapper::toRSDTO).toList());
     }
 
-    @GetMapping("/story/page")
-    public ResponseEntity<?> pageStoryCharacters(Pageable pageable, @RequestParam String lang) throws APIException {
-        return ResponseEntity.ok(service.page(pageable, false, lang).getContent());
-    }
-
-    @GetMapping("/game/get")
-    public ResponseEntity<?> getGameCharacter(@RequestParam String id, @RequestParam String lang) throws APIException {
-        return ResponseEntity.ok(mapper.toRSDTO(service.get(id, true, lang)));
-    }
-
-    @GetMapping("/game/list")
-    public ResponseEntity<?> listGameCharacters(@RequestParam String lang) throws APIException {
-        return ResponseEntity.ok(service.list(true, lang).stream().map(mapper::toRSDTO).toList());
-    }
-
-    @GetMapping("/game/page")
-    public ResponseEntity<?> pageGameCharacters(Pageable pageable, @RequestParam String lang) throws APIException {
-        return ResponseEntity.ok(service.page(pageable, true, lang).getContent());
+    @GetMapping("/page")
+    public ResponseEntity<?> pageCharacters(Pageable pageable, @RequestParam String lang) throws APIException {
+        return ResponseEntity.ok(service.page(pageable, lang).getContent());
     }
 }

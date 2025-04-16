@@ -16,9 +16,6 @@ public interface CharacterRepository {
     void delete(String identifier);
 
     Optional<CharacterMO> get(String identifier);
-    Optional<CharacterMO> get(String identifier, Boolean inGame);
     List<CharacterMO> list();
-    List<CharacterMO> list(Boolean inGame);
     Page<CharacterMO> page(Pageable pageable);
-    Page<CharacterMO> page(Pageable pageable, Boolean inGame);
 }

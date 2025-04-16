@@ -7,6 +7,5 @@ import org.gycoding.fallofthegods.domain.model.TranslatedString;
 public record PlaceRQDTO(
         TranslatedString name,
         TranslatedString description,
-        String image,
-        Boolean inGame
+        String image
 ) { }

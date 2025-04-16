@@ -14,7 +14,7 @@ public interface CreatureService {
     CreatureODTO update(CreatureIDTO creature) throws APIException;
     void delete(String identifier) throws APIException;
 
-    CreatureODTO get(String identifier, Boolean inGame, String language) throws APIException;
-    List<CreatureODTO> list(Boolean inGame, String language) throws APIException;
-    Page<Map<String, Object>> page(Pageable pageable, Boolean inGame, String language) throws APIException;
+    CreatureODTO get(String identifier, String language) throws APIException;
+    List<CreatureODTO> list(String language) throws APIException;
+    Page<Map<String, Object>> page(Pageable pageable, String language) throws APIException;
 }

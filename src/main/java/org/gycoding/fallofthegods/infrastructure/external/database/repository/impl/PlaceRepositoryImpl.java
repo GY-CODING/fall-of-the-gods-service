@@ -6,7 +6,6 @@ import org.gycoding.fallofthegods.domain.exceptions.FOTGAPIError;
 import org.gycoding.fallofthegods.domain.model.worlds.PlaceMO;
 import org.gycoding.fallofthegods.domain.repository.PlaceRepository;
 import org.gycoding.fallofthegods.infrastructure.external.database.mapper.PlaceDatabaseMapper;
-import org.gycoding.fallofthegods.infrastructure.external.database.model.worlds.PlaceEntity;
 import org.gycoding.fallofthegods.infrastructure.external.database.repository.PlaceMongoRepository;
 import org.gycoding.fallofthegods.shared.PagingConverter;
 import org.springframework.data.domain.Page;
@@ -52,36 +51,8 @@ public class PlaceRepositoryImpl implements PlaceRepository {
     }
 
     @Override
-    public Optional<PlaceMO> get(String identifier, Boolean inGame) {
-        Optional<PlaceEntity> placeEntity;
-
-        if(inGame) {
-            placeEntity = repository.findByIdentifierAndInGame(identifier, inGame);
-        } else {
-            placeEntity = repository.findByIdentifier(identifier);
-        }
-
-        return placeEntity.map(mapper::toMO);
-    }
-
-    @Override
     public List<PlaceMO> list() {
         return repository.findAll().stream()
-                .map(mapper::toMO)
-                .toList();
-    }
-
-    @Override
-    public List<PlaceMO> list(Boolean inGame) {
-        List<PlaceEntity> placeEntities;
-
-        if(inGame) {
-            placeEntities = repository.findByInGame(inGame);
-        } else {
-            placeEntities = repository.findAll();
-        }
-
-        return placeEntities.stream()
                 .map(mapper::toMO)
                 .toList();
     }
@@ -90,24 +61,6 @@ public class PlaceRepositoryImpl implements PlaceRepository {
     public Page<PlaceMO> page(Pageable pageable) {
         return PagingConverter.listToPage(
                 repository.findAll(pageable).stream()
-                        .map(mapper::toMO)
-                        .toList(),
-                pageable
-        );
-    }
-
-    @Override
-    public Page<PlaceMO> page(Pageable pageable, Boolean inGame) {
-        Page<PlaceEntity> placeEntities;
-
-        if(inGame) {
-            placeEntities = repository.findByInGame(inGame, pageable);
-        } else {
-            placeEntities = repository.findAll(pageable);
-        }
-
-        return PagingConverter.listToPage(
-                placeEntities.stream()
                         .map(mapper::toMO)
                         .toList(),
                 pageable

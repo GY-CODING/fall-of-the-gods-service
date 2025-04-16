@@ -11,7 +11,6 @@ public record ItemODTO(
         String name,
         String description,
         String image,
-        Boolean inGame,
         ItemType type
 ) {
     public Map<String, Object> toMap() {

@@ -14,7 +14,7 @@ public interface CharacterService {
     CharacterODTO update(CharacterIDTO character) throws APIException;
     void delete(String identifier) throws APIException;
 
-    CharacterODTO get(String identifier, Boolean inGame, String language) throws APIException;
-    List<CharacterODTO> list(Boolean inGame, String language) throws APIException;
-    Page<Map<String, Object>> page(Pageable pageable, Boolean inGame, String language) throws APIException;
+    CharacterODTO get(String identifier, String language) throws APIException;
+    List<CharacterODTO> list(String language) throws APIException;
+    Page<Map<String, Object>> page(Pageable pageable, String language) throws APIException;
 }

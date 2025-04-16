@@ -16,9 +16,6 @@ public interface CreatureRepository {
     void delete(String identifier);
 
     Optional<CreatureMO> get(String identifier);
-    Optional<CreatureMO> get(String identifier, Boolean inGame);
     List<CreatureMO> list();
-    List<CreatureMO> list(Boolean inGame);
     Page<CreatureMO> page(Pageable pageable);
-    Page<CreatureMO> page(Pageable pageable, Boolean inGame);
 }

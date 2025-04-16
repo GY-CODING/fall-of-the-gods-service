@@ -75,8 +75,8 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemODTO get(String identifier, Boolean inGame, String language) throws APIException {
-        final var item = repository.get(identifier, inGame).orElseThrow(() ->
+    public ItemODTO get(String identifier, String language) throws APIException {
+        final var item = repository.get(identifier).orElseThrow(() ->
                 new APIException(
                         FOTGAPIError.RESOURCE_NOT_FOUND.code,
                         FOTGAPIError.RESOURCE_NOT_FOUND.message,
@@ -88,9 +88,9 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemODTO> list(Boolean inGame, String language) throws APIException {
+    public List<ItemODTO> list(String language) throws APIException {
         try {
-            final var items = repository.list(inGame);
+            final var items = repository.list();
 
             return items.stream().map(item -> mapper.toODTO(item, language)).toList();
         } catch (NullPointerException e) {
@@ -103,9 +103,9 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Page<Map<String, Object>> page(Pageable pageable, Boolean inGame, String language) throws APIException {
+    public Page<Map<String, Object>> page(Pageable pageable, String language) throws APIException {
         try {
-            final var items = repository.page(pageable, inGame);
+            final var items = repository.page(pageable);
 
             return PagingConverter.listToPage(items.stream().map(item -> mapper.toODTO(item, language)).map(ItemODTO::toMap).toList(), pageable);
         } catch (NullPointerException e) {

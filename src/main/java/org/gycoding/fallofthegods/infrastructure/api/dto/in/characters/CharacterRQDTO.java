@@ -9,7 +9,6 @@ public record CharacterRQDTO(
         TranslatedString title,
         TranslatedString description,
         String world,
-        Boolean inGame,
         String image,
         TranslatedString race
 ) { }

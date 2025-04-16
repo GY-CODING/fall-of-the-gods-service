@@ -9,8 +9,7 @@ public record PlaceODTO(
         String identifier,
         String name,
         String description,
-        String image,
-        Boolean inGame
+        String image
 ) {
     public Map<String, Object> toMap() {
         return Map.of(

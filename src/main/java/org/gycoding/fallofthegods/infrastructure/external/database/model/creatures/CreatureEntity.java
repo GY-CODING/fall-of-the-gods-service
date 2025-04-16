@@ -16,16 +16,14 @@ public class CreatureEntity {
         public String identifier;
         public TranslatedString name;
         public TranslatedString description;
-        public Boolean inGame;
         public String image;
 
         @Builder
-        public CreatureEntity(String mongoId, String identifier, TranslatedString name, TranslatedString description, Boolean inGame, String image) {
+        public CreatureEntity(String mongoId, String identifier, TranslatedString name, TranslatedString description, String image) {
             this.mongoId = mongoId;
             this.identifier = identifier;
             this.name = name;
             this.description = description;
-            this.inGame = inGame;
             this.image = image;
         }
 }

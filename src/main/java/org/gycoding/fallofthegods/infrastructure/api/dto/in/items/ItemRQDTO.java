@@ -9,6 +9,5 @@ public record ItemRQDTO(
         TranslatedString name,
         TranslatedString description,
         String image,
-        Boolean inGame,
         ItemType type
 ) { }

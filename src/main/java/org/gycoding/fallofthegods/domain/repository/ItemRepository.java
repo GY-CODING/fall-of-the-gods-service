@@ -16,10 +16,6 @@ public interface ItemRepository {
     void delete(String identifier);
 
     Optional<ItemMO> get(String identifier);
-    Optional<ItemMO> get(String identifier, Boolean inGame);
     List<ItemMO> list();
-    List<ItemMO> list(Boolean inGame);
     Page<ItemMO> page(Pageable pageable);
-    Page<ItemMO> page(Pageable pageable, Boolean inGame);
-
 }
