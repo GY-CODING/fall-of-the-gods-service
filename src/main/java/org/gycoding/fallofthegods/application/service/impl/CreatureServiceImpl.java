@@ -11,7 +11,6 @@ import org.gycoding.fallofthegods.domain.exceptions.FOTGAPIError;
 import org.gycoding.fallofthegods.domain.model.TranslatedString;
 import org.gycoding.fallofthegods.domain.model.creatures.CreatureMO;
 import org.gycoding.fallofthegods.domain.repository.CreatureRepository;
-import org.gycoding.fallofthegods.shared.PagingConverter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -107,7 +106,7 @@ public class CreatureServiceImpl implements CreatureService {
         try {
             final var creatures = repository.page(pageable);
 
-            return PagingConverter.listToPage(creatures.stream().map(creature -> mapper.toODTO(creature, language)).map(CreatureODTO::toMap).toList(), pageable);
+            return creatures.map(creature -> mapper.toODTO(creature, language).toMap());
         } catch (NullPointerException e) {
             throw new APIException(
                     FOTGAPIError.RESOURCE_NOT_FOUND.code,

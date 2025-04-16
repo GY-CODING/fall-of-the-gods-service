@@ -7,7 +7,6 @@ import org.gycoding.fallofthegods.domain.model.worlds.PlaceMO;
 import org.gycoding.fallofthegods.domain.repository.PlaceRepository;
 import org.gycoding.fallofthegods.infrastructure.external.database.mapper.PlaceDatabaseMapper;
 import org.gycoding.fallofthegods.infrastructure.external.database.repository.PlaceMongoRepository;
-import org.gycoding.fallofthegods.shared.PagingConverter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -59,11 +58,7 @@ public class PlaceRepositoryImpl implements PlaceRepository {
 
     @Override
     public Page<PlaceMO> page(Pageable pageable) {
-        return PagingConverter.listToPage(
-                repository.findAll(pageable).stream()
-                        .map(mapper::toMO)
-                        .toList(),
-                pageable
-        );
+        return repository.findAll(pageable)
+                .map(mapper::toMO);
     }
 }

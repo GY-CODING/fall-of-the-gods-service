@@ -8,7 +8,6 @@ import org.gycoding.fallofthegods.domain.repository.CharacterRepository;
 import org.gycoding.fallofthegods.infrastructure.external.database.mapper.CharacterDatabaseMapper;
 import org.gycoding.fallofthegods.infrastructure.external.database.repository.CharacterMongoRepository;
 import org.gycoding.fallofthegods.infrastructure.external.database.repository.WorldMongoRepository;
-import org.gycoding.fallofthegods.shared.PagingConverter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -73,11 +72,7 @@ public class CharacterRepositoryImpl implements CharacterRepository {
 
     @Override
     public Page<CharacterMO> page(Pageable pageable) {
-        return PagingConverter.listToPage(
-                repository.findAll(pageable).stream()
-                    .map(mapper::toMO)
-                    .toList(),
-                pageable
-        );
+        return repository.findAll(pageable)
+                .map(mapper::toMO);
     }
 }

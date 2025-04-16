@@ -8,7 +8,6 @@ import org.gycoding.fallofthegods.domain.repository.WorldRepository;
 import org.gycoding.fallofthegods.infrastructure.external.database.mapper.WorldDatabaseMapper;
 import org.gycoding.fallofthegods.infrastructure.external.database.repository.PlaceMongoRepository;
 import org.gycoding.fallofthegods.infrastructure.external.database.repository.WorldMongoRepository;
-import org.gycoding.fallofthegods.shared.PagingConverter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -75,11 +74,7 @@ public class WorldRepositoryImpl implements WorldRepository {
 
     @Override
     public Page<WorldMO> page(Pageable pageable) {
-        return PagingConverter.listToPage(
-                repository.findAll(pageable).stream()
-                        .map(mapper::toMO)
-                        .toList(),
-                pageable
-        );
+        return repository.findAll(pageable)
+                .map(mapper::toMO);
     }
 }

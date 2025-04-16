@@ -59,9 +59,4 @@ public class WorldDataController {
     public ResponseEntity<?> listWorldPlaces(@RequestParam String id, @RequestParam String lang) throws APIException {
         return ResponseEntity.ok(worldService.listPlaces(id, lang).stream().map(placeMapper::toRSDTO).toList());
     }
-
-    @GetMapping("/places/page")
-    public ResponseEntity<?> pageWorldPlaces(@RequestParam String id, Pageable pageable, @RequestParam String lang) throws APIException {
-        return ResponseEntity.ok(worldService.pagePlaces(id, pageable, lang).getContent());
-    }
 }

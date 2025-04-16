@@ -20,5 +20,4 @@ public interface WorldService {
     Page<Map<String, Object>> page(Pageable pageable, String language) throws APIException;
 
     List<PlaceODTO> listPlaces(String idWorld, String language) throws APIException;
-    Page<Map<String, Object>> pagePlaces(String idWorld, Pageable pageable, String language) throws APIException;
 }

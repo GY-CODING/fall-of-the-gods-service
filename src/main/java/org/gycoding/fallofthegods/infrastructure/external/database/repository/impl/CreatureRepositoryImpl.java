@@ -7,7 +7,6 @@ import org.gycoding.fallofthegods.domain.model.creatures.CreatureMO;
 import org.gycoding.fallofthegods.domain.repository.CreatureRepository;
 import org.gycoding.fallofthegods.infrastructure.external.database.mapper.CreatureDatabaseMapper;
 import org.gycoding.fallofthegods.infrastructure.external.database.repository.CreatureMongoRepository;
-import org.gycoding.fallofthegods.shared.PagingConverter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -60,11 +59,7 @@ public class CreatureRepositoryImpl implements CreatureRepository {
 
     @Override
     public Page<CreatureMO> page(Pageable pageable) {
-        return PagingConverter.listToPage(
-                repository.findAll(pageable).stream()
-                        .map(mapper::toMO)
-                        .toList(),
-                pageable
-        );
+        return repository.findAll(pageable)
+                .map(mapper::toMO);
     }
 }

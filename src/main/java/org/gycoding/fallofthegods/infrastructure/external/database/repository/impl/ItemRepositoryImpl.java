@@ -7,7 +7,6 @@ import org.gycoding.fallofthegods.domain.model.items.ItemMO;
 import org.gycoding.fallofthegods.domain.repository.ItemRepository;
 import org.gycoding.fallofthegods.infrastructure.external.database.mapper.ItemDatabaseMapper;
 import org.gycoding.fallofthegods.infrastructure.external.database.repository.ItemMongoRepository;
-import org.gycoding.fallofthegods.shared.PagingConverter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -60,11 +59,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 
     @Override
     public Page<ItemMO> page(Pageable pageable) {
-        return PagingConverter.listToPage(
-                repository.findAll(pageable).stream()
-                        .map(mapper::toMO)
-                        .toList(),
-                pageable
-        );
+        return repository.findAll(pageable)
+                .map(mapper::toMO);
     }
 }
