@@ -63,13 +63,13 @@ COPY src/main/resources/settings.xml /root/.m2/settings.xml
 RUN ls -la /root/.m2/ && cat /root/.m2/settings.xml
 
 # Copy the JAR file from the build stage to the current directory
-COPY --from=build /app/target/*.jar ./fallofthegods-data.jar
+COPY --from=build /app/target/*.jar ./heralds-of-chaos.jar
 
 # Ensure the JAR file has the correct permissions
-RUN chmod 777 /app/fallofthegods-data.jar
+RUN chmod 777 /app/heralds-of-chaos.jar
 
 # Expose the port on which the application will run
 EXPOSE 8003
 
 # Set the command to run the application
-CMD ["java", "-jar", "fallofthegods-data.jar"]
+CMD ["java", "-jar", "heralds-of-chaos.jar"]

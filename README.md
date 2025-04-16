@@ -1,17 +1,14 @@
-# Fall of the Gods API
+# Heralds of Chaos API
 
-![version](https://img.shields.io/badge/version-4.1.0-gold?style=for-the-badge)
+![version](https://img.shields.io/badge/version-5.0.0-gold?style=for-the-badge)
 [![developer](https://img.shields.io/badge/developed-GYCODING-B833FF?style=for-the-badge)](https://gycoding.com)
-[![reference](https://img.shields.io/badge/reference-api_reference-silver?style=for-the-badge)](https://lively-kanya-gycoding-bfa603d9.koyeb.app/)
+[![reference](https://img.shields.io/badge/reference-api_reference-silver?style=for-the-badge)](https://api.gycoding.com/fallofthegods)
 
 <br>
 
 ## Introduction
 
-This is the official **Fall of the Gods API**, containing endpoints to get data about **characters**, **items**, **worlds**, **places** and **stories** from the main universe and the videogame.
-This API also serves as the achievement management system for every **GYCODING** user for the game Leaves & Shadows.
-
-We provide a full **[API reference](https://fallofthegods-data-gycoding.koyeb.app/)**, containing all the available **endpoints**, **documentation** and a **changelog** with the new features or bugfixes from all the versions of this API.
+This is the official **Heralds of Chaos API**, containing endpoints to get data about **characters**, **items**, **worlds**, **places** and **creatures** from the main universe.
 
 <br>
 
@@ -25,14 +22,6 @@ This API REST uses **Spring Web** for the whole API REST functionality and **Spr
 
 <br>
 
-![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
-
-The reference static website was made using just **HTML**, **CSS** and some **JavaScript**, while the documentation was made automatically using **Dokka** for the Code Docs and **Postman** for the API Docs.
-
-<br>
-
 ## Creators
 
 | Product Owner |
@@ -41,4 +30,4 @@ The reference static website was made using just **HTML**, **CSS** and some **Ja
 
 <br>
 
-<pre align="center">GYCODING 2024</pre>
+<pre align="center">GYCODING 2025</pre>
