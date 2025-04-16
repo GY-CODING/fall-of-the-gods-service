@@ -11,6 +11,7 @@ import java.util.Map;
 
 public interface AchievementService {
     AchievementODTO save(AchievementIDTO achievement) throws APIException;
+    AchievementODTO update(AchievementIDTO achievement) throws APIException;
     void delete(String identifier) throws APIException;
 
     AchievementODTO get(String identifier, String language) throws APIException;

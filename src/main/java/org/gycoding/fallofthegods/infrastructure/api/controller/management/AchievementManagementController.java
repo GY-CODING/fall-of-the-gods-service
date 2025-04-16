@@ -21,6 +21,11 @@ public class AchievementManagementController {
         return ResponseEntity.ok(mapper.toRSDTO(service.save(mapper.toIDTO(achievement))));
     }
 
+    @PatchMapping("")
+    public ResponseEntity<?> update(@RequestBody AchievementRQDTO achievement, @RequestParam String id) throws APIException {
+        return ResponseEntity.ok(mapper.toRSDTO(service.update(mapper.toIDTO(achievement, id))));
+    }
+
     @DeleteMapping("")
     public ResponseEntity<?> removeAchievement(@RequestParam String id) throws APIException {
         service.delete(id);

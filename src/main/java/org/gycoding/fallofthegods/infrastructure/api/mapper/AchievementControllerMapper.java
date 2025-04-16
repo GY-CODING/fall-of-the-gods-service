@@ -13,5 +13,8 @@ public interface AchievementControllerMapper {
     @Mapping(target = "identifier", expression = "java(IdentifierGenerator.generate(achievement.name().en()))")
     AchievementIDTO toIDTO(AchievementRQDTO achievement);
 
+    @Mapping(target = "identifier", source = "identifier")
+    AchievementIDTO toIDTO(AchievementRQDTO achievement, String identifier);
+
     AchievementRSDTO toRSDTO(AchievementODTO achievement);
 }

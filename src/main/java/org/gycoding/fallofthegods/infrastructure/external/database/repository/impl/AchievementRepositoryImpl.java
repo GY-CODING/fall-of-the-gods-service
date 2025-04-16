@@ -1,6 +1,8 @@
 package org.gycoding.fallofthegods.infrastructure.external.database.repository.impl;
 
 import lombok.AllArgsConstructor;
+import org.gycoding.exceptions.model.APIException;
+import org.gycoding.fallofthegods.domain.exceptions.FOTGAPIError;
 import org.gycoding.fallofthegods.domain.model.achievements.AchievementMO;
 import org.gycoding.fallofthegods.domain.repository.AchievementRepository;
 import org.gycoding.fallofthegods.infrastructure.external.database.mapper.AchievementDatabaseMapper;
@@ -23,6 +25,19 @@ public class AchievementRepositoryImpl implements AchievementRepository {
     @Override
     public AchievementMO save(AchievementMO achievement) {
         return mapper.toMO(repository.save(mapper.toEntity(achievement)));
+    }
+
+    @Override
+    public AchievementMO update(AchievementMO achievement) throws APIException {
+        final var persistedAchievement = repository.findByIdentifier(achievement.identifier()).orElseThrow(() ->
+                new APIException(
+                        FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.status
+                )
+        );
+
+        return mapper.toMO(repository.save(mapper.toUpdatedEntity(persistedAchievement, achievement)));
     }
 
     @Override

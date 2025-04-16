@@ -45,6 +45,23 @@ public class AchievementServiceImpl implements AchievementService {
     }
 
     @Override
+    public AchievementODTO update(AchievementIDTO achievement) throws APIException {
+        final AchievementMO updatedAchievement;
+
+        try {
+            updatedAchievement = repository.update(mapper.toMO(achievement));
+        } catch(Exception e) {
+            throw new APIException(
+                    FOTGAPIError.CONFLICT.code,
+                    FOTGAPIError.CONFLICT.message,
+                    FOTGAPIError.CONFLICT.status
+            );
+        }
+
+        return mapper.toODTO(updatedAchievement, TranslatedString.EN);
+    }
+
+    @Override
     public void delete(String identifier) throws APIException {
         try {
             repository.delete(identifier);
