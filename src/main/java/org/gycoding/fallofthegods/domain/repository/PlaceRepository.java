@@ -16,9 +16,6 @@ public interface PlaceRepository {
     void delete(String identifier);
 
     Optional<PlaceMO> get(String identifier);
-    Optional<PlaceMO> get(String identifier, Boolean inGame);
     List<PlaceMO> list();
-    List<PlaceMO> list(Boolean inGame);
     Page<PlaceMO> page(Pageable pageable);
-    Page<PlaceMO> page(Pageable pageable, Boolean inGame);
 }

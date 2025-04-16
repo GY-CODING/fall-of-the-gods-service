@@ -6,10 +6,8 @@ import org.gycoding.fallofthegods.domain.exceptions.FOTGAPIError;
 import org.gycoding.fallofthegods.domain.model.characters.CharacterMO;
 import org.gycoding.fallofthegods.domain.repository.CharacterRepository;
 import org.gycoding.fallofthegods.infrastructure.external.database.mapper.CharacterDatabaseMapper;
-import org.gycoding.fallofthegods.infrastructure.external.database.model.characters.CharacterEntity;
 import org.gycoding.fallofthegods.infrastructure.external.database.repository.CharacterMongoRepository;
 import org.gycoding.fallofthegods.infrastructure.external.database.repository.WorldMongoRepository;
-import org.gycoding.fallofthegods.shared.PagingConverter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -66,19 +64,6 @@ public class CharacterRepositoryImpl implements CharacterRepository {
     }
 
     @Override
-    public Optional<CharacterMO> get(String identifier, Boolean inGame) {
-        Optional<CharacterEntity> characterEntity;
-
-        if(inGame) {
-            characterEntity = repository.findByIdentifierAndInGame(identifier, inGame);
-        } else {
-            characterEntity = repository.findByIdentifier(identifier);
-        }
-
-        return characterEntity.map(mapper::toMO);
-    }
-
-    @Override
     public List<CharacterMO> list() {
         return repository.findAll().stream()
                 .map(mapper::toMO)
@@ -86,45 +71,8 @@ public class CharacterRepositoryImpl implements CharacterRepository {
     }
 
     @Override
-    public List<CharacterMO> list(Boolean inGame) {
-        List<CharacterEntity> characterEntities;
-
-        if(inGame) {
-            characterEntities = repository.findByInGame(inGame);
-        } else {
-            characterEntities = repository.findAll();
-        }
-
-        return characterEntities.stream()
-                .map(mapper::toMO)
-                .toList();
-    }
-
-    @Override
     public Page<CharacterMO> page(Pageable pageable) {
-        return PagingConverter.listToPage(
-                repository.findAll(pageable).stream()
-                    .map(mapper::toMO)
-                    .toList(),
-                pageable
-        );
-    }
-
-    @Override
-    public Page<CharacterMO> page(Pageable pageable, Boolean inGame) {
-        Page<CharacterEntity> characterEntities;
-
-        if(inGame) {
-            characterEntities = repository.findByInGame(inGame, pageable);
-        } else {
-            characterEntities = repository.findAll(pageable);
-        }
-
-        return PagingConverter.listToPage(
-                characterEntities.stream()
-                        .map(mapper::toMO)
-                        .toList(),
-                pageable
-        );
+        return repository.findAll(pageable)
+                .map(mapper::toMO);
     }
 }

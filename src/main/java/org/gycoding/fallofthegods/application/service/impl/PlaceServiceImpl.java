@@ -11,7 +11,6 @@ import org.gycoding.fallofthegods.domain.exceptions.FOTGAPIError;
 import org.gycoding.fallofthegods.domain.model.TranslatedString;
 import org.gycoding.fallofthegods.domain.model.worlds.PlaceMO;
 import org.gycoding.fallofthegods.domain.repository.PlaceRepository;
-import org.gycoding.fallofthegods.shared.PagingConverter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -107,7 +106,7 @@ public class PlaceServiceImpl implements PlaceService {
         try {
             final var places = repository.page(pageable);
 
-            return PagingConverter.listToPage(places.stream().map(place -> mapper.toODTO(place, language)).map(PlaceODTO::toMap).toList(), pageable);
+            return places.map(place -> mapper.toODTO(place, language).toMap());
         } catch (NullPointerException e) {
             throw new APIException(
                     FOTGAPIError.RESOURCE_NOT_FOUND.code,

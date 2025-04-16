@@ -18,17 +18,15 @@ public class ItemEntity {
     public TranslatedString name;
     public TranslatedString description;
     public String image;
-    public Boolean inGame;
     public ItemType type;
 
     @Builder
-    public ItemEntity(String mongoId, String identifier, TranslatedString name, TranslatedString description, String image, Boolean inGame, ItemType type) {
+    public ItemEntity(String mongoId, String identifier, TranslatedString name, TranslatedString description, String image, ItemType type) {
         this.mongoId = mongoId;
         this.identifier = identifier;
         this.name = name;
         this.description = description;
         this.image = image;
-        this.inGame = inGame;
         this.type = type;
     }
 }

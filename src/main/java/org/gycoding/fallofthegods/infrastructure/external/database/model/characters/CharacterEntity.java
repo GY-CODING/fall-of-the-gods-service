@@ -21,19 +21,17 @@ public class CharacterEntity {
         public TranslatedString description;
         @DBRef
         public WorldEntity world;
-        public Boolean inGame;
         public String image;
         public TranslatedString race;
 
         @Builder
-        public CharacterEntity(String mongoId, String identifier, TranslatedString name, TranslatedString title, TranslatedString description, WorldEntity world, Boolean inGame, String image, TranslatedString race) {
+        public CharacterEntity(String mongoId, String identifier, TranslatedString name, TranslatedString title, TranslatedString description, WorldEntity world, String image, TranslatedString race) {
                 this.mongoId = mongoId;
                 this.identifier = identifier;
                 this.name = name;
                 this.title = title;
                 this.description = description;
                 this.world = world;
-                this.inGame = inGame;
                 this.image = image;
                 this.race = race;
         }

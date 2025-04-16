@@ -7,6 +7,5 @@ import org.gycoding.fallofthegods.domain.model.TranslatedString;
 public record CreatureRQDTO(
         TranslatedString name,
         TranslatedString description,
-        Boolean inGame,
         String image
 ) { }

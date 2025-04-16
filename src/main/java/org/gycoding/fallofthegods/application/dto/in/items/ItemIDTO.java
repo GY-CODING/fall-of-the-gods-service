@@ -10,6 +10,5 @@ public record ItemIDTO(
         TranslatedString name,
         TranslatedString description,
         String image,
-        Boolean inGame,
         ItemType type
 ) {}

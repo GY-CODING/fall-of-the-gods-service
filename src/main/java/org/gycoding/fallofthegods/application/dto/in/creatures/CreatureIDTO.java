@@ -8,7 +8,6 @@ public record CreatureIDTO(
         String identifier,
         TranslatedString name,
         TranslatedString description,
-        Boolean inGame,
         String image
 ) {}
 

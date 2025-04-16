@@ -11,7 +11,6 @@ import org.gycoding.fallofthegods.domain.exceptions.FOTGAPIError;
 import org.gycoding.fallofthegods.domain.model.TranslatedString;
 import org.gycoding.fallofthegods.domain.model.creatures.CreatureMO;
 import org.gycoding.fallofthegods.domain.repository.CreatureRepository;
-import org.gycoding.fallofthegods.shared.PagingConverter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -75,8 +74,8 @@ public class CreatureServiceImpl implements CreatureService {
     }
 
     @Override
-    public CreatureODTO get(String identifier, Boolean inGame, String language) throws APIException {
-        final var creature = repository.get(identifier, inGame).orElseThrow(() ->
+    public CreatureODTO get(String identifier, String language) throws APIException {
+        final var creature = repository.get(identifier).orElseThrow(() ->
                 new APIException(
                         FOTGAPIError.RESOURCE_NOT_FOUND.code,
                         FOTGAPIError.RESOURCE_NOT_FOUND.message,
@@ -88,9 +87,9 @@ public class CreatureServiceImpl implements CreatureService {
     }
 
     @Override
-    public List<CreatureODTO> list(Boolean inGame, String language) throws APIException {
+    public List<CreatureODTO> list(String language) throws APIException {
         try {
-            final var creatures = repository.list(inGame);
+            final var creatures = repository.list();
 
             return creatures.stream().map(creature -> mapper.toODTO(creature, language)).toList();
         } catch (NullPointerException e) {
@@ -103,11 +102,11 @@ public class CreatureServiceImpl implements CreatureService {
     }
 
     @Override
-    public Page<Map<String, Object>> page(Pageable pageable, Boolean inGame, String language) throws APIException {
+    public Page<Map<String, Object>> page(Pageable pageable, String language) throws APIException {
         try {
-            final var creatures = repository.page(pageable, inGame);
+            final var creatures = repository.page(pageable);
 
-            return PagingConverter.listToPage(creatures.stream().map(creature -> mapper.toODTO(creature, language)).map(CreatureODTO::toMap).toList(), pageable);
+            return creatures.map(creature -> mapper.toODTO(creature, language).toMap());
         } catch (NullPointerException e) {
             throw new APIException(
                     FOTGAPIError.RESOURCE_NOT_FOUND.code,

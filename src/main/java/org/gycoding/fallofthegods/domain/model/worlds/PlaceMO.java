@@ -8,6 +8,5 @@ public record PlaceMO(
         String identifier,
         TranslatedString name,
         TranslatedString description,
-        String image,
-        Boolean inGame
+        String image
 ) {}

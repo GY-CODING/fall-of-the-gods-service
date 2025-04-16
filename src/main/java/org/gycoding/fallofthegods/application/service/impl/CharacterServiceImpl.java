@@ -11,7 +11,6 @@ import org.gycoding.fallofthegods.domain.exceptions.FOTGAPIError;
 import org.gycoding.fallofthegods.domain.model.TranslatedString;
 import org.gycoding.fallofthegods.domain.model.characters.CharacterMO;
 import org.gycoding.fallofthegods.domain.repository.CharacterRepository;
-import org.gycoding.fallofthegods.shared.PagingConverter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -75,8 +74,8 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public CharacterODTO get(String identifier, Boolean inGame, String language) throws APIException {
-        final var character = repository.get(identifier, inGame).orElseThrow(() ->
+    public CharacterODTO get(String identifier, String language) throws APIException {
+        final var character = repository.get(identifier).orElseThrow(() ->
                 new APIException(
                         FOTGAPIError.RESOURCE_NOT_FOUND.code,
                         FOTGAPIError.RESOURCE_NOT_FOUND.message,
@@ -88,9 +87,9 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public List<CharacterODTO> list(Boolean inGame, String language) throws APIException {
+    public List<CharacterODTO> list(String language) throws APIException {
         try {
-            final var characters = repository.list(inGame);
+            final var characters = repository.list();
 
             return characters.stream()
                     .map(character -> mapper.toODTO(character, language))
@@ -105,17 +104,11 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public Page<Map<String, Object>> page(Pageable pageable, Boolean inGame, String language) throws APIException {
+    public Page<Map<String, Object>> page(Pageable pageable, String language) throws APIException {
         try {
-            final var characters = repository.page(pageable, inGame);
+            final var characters = repository.page(pageable);
 
-            return PagingConverter.listToPage(
-                    characters.stream()
-                            .map(character -> mapper.toODTO(character, language))
-                            .map(CharacterODTO::toMap)
-                            .toList(),
-                    pageable
-            );
+            return characters.map(character -> mapper.toODTO(character, language).toMap());
         } catch (NullPointerException e) {
             throw new APIException(
                     FOTGAPIError.RESOURCE_NOT_FOUND.code,

@@ -14,7 +14,7 @@ public interface ItemService {
     ItemODTO update(ItemIDTO item) throws APIException;
     void delete(String identifier) throws APIException;
 
-    ItemODTO get(String identifier, Boolean inGame, String language) throws APIException;
-    List<ItemODTO> list(Boolean inGame, String language) throws APIException;
-    Page<Map<String, Object>> page(Pageable pageable, Boolean inGame, String language) throws APIException;
+    ItemODTO get(String identifier, String language) throws APIException;
+    List<ItemODTO> list(String language) throws APIException;
+    Page<Map<String, Object>> page(Pageable pageable, String language) throws APIException;
 }

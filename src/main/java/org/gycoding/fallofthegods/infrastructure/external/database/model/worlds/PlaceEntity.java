@@ -17,15 +17,13 @@ public class PlaceEntity {
         public TranslatedString name;
         public TranslatedString description;
         public String image;
-        public Boolean inGame;
 
         @Builder
-        public PlaceEntity(String mongoId, String identifier, TranslatedString name, TranslatedString description, String image, Boolean inGame) {
+        public PlaceEntity(String mongoId, String identifier, TranslatedString name, TranslatedString description, String image) {
             this.mongoId = mongoId;
             this.identifier = identifier;
             this.name = name;
             this.description = description;
             this.image = image;
-            this.inGame = inGame;
         }
 }
