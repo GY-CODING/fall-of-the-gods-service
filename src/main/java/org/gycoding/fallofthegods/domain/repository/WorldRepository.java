@@ -11,9 +11,10 @@ import java.util.Optional;
 
 @Repository
 public interface WorldRepository {
-    WorldMO save(WorldMO entity) throws APIException;
-    Optional<WorldMO> get(String identifier) throws APIException;
-    List<WorldMO> list() throws APIException;
-    Page<WorldMO> page(Pageable pageable) throws APIException;
-    void delete(String identifier) throws APIException;
+    WorldMO save(WorldMO world, List<String> places) throws APIException;
+    void delete(String identifier);
+
+    Optional<WorldMO> get(String identifier);
+    List<WorldMO> list();
+    Page<WorldMO> page(Pageable pageable);
 }

@@ -3,6 +3,7 @@ package org.gycoding.fallofthegods.infrastructure.external.database.model.worlds
 import lombok.Builder;
 import org.gycoding.fallofthegods.domain.model.TranslatedString;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -18,5 +19,6 @@ public record WorldEntity(
         String image,
         String detailedIcon,
         String mainColor,
+        @DBRef
         List<PlaceEntity> places
 ) {}

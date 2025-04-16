@@ -3,8 +3,6 @@ package org.gycoding.fallofthegods.domain.model.items;
 import lombok.Builder;
 import org.gycoding.fallofthegods.domain.model.TranslatedString;
 
-import java.util.List;
-
 @Builder
 public record ItemMO(
     String identifier,
@@ -12,6 +10,5 @@ public record ItemMO(
     TranslatedString description,
     String image,
     Boolean inGame,
-    ItemType type,
-    List<ItemMO> fragments
+    ItemType type
 ) {}

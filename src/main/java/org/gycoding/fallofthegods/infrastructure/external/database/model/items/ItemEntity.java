@@ -6,8 +6,6 @@ import org.gycoding.fallofthegods.domain.model.items.ItemType;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
-
 @Builder
 @Document(collection = "Item")
 public record ItemEntity(
@@ -18,6 +16,5 @@ public record ItemEntity(
     TranslatedString description,
     String image,
     Boolean inGame,
-    ItemType type,
-    List<ItemEntity> fragments
+    ItemType type
 ) {}
