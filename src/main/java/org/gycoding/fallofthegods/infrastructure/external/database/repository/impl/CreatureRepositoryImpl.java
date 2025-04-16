@@ -1,6 +1,8 @@
 package org.gycoding.fallofthegods.infrastructure.external.database.repository.impl;
 
 import lombok.AllArgsConstructor;
+import org.gycoding.exceptions.model.APIException;
+import org.gycoding.fallofthegods.domain.exceptions.FOTGAPIError;
 import org.gycoding.fallofthegods.domain.model.creatures.CreatureMO;
 import org.gycoding.fallofthegods.domain.repository.CreatureRepository;
 import org.gycoding.fallofthegods.infrastructure.external.database.mapper.CreatureDatabaseMapper;
@@ -24,6 +26,19 @@ public class CreatureRepositoryImpl implements CreatureRepository {
     @Override
     public CreatureMO save(CreatureMO creature) {
         return mapper.toMO(repository.save(mapper.toEntity(creature)));
+    }
+
+    @Override
+    public CreatureMO update(CreatureMO creature) throws APIException {
+        final var persistedCreature = repository.findByIdentifier(creature.identifier()).orElseThrow(() ->
+                new APIException(
+                        FOTGAPIError.RESOURCE_NOT_FOUND.code,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.message,
+                        FOTGAPIError.RESOURCE_NOT_FOUND.status
+                )
+        );
+
+        return mapper.toMO(repository.save(mapper.toUpdatedEntity(persistedCreature, creature)));
     }
 
     @Override

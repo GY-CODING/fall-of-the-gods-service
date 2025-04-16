@@ -13,5 +13,8 @@ public interface CreatureControllerMapper {
     @Mapping(target = "identifier", expression = "java(IdentifierGenerator.generate(creature.name().en()))")
     CreatureIDTO toIDTO(CreatureRQDTO creature);
 
+    @Mapping(target = "identifier", source = "identifier")
+    CreatureIDTO toIDTO(CreatureRQDTO creature, String identifier);
+
     CreatureRSDTO toRSDTO(CreatureODTO creature);
 }

@@ -11,6 +11,7 @@ import java.util.Map;
 
 public interface CreatureService {
     CreatureODTO save(CreatureIDTO creature) throws APIException;
+    CreatureODTO update(CreatureIDTO creature) throws APIException;
     void delete(String identifier) throws APIException;
 
     CreatureODTO get(String identifier, Boolean inGame, String language) throws APIException;

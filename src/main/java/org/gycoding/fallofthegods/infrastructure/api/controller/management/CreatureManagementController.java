@@ -21,6 +21,11 @@ public class CreatureManagementController {
         return ResponseEntity.ok(mapper.toRSDTO(service.save(mapper.toIDTO(creature))));
     }
 
+    @PatchMapping("")
+    public ResponseEntity<?> update(@RequestBody CreatureRQDTO creature, @RequestParam String id) throws APIException {
+        return ResponseEntity.ok(mapper.toRSDTO(service.update(mapper.toIDTO(creature, id))));
+    }
+
     @DeleteMapping("")
     public ResponseEntity<?> removeCreature(@RequestParam String id) throws APIException {
         service.delete(id);

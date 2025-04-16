@@ -45,6 +45,23 @@ public class CreatureServiceImpl implements CreatureService {
     }
 
     @Override
+    public CreatureODTO update(CreatureIDTO creature) throws APIException {
+        final CreatureMO updatedCreature;
+
+        try {
+            updatedCreature = repository.update(mapper.toMO(creature));
+        } catch(Exception e) {
+            throw new APIException(
+                    FOTGAPIError.CONFLICT.code,
+                    FOTGAPIError.CONFLICT.message,
+                    FOTGAPIError.CONFLICT.status
+            );
+        }
+
+        return mapper.toODTO(updatedCreature, TranslatedString.EN);
+    }
+
+    @Override
     public void delete(String identifier) throws APIException {
         try {
             repository.delete(identifier);
