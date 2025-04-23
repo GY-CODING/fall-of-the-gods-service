@@ -7,5 +7,6 @@ import org.gycoding.heraldsofchaos.domain.model.TranslatedString;
 public record CreatureRQDTO(
         TranslatedString name,
         TranslatedString description,
-        String image
+        String image,
+        TranslatedString race
 ) { }

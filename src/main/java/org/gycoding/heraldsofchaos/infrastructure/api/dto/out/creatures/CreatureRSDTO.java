@@ -7,6 +7,7 @@ public record CreatureRSDTO(
         String identifier,
         String name,
         String description,
-        String image
+        String image,
+        String race
 ) { }
 
