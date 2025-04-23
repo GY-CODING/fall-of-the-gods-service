@@ -10,14 +10,16 @@ public record CreatureODTO(
         String identifier,
         String name,
         String description,
-        String image
+        String image,
+        String race
 ) {
     public Map<String, Object> toMap() {
         return new HashMap<String, Object>(Map.of(
                 "identifier", identifier,
                 "name", name,
                 "description", description,
-                "image", image
+                "image", image,
+                "race", race
         ));
     }
 }
