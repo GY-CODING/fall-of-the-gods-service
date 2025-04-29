@@ -8,6 +8,7 @@ public record CreatureIDTO(
         String identifier,
         TranslatedString name,
         TranslatedString description,
-        String image
+        String image,
+        TranslatedString race
 ) {}
 

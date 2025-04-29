@@ -13,5 +13,6 @@ public interface CreatureServiceMapper {
 
     @Mapping(target = "name", expression = "java(StringTranslator.translate(creature.name(), language))")
     @Mapping(target = "description", expression = "java(StringTranslator.translate(creature.description(), language))")
+    @Mapping(target = "race", expression = "java(StringTranslator.translate(creature.race(), language))")
     CreatureODTO toODTO(CreatureMO creature, String language);
 }
