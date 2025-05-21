@@ -54,7 +54,7 @@ public class CharacterRepositoryImpl implements CharacterRepository {
 
         final var persistedWorld = worldRepository.findByIdentifier(character.world()).orElse(null);
 
-        Logger.debug(String.format("World searched (not specifically found) for character: %s", character.identifier()), character.world());
+        Logger.debug(String.format("World searched (not necessary found) for character: %s", character.identifier()), character.world());
 
         return mapper.toMO(repository.save(mapper.toUpdatedEntity(persistedCharacter, character, persistedWorld)));
     }
